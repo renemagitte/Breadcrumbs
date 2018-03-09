@@ -145,7 +145,7 @@ fetch('http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=e26b796f49
               
               
               
-              console.log(pos);
+            //  console.log(pos);
               
               compareLocations(pos);
               
@@ -161,7 +161,7 @@ fetch('http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=e26b796f49
 
 
 var locations = [
-        {lat: 59.27, lng: 18.04},
+        {lat: 59.35, lng: 18.06},
         {lat: 59.2734752, lng: 18.0496685},
         {lat: -33.718234, lng: 151.209834},
         {lat: -33.727111, lng: 150.371124},
@@ -196,11 +196,6 @@ function compareLocations(yourPosition){
         console.log(yourLngRoundOff);
     
     
-    
-
-    for(i = 0; i < locations.length; i++){
-        
-
 
 
         for(i = 0; i < locations.length; i++){
@@ -208,16 +203,24 @@ function compareLocations(yourPosition){
 //        console.log(locations[i]);
 
 //        let currentPos = locations[i];
+            
+        let crumbLatParsed = parseFloat(locations[i].lat);
+        let crumbLatRoundOff = crumbLatParsed.toFixed(2);
+        console.log(crumbLatRoundOff);
+            
+        let crumbLngParsed = parseFloat(locations[i].lng);
+        let crumbLngRoundOff = crumbLngParsed.toFixed(2);
+        console.log(crumbLngRoundOff);
 
-            if((yourPosition.lat == locations[i].lat) && (yourPosition.lng == locations[i].lng)){
+            
+            if((yourLatRoundOff == crumbLatRoundOff) && (yourLngRoundOff == crumbLngRoundOff)){
                 console.log("IT'S A MATCH!")
             }else{
                     console.log("this is somewhere else")
                 }
-            } 
+        } 
 
 
-        }
     
     
     
