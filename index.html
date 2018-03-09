@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="javascript">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+     
+     <link href="https://fonts.googleapis.com/css?family=Averia+Gruesa+Libre|Contrail+One|Kavoon|Londrina+Solid|Piedra|Spicy+Rice|Unlock" rel="stylesheet">
       
     <title>Geo music</title>
     
@@ -11,27 +15,56 @@
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 80%;
+        height: 50%;
+        width: 50%;
+        margin-left: 25px;        
+        background-color: turquoise;
       }
             
-/*
-            .map{
-                height: 600px;
-                width: auto;
-            }
-*/
+            
       /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
         margin: 0;
         padding: 0;
+          background-color: turquoise;
       }
+            
+            .title{
+                background-color: turquoise;
+                color: #FCDC3B;
+                /*
+                font-family: 'Contrail One', cursive;
+                font-family: 'Londrina Solid', cursive;
+                font-family: 'Kavoon', cursive;
+                font-family: 'Averia Gruesa Libre', cursive;
+                font-family: 'Spicy Rice', cursive;
+                */
+                font-family: 'Piedra', cursive;
+
+/*                font-family: 'Unlock', cursive;*/
+                font-size: 4em;
+                text-transform: uppercase;
+                padding-top: 40px;
+                padding-left: 25px;
+            }
+            
+            .menu{
+                padding-left: 25px;   
+            }
+            
     </style>
     
 
 </head>
 
 <body>
+ 
+ <div class="title">Breadcrumbs. . . . . . . . </div>
+ <div class="menu">
+     <button type="button" class="btn btn-primary">Follow crumbs</button>
+     <button type="button" class="btn btn-primary">Drop crumbs</button>
+ </div>
   
    <div id="map" class="map"></div>
    
