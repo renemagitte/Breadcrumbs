@@ -56,13 +56,14 @@
 
 } // end initMap
 
+/*** in this version, crumbId's are fixed :( ***/
 var locations = [
-        {lat: 59.35, lng: 18.06}, /* MI, 3:e bänken, stolen näst längst in..) */
-        {lat: 59.2734752, lng: 18.0496685},
-        {lat: -33.718234, lng: 151.209834},
-        {lat: -33.727111, lng: 150.371124},
-        {lat: -33.848588, lng: 151.209834},
-        {lat: -33.851702, lng: 151.216968},
+        {lat: 59.35, lng: 18.06, crumbId: '68a14ccf-b8ad-4f70-8041-d0f3852e6ff1'}, /* MI, 3:e bänken, stolen näst längst in..) */
+        {lat: 59.2734752, lng: 18.0496685, crumbId: '68a14ccf-b8ad-4f70-8041-d0f3852e6ff1'},
+        {lat: -33.718234, lng: 151.209834, crumbId: 02},
+        {lat: -33.727111, lng: 150.371124, crumbId: 03},
+        {lat: -33.848588, lng: 151.209834, crumbId: 04},
+        {lat: -33.851702, lng: 151.216968, crumbId: 05},
       ]
 
 
@@ -118,27 +119,58 @@ function compareLocations(yourPosition){
             
             let crumbLngPosition = parseAndRoundOffPosition(locations[i].lng);
             
+            let crumbId = locations[i].crumbId;
+            
             /* if((yourLatRoundOff == crumbLatRoundOff) && (yourLngRoundOff == crumbLngRoundOff)){ */
             if((userLatPosition == crumbLatPosition) && (userLngPosition  == crumbLngPosition)){
                 console.log("IT'S A MATCH!")
+                
+                //console.log(locations[i].crumbId);
+
+                
+                pickUpCrumb(crumbId);
+                
             }else{
                     console.log("this is somewhere else")
                 }
-        } 
+        }    
+} // end of compareLocations
 
 
-    
-    
-    
-    
-}
 
 function parseAndRoundOffPosition(latOrLng){
     let latOrLngParsed = parseFloat(latOrLng);
     let latOrLngRoundOff = latOrLngParsed.toFixed(2);
-        return latOrLngRoundOff;   
+    return latOrLngRoundOff;   
 }
 
+
+function pickUpCrumb(id){
+    console.log("Yay! You found a song!")
+    
+//    let songId = '68a14ccf-b8ad-4f70-8041-d0f3852e6ff1';
+
+    fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+    .then(function(respone){ 
+        return respone.json(); 
+    })
+    .then(function(songData){ 
+        console.log(songData);
+        
+        console.log(songData.track.artist.name);
+        
+//    console.log(songData.recenttracks.track[0].artist);
+//    
+//    console.log(songData.recenttracks.track[0].name);
+        
+        /* knapp: jag vill veta mer om den här artisten */
+
+    })
+    .catch(function(error){
+        console.log(error);
+    })
+    
+}
 
 
 
