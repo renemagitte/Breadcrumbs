@@ -107,46 +107,81 @@ function parseAndRoundOffPosition(latOrLng){
 
 
 /*** DOM Elements ***/
-const pickUpDiv = document.getElementById('pickUpDiv');
-
+const pickUpElement = document.getElementById('pickUpElement');
 
 function pickUpCrumb(id){
     
-     fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+        console.log(id);
+    
+            let pickUpCrumbTest = `
+            <div>
+            <div>Yay! You found a crumb! Pick it up!</div>
+            <div class="crumb">.</div>
+            </div>
+            `;
+            pickUpElement.insertAdjacentHTML('afterbegin', pickUpCrumbTest); 
+    
+            pickUpElement.addEventListener('click', function(){ 
+                fetchAndPrintInfo(id);
+            })
+} // end pickUpCrumb
+
+function fetchAndPrintInfo(id){
+    
+        console.log(id);
+    
+//        const fetchedInfo = document.createElement('div');
+//        fetchedInfo.classList.add('classSome');
+//        pickUpDiv.innerHTML = 'Some info about the track';
+    
+         fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
       .then(response => response.json())
-      .then(jsonData => {
-//            console.log(songData);
+      .then(songData => {
+            console.log(songData);
 //            console.log(songData.track.artist.name);
          
 
          
-            const pickUpCrumb = document.createElement('div');
-            pickUpCrumb.classList.add('pickUpCrumb');
-            pickUpCrumb.innerHTML = 'Yay! You found a crumb! Pick it up!';
-            pickUpDiv.appendChild(pickUpCrumb);
-         
-            pickUpCrumb.addEventListener('click', function(){ 
-                printInfo(id);
-            })
-      })
+//            const pickUpCrumbDiv = document.createElement('div');
+//            pickUpCrumbDiv.classList.add('crumb');
+//            pickUpCrumbDiv.innerHTML = 'Yay! You found a crumb! Pick it up!';
+//            pickUpElement.appendChild(pickUpCrumbDiv);
+             
+            let pickUpCrumbTest = `
+            <p>Congratulations! You found a song that was dropped here dd/mm by userName.
+            Title: ${songData.track.name}
+            Artist: <a href="${songData.track.artist.url}">${songData.track.artist.name}</a>
+            From release: ${songData.track.album.title}</p>
+
+            If you loved this track, maybe you want to checkout:
+            `;
+            pickUpElement.innerHTML = '';
+            pickUpElement.insertAdjacentHTML('afterbegin', pickUpCrumbTest); 
+             
+            const moreInfoButton = document.createElement('button');
+            moreInfoButton.innerHTML = 'Info about this artist';
+            moreInfoButton.addEventListener('click', function(){ 
+                 moreInfo(id);
+            });
+             
+            const seeRecentlyPlayedButton = document.createElement('button');
+            moreInfoButton.innerHTML = 'See what the user who dropped this crumb listened to recently';
+            pickUpElement.appendChild(moreInfoButton);
+             
+            moreInfoButton.addEventListener('click', function(){ 
+                 seeRecentlyPlayed(id);
+            });
+             
+             
+
+            
+                          
+                          
+    })
       .catch(function(error){
             console.log(error);
       })
 
-} // end pickUpCrumb
-
-//const printInfo = document.getElementById('printInfo');
-
-function printInfo(id){
-    
-        const fetchedInfo = document.createElement('div');
-        fetchedInfo.classList.add('classSome');
-        pickUpDiv.innerHTML = 'Some info about the track';
-        //pickUpDiv.appendChild(fetchedInfo);
-    
-    moreInfoButton.addEventListener('click', function(){ 
-        moreInfo(id);
-    })
     
 }
 
@@ -155,11 +190,32 @@ function moreInfo(id){
     
 }
 
+function seeRecentlyPlayed(id){
+    
+      fetch('http://ws.audioscrobbler.com/2.0/?method=User.getInfo&method=User.getRecentTracks&user=VenusOfTheSoup&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+        .then(response => response.json())
+        .then(songData => {
+            console.log(songData);
+          
+            const seeRecentlyDiv = document.createElement('div');
+          
+              for(i = 5; i > 0; i--){
+                  
+                let recentTrackRow = `
+                ${i}. ${songData.recenttracks.track[i].artist['#text']} - ${songData.recenttracks.track[i].name} 
+                `;
+                seeRecentlyDiv.insertAdjacentHTML('afterbegin', recentTrackRow); 
 
-
-
-
-
+              }
+          
+                pickUpElement.appendChild(seeRecentlyDiv);
+                      
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    
+}
 
 
 

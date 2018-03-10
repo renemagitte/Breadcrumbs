@@ -1,0 +1,48 @@
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 50%;
+        width: 50%;
+        margin-left: 25px;        
+        background-color: #87B8FF;
+      }
+            
+            
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+/*          background-color: turquoise;*/
+          background-color: #87B8FF;
+      }
+            
+            .title{
+                background-color: #87B8FF;
+                color: #FCDC3B;
+                /*
+                font-family: 'Contrail One', cursive;
+                font-family: 'Londrina Solid', cursive;
+                font-family: 'Kavoon', cursive;
+                font-family: 'Averia Gruesa Libre', cursive;
+                font-family: 'Spicy Rice', cursive;
+                */
+                font-family: 'Piedra', cursive;
+
+/*                font-family: 'Unlock', cursive;*/
+                font-size: 4em;
+                text-transform: uppercase;
+                padding-top: 40px;
+                padding-left: 25px;
+            }
+            
+            .menu{
+                padding-left: 25px;   
+            }
+            
+            .crumb{
+               font-family: 'Piedra', cursive; 
+                font-size: 15em;
+                color: #FCDC3B;
+                margin-top: -100px;
+            }
