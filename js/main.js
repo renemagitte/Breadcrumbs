@@ -60,7 +60,7 @@
 /*** in this version, crumbId's are fixed, not variables from database :( ***/
 var locations = [
         {lat: 59.35, lng: 18.06, crumbId: '68a14ccf-b8ad-4f70-8041-d0f3852e6ff1'}, /* MI, 3:e bänken, stolen näst längst in..) */
-        {lat: 59.2734752, lng: 18.0496685, crumbId: '68a14ccf-b8ad-4f70-8041-d0f3852e6ff1'},
+        {lat: 59.27, lng: 18.05, crumbId: '68a14ccf-b8ad-4f70-8041-d0f3852e6ff1'},
         {lat: -33.718234, lng: 151.209834, crumbId: 02},
         {lat: -33.727111, lng: 150.371124, crumbId: 03},
         {lat: -33.848588, lng: 151.209834, crumbId: 04},
@@ -82,27 +82,22 @@ var locations = [
 
 
 function compareLocations(yourPosition){
-    
     let userLatPosition = parseAndRoundOffPosition(yourPosition.lat);
     let userLngPosition = parseAndRoundOffPosition(yourPosition.lng);
 
         for(i = 0; i < locations.length; i++){
-
             let crumbLatPosition = parseAndRoundOffPosition(locations[i].lat);
             let crumbLngPosition = parseAndRoundOffPosition(locations[i].lng);
-            
-            let crumbId = locations[i].crumbId;
+            let crumbId = locations[i].crumbId;     
             
             if((userLatPosition == crumbLatPosition) && (userLngPosition  == crumbLngPosition)){
-                //console.log("IT'S A MATCH!")
+                    console.log("it's a match!")
                 pickUpCrumb(crumbId);
             }else{
                     console.log("this is somewhere else")
-                }
+            }
         }    
-} // end of compareLocations
-
-
+}
 
 function parseAndRoundOffPosition(latOrLng){
     let latOrLngParsed = parseFloat(latOrLng);
@@ -111,42 +106,43 @@ function parseAndRoundOffPosition(latOrLng){
 }
 
 
-function pickUpCrumb(id){
-    console.log("Yay! You found a song!")
+/*** DOM Elements ***/
+const pickUpDiv = document.getElementById('pickUpDiv');
 
-//    fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
-//    .then(function(respone){ 
-//        return respone.json(); 
-//    })
-//    .then(function(songData){ 
-//        console.log(songData);
-//        
-//        console.log(songData.track.artist.name);
-//        
-//    console.log(songData.recenttracks.track[0].artist);
-//    
-//    console.log(songData.recenttracks.track[0].name);
-//
-//    })
+
+function pickUpCrumb(id){
     
- fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
-  .then(response => response.json())
-  .then(jsonData => {
-        console.log(songData);
-        
-        console.log(songData.track.artist.name);
-  })
-    
-    .catch(function(error){
-        console.log(error);
-    })
-    
-}
+     fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+      .then(response => response.json())
+      .then(jsonData => {
+//            console.log(songData);
+//            console.log(songData.track.artist.name);
+         
+
+         
+            const pickUpCrumb = document.createElement('div');
+            pickUpCrumb.classList.add('pickUpCrumb');
+            pickUpCrumb.innerHTML = 'Yay! You found a crumb! Pick it up!';
+            pickUpDiv.appendChild(pickUpCrumb);
+         
+            pickUpCrumb.addEventListener('click', function(){ 
+                printInfo(id);
+            })
+      })
+      .catch(function(error){
+            console.log(error);
+      })
+
+} // end pickUpCrumb
+
+//const printInfo = document.getElementById('printInfo');
 
 function printInfo(id){
     
-    
-    const moreInfoButton = document.createElement("button");
+        const fetchedInfo = document.createElement('div');
+        fetchedInfo.classList.add('classSome');
+        pickUpDiv.innerHTML = 'Some info about the track';
+        //pickUpDiv.appendChild(fetchedInfo);
     
     moreInfoButton.addEventListener('click', function(){ 
         moreInfo(id);
