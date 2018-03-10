@@ -1,11 +1,6 @@
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-      #map {
-        height: 50%;
-        width: 50%;
-        margin-left: 25px;        
-        background-color: #87B8FF;
-      }
+
             
             
       /* Optional: Makes the sample page fill the window. */
@@ -14,35 +9,171 @@
         margin: 0;
         padding: 0;
 /*          background-color: turquoise;*/
-          background-color: #87B8FF;
+          background-color: #ededed;
+          font-family: 'Open Sans', sans-serif;
       }
             
-            .title{
-                background-color: #87B8FF;
-                color: #FCDC3B;
-                /*
-                font-family: 'Contrail One', cursive;
-                font-family: 'Londrina Solid', cursive;
-                font-family: 'Kavoon', cursive;
-                font-family: 'Averia Gruesa Libre', cursive;
-                font-family: 'Spicy Rice', cursive;
-                */
-                font-family: 'Piedra', cursive;
+    .title{
+        background-color: #ededed;
+/*        color: #FCDC3B;*/
+        color: #4C340D;
+        /*
+        font-family: 'Contrail One', cursive;
+        font-family: 'Londrina Solid', cursive;
+        font-family: 'Kavoon', cursive;
+        font-family: 'Averia Gruesa Libre', cursive;
+        font-family: 'Spicy Rice', cursive;
+        */
+        font-family: 'Piedra', cursive;
+/*      font-family: 'Unlock', cursive;*/
+        font-size: 2em;
+        text-transform: uppercase;
+        padding-top: 10px;
+        padding-left: 25px;
+    }
 
-/*                font-family: 'Unlock', cursive;*/
-                font-size: 4em;
-                text-transform: uppercase;
-                padding-top: 40px;
-                padding-left: 25px;
-            }
-            
-            .menu{
-                padding-left: 25px;   
-            }
-            
-            .crumb{
-               font-family: 'Piedra', cursive; 
-                font-size: 15em;
-                color: #FCDC3B;
-                margin-top: -100px;
-            }
+    .menu{
+        padding-left: 25px;         
+        background-color: #ededed;
+        border-bottom: 1px solid blue;
+    }
+
+    .crumb{
+       font-family: 'Piedra', cursive; 
+        font-size: 15em;
+        color: #FCDC3B;
+        margin-top: -100px;
+    }
+
+
+
+/*** Mobile ***/
+@media screen and (max-width: 500px) {
+    
+    #map {
+        height: 50%;
+        width: 100%;
+        margin-left: 0px;        
+      }
+    
+    .opacityOverMap{
+        background-color: white;
+        opacity: 0.5;
+        z-index: 99;
+        position: absolute;
+        border: 1px solid red;
+    }
+    
+}
+
+/*** Tablet ***/
+@media screen and (min-width: 501px) and (max-width: 1023px) {
+    
+    #map {
+        height: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+    
+
+
+    .foundMessage{
+        z-index: 99 !important;
+        position: absolute !important;
+        height: 180px;
+        width: 340px;
+        background-color: white !important;
+        border: 1px solid black;
+        opacity: 1 !important;
+        vertical-align: middle;
+        align-self: center;
+    }
+}
+
+/*** Desktop ***/
+@media screen and (min-width: 1024px) {
+    
+        #map {
+        height: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+    
+    .opacityOverMap{
+        height: 50%;
+        width: 100%;
+        background-color: white;
+        opacity: 0.55;
+        z-index: 98;
+        position: absolute;
+        left: 0px;
+        top: 100px;
+        margin-top: 0px;
+        display: flex;
+        justify-content: center;
+
+
+    }
+    
+    .foundMessage{
+        z-index: 99 !important;
+        position: absolute !important;
+        height: 180px;
+        width: 600px;
+        background-color: white !important;
+        border: 1px solid black;
+        opacity: none;
+        vertical-align: middle;
+        align-self: center;
+        font-family: 'Karma', serif;
+/*        font-family: 'Open Sans', sans-serif;*/
+        font-size: 1.4em;
+        color: black;
+        text-align: center;   
+    }
+    
+    .foundMessage img{
+        width: 140px;
+        padding: 20px;
+    }
+    
+} /* end of Desktop */
+
+
+/*** Animations ***/
+
+#p1 {
+    animation: fadeout 11s;
+}
+#p2 {
+    animation: fadeout 9s;
+}
+#p3 {
+    animation: fadeout 7s;
+}
+#p4 {
+    animation: fadeout 5s;
+}
+#p5 {
+    animation: fadeout 3s;
+}
+#p6 {
+    animation: fadeout 1s;
+}
+#p7 {
+    animation: fadeout 3s;
+}
+#p8 {
+    animation: fadeout 1s;
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 0;
+  }
+}

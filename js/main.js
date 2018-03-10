@@ -41,8 +41,10 @@
             };
             infoWindow.setPosition(pos);
             infoWindow.setContent('Location found.');
+            
             infoWindow.open(map);
             map.setCenter(pos);
+
 
             /* sending the current position for comparing to existing Crumbs' locations */  
             compareLocations(pos);
@@ -113,12 +115,18 @@ function pickUpCrumb(id){
     
         console.log(id);
     
+            let imageFileEnding = randomCrumbImage();
+    
+    
             let pickUpCrumbTest = `
-            <div>
-            <div>Yay! You found a crumb! Pick it up!</div>
-            <div class="crumb">.</div>
+            <div class="opacityOverMap">
+                <div class="foundMessage">
+                    <img src="images/crumb${imageFileEnding}.jpg">
+                    <p>Someone dropped something here! Pick it up!</p>
+                </div>
             </div>
             `;
+//            pickUpCrumbTest.classList.add('opacityOverMap')
             pickUpElement.insertAdjacentHTML('afterbegin', pickUpCrumbTest); 
     
             pickUpElement.addEventListener('click', function(){ 
@@ -214,6 +222,11 @@ function seeRecentlyPlayed(id){
         .catch(function(error){
             console.log(error);
         })
+    
+}
+
+function randomCrumbImage(){
+    return Math.floor((Math.random() * 7) + 1);
     
 }
 
