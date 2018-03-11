@@ -1,7 +1,20 @@
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 
-            
+   .small_button {
+    font-size: 12px;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    background-color: #e7e7e7;
+    border: 1px grey;
+    border-radius: 20px;
+    height: 22px;
+    width: auto;
+    margin-left: 10px;
+        cursor: pointer;
+    
+}
+
             
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -9,24 +22,27 @@
         margin: 0;
         padding: 0;
 /*          background-color: turquoise;*/
-          background-color: #ededed;
+/*          background-color: #ededed;*/
           font-family: 'Open Sans', sans-serif;
+                  background-color: #FFAFE1;
       }
             
     .title{
-        background-color: #ededed;
+/*        background-color: #ededed;*/
 /*        color: #FCDC3B;*/
+        height: 80px;
         color: #4C340D;
+        background-color: #FFAFE1;
         /*
         font-family: 'Contrail One', cursive;
         font-family: 'Londrina Solid', cursive;
-        font-family: 'Kavoon', cursive;
-        font-family: 'Averia Gruesa Libre', cursive;
-        font-family: 'Spicy Rice', cursive;
-        */
-        font-family: 'Piedra', cursive;
+        font-family: 'Kavoon', cursive; */
+        font-family: 'Averia Gruesa Libre', cursive; 
+/*        font-family: 'Spicy Rice', cursive;*/
+        
+/*        font-family: 'Piedra', cursive;*/
 /*      font-family: 'Unlock', cursive;*/
-        font-size: 2em;
+        font-size: 3em;
         text-transform: uppercase;
         padding-top: 10px;
         padding-left: 25px;
@@ -48,6 +64,8 @@
 .pickUpElement{
         display: flex;
         justify-content: center;
+        padding: 20px;
+        background-color: #FFAFE1;
 }
 
 
@@ -105,17 +123,18 @@
         width: 100%;
         display: flex;
         justify-content: center;
+                    background-color: #FFAFE1;
       }
     
     .opacityOverMap{
         height: 100%;
         width: 100%;
         background-color: white;
-        opacity: 0.55;
+        opacity: 0.45;
         z-index: 97;
         position: absolute;
         left: 0px;
-        top: 100px;
+        top: 80px;
         margin-top: 0px;
         display: flex;
         justify-content: center;
@@ -158,17 +177,56 @@
         opacity: none;
         vertical-align: middle;
         align-self: center;
-        font-family: 'Karma', serif;
+/*        font-family: 'Karma', serif;*/
+    font-family: 'Raleway', sans-serif;
 /*        font-family: 'Open Sans', sans-serif;*/
         font-size: 1em;
         color: black;
         text-align: center;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        padding: 20px;
     }
     
     .openFoundCrumb img{
-        width: 140px;
-        padding: 20px;
+        width: 75px;
+        padding: 0px;
+        padding-bottom: 20px;
+    }
+    
+    .details_overwrap{
+        display: flex;
+        justify-content: center;
+    }
+    
+    .details_wrapper{
+        width: 800px;
+/*        border: 1px solid blue;*/
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+    
+    .details_albumpic{
+        width: 30%;
+    }
+    
+    .details_albumpic img{
+        width: 100%;
+    }
+    
+    .details_details{
+        width: 70%;
+    }
+    
+    .div_key{
+        width: 15%;
+        text-align: left;
+    }
+    
+    .div_value{
+        width: 85%;
+        text-align: left;
+
     }
     
     
@@ -177,6 +235,7 @@
 
 /*** Animations ***/
 
+/*
 #p1 {
     animation: fadeout 11s;
 }
@@ -210,3 +269,4 @@
     opacity: 0;
   }
 }
+*/
