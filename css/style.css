@@ -45,13 +45,18 @@
         margin-top: -100px;
     }
 
+.pickUpElement{
+        display: flex;
+        justify-content: center;
+}
+
 
 
 /*** Mobile ***/
 @media screen and (max-width: 500px) {
     
     #map {
-        height: 50%;
+        height: 80%;
         width: 100%;
         margin-left: 0px;        
       }
@@ -62,6 +67,7 @@
         z-index: 99;
         position: absolute;
         border: 1px solid red;
+        height: 100%;
     }
     
 }
@@ -70,7 +76,7 @@
 @media screen and (min-width: 501px) and (max-width: 1023px) {
     
     #map {
-        height: 50%;
+        height: 80%;
         width: 100%;
         display: flex;
         justify-content: center;
@@ -95,31 +101,31 @@
 @media screen and (min-width: 1024px) {
     
         #map {
-        height: 50%;
+        height: 80%;
         width: 100%;
         display: flex;
         justify-content: center;
       }
     
     .opacityOverMap{
-        height: 50%;
+        height: 100%;
         width: 100%;
         background-color: white;
         opacity: 0.55;
-        z-index: 98;
+        z-index: 97;
         position: absolute;
         left: 0px;
         top: 100px;
         margin-top: 0px;
         display: flex;
         justify-content: center;
-
-
     }
     
-    .foundMessage{
-        z-index: 99 !important;
+    
+    .foundCrumbMessage{
+        z-index: 98 !important;
         position: absolute !important;
+        top: 160px;
         height: 180px;
         width: 600px;
         background-color: white !important;
@@ -131,13 +137,40 @@
 /*        font-family: 'Open Sans', sans-serif;*/
         font-size: 1.4em;
         color: black;
-        text-align: center;   
+        text-align: center;
+        cursor: pointer;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
     
-    .foundMessage img{
+    .foundCrumbMessage img{
         width: 140px;
         padding: 20px;
     }
+    
+    .openFoundCrumb{
+        z-index: 99 !important;
+        position: absolute !important;
+        top: 130px;
+        height: auto;
+        width: 90%;
+        background-color: white !important;
+        border: 1px solid black;
+        opacity: none;
+        vertical-align: middle;
+        align-self: center;
+        font-family: 'Karma', serif;
+/*        font-family: 'Open Sans', sans-serif;*/
+        font-size: 1em;
+        color: black;
+        text-align: center;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    
+    .openFoundCrumb img{
+        width: 140px;
+        padding: 20px;
+    }
+    
     
 } /* end of Desktop */
 

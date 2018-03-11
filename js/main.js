@@ -63,7 +63,7 @@
 var locations = [
         {lat: 59.35, lng: 18.06, crumbId: '68a14ccf-b8ad-4f70-8041-d0f3852e6ff1'}, /* MI, 3:e bänken, stolen näst längst in..) */
         {lat: 59.27, lng: 18.05, crumbId: '68a14ccf-b8ad-4f70-8041-d0f3852e6ff1'},
-        {lat: -33.718234, lng: 151.209834, crumbId: 02},
+        {lat: 52.48142, lng: -1.89983, crumbId: 02},
         {lat: -33.727111, lng: 150.371124, crumbId: 03},
         {lat: -33.848588, lng: 151.209834, crumbId: 04},
         {lat: -33.851702, lng: 151.216968, crumbId: 05},
@@ -112,31 +112,25 @@ function parseAndRoundOffPosition(latOrLng){
 const pickUpElement = document.getElementById('pickUpElement');
 
 function pickUpCrumb(id){
-    
-        console.log(id);
-    
             let imageFileEnding = randomCrumbImage();
     
-    
             let pickUpCrumbTest = `
-            <div class="opacityOverMap">
-                <div class="foundMessage">
+            <div class="opacityOverMap"></div>
+                <div class="foundCrumbMessage">
                     <img src="images/crumb${imageFileEnding}.jpg">
                     <p>Someone dropped something here! Pick it up!</p>
                 </div>
-            </div>
             `;
-//            pickUpCrumbTest.classList.add('opacityOverMap')
             pickUpElement.insertAdjacentHTML('afterbegin', pickUpCrumbTest); 
     
             pickUpElement.addEventListener('click', function(){ 
-                fetchAndPrintInfo(id);
+                fetchAndPrintInfo(id, imageFileEnding);
             })
 } // end pickUpCrumb
 
-function fetchAndPrintInfo(id){
-    
+function fetchAndPrintInfo(id, imageFileEnding){
         console.log(id);
+
     
 //        const fetchedInfo = document.createElement('div');
 //        fetchedInfo.classList.add('classSome');
@@ -155,28 +149,41 @@ function fetchAndPrintInfo(id){
 //            pickUpCrumbDiv.innerHTML = 'Yay! You found a crumb! Pick it up!';
 //            pickUpElement.appendChild(pickUpCrumbDiv);
              
-            let pickUpCrumbTest = `
-            <p>Congratulations! You found a song that was dropped here dd/mm by userName.
-            Title: ${songData.track.name}
-            Artist: <a href="${songData.track.artist.url}">${songData.track.artist.name}</a>
-            From release: ${songData.track.album.title}</p>
+            let searchStringArtist = generateSearchString(songData.track.artist.name, songData.track.name);
+            let searchStringSongTitle = generateSearchString(songData.track.name);
+             
+            let pickUpCrumbTest2 = `
+            <div class="opacityOverMap"></div>
+                <div class="openFoundCrumb" id="openFoundCrumb">
+                <img src="images/happycrumb${imageFileEnding}.jpg">
+                <p>Congratulations! You found a song that was dropped here dd/mm by userName.</p>
+                Title: ${songData.track.name}
+                Artist: <a target="_blank" href="${songData.track.artist.url}">${songData.track.artist.name}</a>
+                From release: ${songData.track.album.title}
+                <a href="https://www.youtube.com/results?search_query=${searchStringArtist}+${searchStringSongTitle}">Search directly on YouTube</a></p>
 
-            If you loved this track, maybe you want to checkout:
+                If you loved this track, maybe you want to checkout:
+                </div>
             `;
             pickUpElement.innerHTML = '';
-            pickUpElement.insertAdjacentHTML('afterbegin', pickUpCrumbTest); 
+            pickUpElement.insertAdjacentHTML('afterbegin', pickUpCrumbTest2); 
              
-            const moreInfoButton = document.createElement('button');
-            moreInfoButton.innerHTML = 'Info about this artist';
-            moreInfoButton.addEventListener('click', function(){ 
-                 moreInfo(id);
-            });
+//            const moreInfoButton = document.createElement('button');
+//            moreInfoButton.innerHTML = 'Info about this artist';
+//            moreInfoButton.addEventListener('click', function(){ 
+//                 moreInfo(id);
+//            });
              
             const seeRecentlyPlayedButton = document.createElement('button');
-            moreInfoButton.innerHTML = 'See what the user who dropped this crumb listened to recently';
-            pickUpElement.appendChild(moreInfoButton);
+            seeRecentlyPlayedButton.innerHTML = 'See what the user who dropped this crumb listened to recently';
              
-            moreInfoButton.addEventListener('click', function(){ 
+
+            const openFoundCrumb = document.getElementById('openFoundCrumb');
+            openFoundCrumb.appendChild(seeRecentlyPlayedButton);
+             
+            //openFoundCrumb.insertAdjacentHTML('beforeend', seeRecentlyPlayedButton); 
+             
+            seeRecentlyPlayedButton.addEventListener('click', function(){ 
                  seeRecentlyPlayed(id);
             });
              
@@ -207,16 +214,18 @@ function seeRecentlyPlayed(id){
           
             const seeRecentlyDiv = document.createElement('div');
           
-              for(i = 5; i > 0; i--){
-                  
+              for(i = 5; i > 0; i--){ 
                 let recentTrackRow = `
                 ${i}. ${songData.recenttracks.track[i].artist['#text']} - ${songData.recenttracks.track[i].name} 
-                `;
-                seeRecentlyDiv.insertAdjacentHTML('afterbegin', recentTrackRow); 
-
+                `; 
+                  
+                openFoundCrumb.insertAdjacentHTML('beforeend', recentTrackRow);
               }
+
           
-                pickUpElement.appendChild(seeRecentlyDiv);
+//                seeRecentlyDiv.insertAdjacentHTML('beforeend', recentTrackRow);
+//          
+//                openFoundCrumb.appendChild(seeRecentlyDiv);
                       
         })
         .catch(function(error){
@@ -226,8 +235,12 @@ function seeRecentlyPlayed(id){
 }
 
 function randomCrumbImage(){
-    return Math.floor((Math.random() * 7) + 1);
-    
+    return Math.floor((Math.random() * 7) + 1); 
+}
+
+function generateSearchString(string){
+    let result = string.replace(' ', '+');
+    return result; 
 }
 
 
