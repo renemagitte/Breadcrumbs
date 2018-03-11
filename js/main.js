@@ -133,7 +133,7 @@ function pickUpCrumb(id, date, user){
 } // end pickUpCrumb
 
 function fetchAndPrintInfo(id, date, user, imageFileEnding){
-        console.log(id);
+ //       console.log(id);
 
     
 //        const fetchedInfo = document.createElement('div');
@@ -143,21 +143,21 @@ function fetchAndPrintInfo(id, date, user, imageFileEnding){
          fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
       .then(response => response.json())
       .then(songData => {
-            console.log(songData);
+ //           console.log(songData);
 //           console.log(songData.track.album.mbid);
-             let albumId = songData.track.album.mbid;
-//             var albumArtLink = fetchAlbumCoverOkay();
+
              
             let searchStringArtist = generateSearchString(songData.track.artist.name);
             let searchStringSongTitle = generateSearchString(songData.track.name);
              
-             
-                              fetch('http://ws.audioscrobbler.com/2.0/?method=album.getInfo&mbid=' + albumId + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
-                              .then(response => response.json())
-                              .then(albumCoverFetch => {
-                                    console.log(albumCoverFetch);
-                                    console.log(albumCoverFetch.album.image[1]['#text']);
-                                    let albumArtresult = albumCoverFetch.album.image[2]['#text'];
+//                               let albumId = songData.track.album.mbid;             
+//                              fetch('http://ws.audioscrobbler.com/2.0/?method=album.getInfo&mbid=' + albumId + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+//                              .then(response => response.json())
+//                              .then(albumCoverFetch => {
+//                                    console.log(albumCoverFetch);
+//                                    console.log(albumCoverFetch.album.image[1]['#text']);
+//                                    // let albumArtresult = albumCoverFetch.album.image[2]['#text'];
+
                                     
                                   
              let pickUpCrumbTest2 = `
@@ -171,7 +171,7 @@ function fetchAndPrintInfo(id, date, user, imageFileEnding){
                 <div="details_overwrap">
                 <div class="details_wrapper">
                 <div class="details_albumpic">
-                    <img src="${albumCoverFetch.album.image[1]['#text']}">
+                    <img src="${albumCoverFetch.album.image[2]['#text']}">
                 </div>
                 <div class="details_details">
                     <div class="div_key">Title:</div><div class="div_value">${songData.track.name} </div>
@@ -193,10 +193,10 @@ function fetchAndPrintInfo(id, date, user, imageFileEnding){
                                   
                                   
                                   
-                                })
-                                  .catch(function(error){
-                                        console.log(error);
-                                })
+//                                })
+//                                  .catch(function(error){
+//                                        console.log(error);
+//                                })
        
                  
  
