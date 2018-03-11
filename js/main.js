@@ -162,29 +162,25 @@ function fetchAndPrintInfo(id, date, user, imageFileEnding){
                                   
              let pickUpCrumbTest2 = `
             <div class="opacityOverMap"></div>
-                <div class="openFoundCrumb" id="openFoundCrumb">
-                
-                <img src="images/heartnotes.gif">
-                <img src="images/happycrumb${imageFileEnding}.jpg">
-                <img src="images/heartnotes.gif">
-                <p>Congratulations! You found a song that was dropped here ${date} by ${user}.</p>
-                <div="details_overwrap">
-                <div class="details_wrapper">
-                <div class="details_albumpic">
-                    <img src="${albumCoverFetch.album.image[2]['#text']}">
-                </div>
-                <div class="details_details">
-                    <div class="div_key">Title:</div><div class="div_value">${songData.track.name} </div>
-                    <div class="div_key">Artist:</div><div class="div_value"<a href="${songData.track.artist.url}">${songData.track.artist.name}</a>
-                    </div>
-                </div>
-                From release: ${songData.track.album.title}<br>
-                </div>
-                </div>
-                <a target="_blank" href="https://www.youtube.com/results?search_query=${searchStringArtist}+${searchStringSongTitle}">Search directly on YouTube</a></p>
+                    <div class="openFoundCrumb" id="openFoundCrumb">
 
-                If you loved this track, maybe you want to checkout:
-                </div>
+                        <img src="images/heartnotes.gif">
+                        <img src="images/happycrumb${imageFileEnding}.jpg">
+                        <img src="images/heartnotes.gif">
+                        <p>Congratulations! You found a song that was dropped here ${date} by ${user}.</p>
+                            <div class="details_overwrap">
+                                <div class="details_wrapper">
+                                    <div class="div_key">Title:</div><div class="div_value">${songData.track.name} </div>
+                                    <div class="div_key">Artist:</div><div class="div_value"<a href="${songData.track.artist.url}">${songData.track.artist.name}</a></div>
+                                    <div class="div_key">Release:</div><div class="div_value">${songData.track.album.title} </div>
+                                </div>
+                            </div>
+ 
+                    </div>
+                    <a target="_blank" href="https://www.youtube.com/results?search_query=${searchStringArtist}+${searchStringSongTitle}">Search directly on YouTube</a></p>
+
+                    If you loved this track, maybe you want to checkout:
+            </div>
             `;
             pickUpElement.innerHTML = '';
             pickUpElement.insertAdjacentHTML('afterbegin', pickUpCrumbTest2); 

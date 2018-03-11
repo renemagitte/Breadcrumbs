@@ -30,14 +30,17 @@
     .title{
 /*        background-color: #ededed;*/
 /*        color: #FCDC3B;*/
-        height: 80px;
+        height: 100px;
         color: #4C340D;
         background-color: #FFAFE1;
+/*        background-color: lightgray;*/
+        
         /*
         font-family: 'Contrail One', cursive;
         font-family: 'Londrina Solid', cursive;
-        font-family: 'Kavoon', cursive; */
-        font-family: 'Averia Gruesa Libre', cursive; 
+        font-family: 'Kavoon', cursive; 
+        font-family: 'Averia Gruesa Libre', cursive; */
+        font-family: 'Nova Mono', monospace;
 /*        font-family: 'Spicy Rice', cursive;*/
         
 /*        font-family: 'Piedra', cursive;*/
@@ -46,6 +49,9 @@
         text-transform: uppercase;
         padding-top: 10px;
         padding-left: 25px;
+        padding-bottom: 20px;
+/*        border-bottom: 10px solid #87FFC8;*/
+/*        border-bottom: 10px solid #4C340D;*/
     }
 
     .menu{
@@ -124,20 +130,23 @@
         display: flex;
         justify-content: center;
                     background-color: #FFAFE1;
+        border-bottom: 10px solid #4C340D;
+        border-top: 10px solid #4C340D;
       }
     
     .opacityOverMap{
-        height: 100%;
+        height: 78%;
         width: 100%;
         background-color: white;
         opacity: 0.45;
         z-index: 97;
         position: absolute;
         left: 0px;
-        top: 80px;
+        top: 110px;
         margin-top: 0px;
         display: flex;
         justify-content: center;
+        
     }
     
     
@@ -194,18 +203,20 @@
     }
     
     .details_overwrap{
+        width: 100%;
         display: flex;
         justify-content: center;
     }
     
     .details_wrapper{
-        width: 800px;
+        width: 55%;
 /*        border: 1px solid blue;*/
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
     }
     
+/*
     .details_albumpic{
         width: 30%;
     }
@@ -213,10 +224,12 @@
     .details_albumpic img{
         width: 100%;
     }
+
     
     .details_details{
         width: 70%;
     }
+*/
     
     .div_key{
         width: 15%;
