@@ -140,19 +140,23 @@ function fetchAndPrintInfo(id, date, user, imageFileEnding){
      fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
       .then(response => response.json())
       .then(songData => {
+         
+         //console.log(songData);
+         
             let crumbId = id;
             let crumbDate = date;
             let crumbUser = user;
             let fileEnding = imageFileEnding;
             let searchStringArtist = generateSearchString(songData.track.artist.name);
             let searchStringSongTitle = generateSearchString(songData.track.name);
-            let artistUrl = songData.track.artist.url;
+            let trackId = songData.track.mbid; 
             let trackName = songData.track.name;
             let artistName = songData.track.artist.name
             let albumName = songData.track.album.title
+            let artistUrl = songData.track.artist.url;
 
             printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringArtist, searchStringSongTitle,
-            artistUrl, trackName, artistName, albumName);      
+            trackId, trackName, artistName, albumName, artistUrl);      
         })
         .catch(function(error){
             console.log(error);
@@ -160,7 +164,7 @@ function fetchAndPrintInfo(id, date, user, imageFileEnding){
 } // end fetchAndPrintInfo()
                           
 function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringArtist, searchStringSongTitle,
-            artistUrl, trackName, artistName, albumName){
+            trackId, trackName, artistName, albumName, artistUrl){
     
                  let pickUpCrumbTest2 = `
             <div class="opacityOverMap"></div>
@@ -192,69 +196,104 @@ function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringA
             seeRecentlyPlayedButton.classList.add('small_button');
             seeRecentlyPlayedButton.innerHTML = 'Users recent tracks';
     
-            const openFoundCrumb = document.getElementById('openFoundCrumb');
-            openFoundCrumb.appendChild(seeRecentlyPlayedButton);
-             
-            //openFoundCrumb.insertAdjacentHTML('beforeend', seeRecentlyPlayedButton); 
+            const seeTagsButton = document.createElement('button');
+            seeTagsButton.classList.add('small_button');
+            seeTagsButton.innerHTML = 'See tags for this track';
     
-            let user = crumbUser;
-        console.log(user);
+            const openFoundCrumb = document.getElementById('openFoundCrumb');
+    
+            openFoundCrumb.appendChild(seeRecentlyPlayedButton);
+            openFoundCrumb.appendChild(seeTagsButton);
+
+    
+            let user = crumbUser; // ta bort här ha bara crumbUser som argument???!!
+            //console.log(user);
              
             seeRecentlyPlayedButton.addEventListener('click', function(){ 
                  fetchRecentlyPlayed(user);
-            });    
+            }); 
+    
+            seeTagsButton.addEventListener('click', function(){ 
+                 fetchTags(trackId);
+            });   
     
 }
                    
 function fetchRecentlyPlayed(id){
-    
-    console.log(id);
-    
       fetch('http://ws.audioscrobbler.com/2.0/?method=User.getRecentTracks&user=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
-            console.log(songData);
+            //console.log(songData);
           
-        let artist = songData.recenttracks.track[i].artist['#text'];
-          let track = songData.recenttracks.track[i].name;
+            let artist = songData.recenttracks.track[i].artist['#text'];
+            let track = songData.recenttracks.track[i].name;
           
-          printOutRecentlyPlayed(artist, track)
+            const exploreFurtherDiv = document.createElement('div');
           
-//            const seeRecentlyDiv = document.createElement('div');
+               for(i = 0; i < 5; i++){  
+                 let recentTrackRow = `
+                 <div class="recentTrackRow">${i+1}. ${songData.recenttracks.track[i].artist['#text']} - ${songData.recenttracks.track[i].name} </div>
+                 `;
+                   exploreFurtherDiv.insertAdjacentHTML('beforeend', recentTrackRow); 
+                }
+                openFoundCrumb.appendChild(exploreFurtherDiv); 
+        })
+            .catch(function(error){
+                console.log(error);
+        })
+}
+
+
+                   
+function fetchTags(id){
+      fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+        .then(response => response.json())
+        .then(songData => {
+          
+          console.log(id);
+            //console.log(songData);
+          
+            const exploreFurtherDiv = document.createElement('div');
+          
+          console.log(songData.track.toptags);
+          
+//               for(i = 0; i < songData.track.toptags.tag[i].length; i++){
+               for(i = 0; i < songData.track.toptags.tag.length; i++){
+                   
+                //console.log(songData.track.toptags.tag[i]);
+                   
+                 let tagsForTrack = `
+                 <div class="tagDiv">${songData.track.toptags.tag[i].name}</div>
+                 `;
+                   exploreFurtherDiv.insertAdjacentHTML('beforeend', tagsForTrack); 
+                }
+                openFoundCrumb.appendChild(exploreFurtherDiv); 
+        })
+            .catch(function(error){
+                console.log(error);
+        })
+}
+
+
+//function printOutRecentlyPlayed(artist, track){
+//             const seeRecentlyDiv = document.createElement('div');
 //          
 //               for(i = 5; i > 0; i--){
 //                   
 //                 let recentTrackRow = `
-//                 ${i}. ${songData.recenttracks.track[i].artist['#text']} - ${songData.recenttracks.track[i].name} 
+//                 ${i}. ${artist} - ${track} 
 //                 `;
-//                 seeRecentlyDiv.insertAdjacentHTML('afterbegin', recentTrackRow); 
+//                   
+//                   pickUpElement.insertAdjacentHTML('beforeend', recentTrackRow);
+//                   
+////                 seeRecentlyDiv.insertAdjacentHTML('afterbegin', recentTrackRow); 
 // 
 //               }
 //           
-//                 pickUpElement.appendChild(seeRecentlyDiv);
-          
-        })
-        .catch(function(error){
-            console.log(error);
-        })
-}
-
-function printOutRecentlyPlayed(artist, track){
-             const seeRecentlyDiv = document.createElement('div');
-          
-               for(i = 5; i > 0; i--){
-                   
-                 let recentTrackRow = `
-                 ${i}. ${artist} - ${track} 
-                 `;
-                 seeRecentlyDiv.insertAdjacentHTML('afterbegin', recentTrackRow); 
- 
-               }
-           
-                 pickUpElement.appendChild(seeRecentlyDiv);   
-    
-
-}
+////                 pickUpElement.appendChild(seeRecentlyDiv);   
+//    
+//
+//}
 
 
 /*** Small functions ***/
