@@ -15,7 +15,19 @@
 
 </head>
 
-<body>
+<!--LOAD TEST-->
+<!--<body onload="myFunction()">-->
+
+<body onload="myFunction()" style="display:none;" id="myDiv" class="animate-bottom">
+
+
+
+<!--
+<div style="display:none;" id="myDiv" class="animate-bottom">
+  <h2>Tada!</h2>
+  <p>Some text in my newly loaded page..</p>
+</div>
+-->
  
     <div class="title">Breadcrumbs<span id="p1"> . </span><span id="p2"> . </span><span id="p3"> . </span><span id="p4"> . </span>
     <span id="p5"> . </span><span id="p6"> . </span><span id="p7"> . </span><span id="p8"> . </span><span id="p9"> . </span>
@@ -30,10 +42,16 @@
      </div>
     </nav>
 -->
+
+<div id="loader"></div>
   
-   <div id="map" class="map"></div>
+   <div id="map" class="map" ></div>
+
    
    <div id="pickUpElement" class="pickUpElement"></div>
+   
+   <div class="openFoundCrumbOverLay"></div>
+
    
    
 

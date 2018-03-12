@@ -10,8 +10,21 @@ var whereWhoWhenWhat = [
       ]
 
 /*** DEMO row ***/
-//{lat: 59.2734859, lng: 18.0497044, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: 05}
-//{lat: 59.34585339999999, lng: 18.058053299999997, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: 05}
+//{lat: 59.2734859, lng: 18.0497044, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 05}
+//{lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 05} /* MI klassrummet */
+
+
+var myVar;
+
+function myFunction() {
+    initMap = setTimeout(showPage, 3000);
+}
+
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("myDiv").style.display = "block";
+}
+
 
 /*** Setting up map ***/
 
@@ -183,18 +196,30 @@ function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringA
                                 <div class="details_wrapper">
                                     <div class="div_key">Title:</div><div class="div_value">${trackName} </div>
                                     <div class="div_key">Artist:</div><div class="div_value"<a href="${artistUrl}">${artistName}</a></div>
-                                    <div class="div_key">Release:</div><div class="div_value">${albumName} </div>
                                 </div>
                             </div>
+                    <p><span class="crumbFont">Direct search on youtube:</span></p>
+                    <a target="_blank" href="https://www.youtube.com/results?search_query=${searchStringArtist}+${searchStringSongTitle}">
+                        <img id="youtube_logo" src="images/youtube_logo.jpg">
+                    </a></p>
 
-                    <a target="_blank" href="https://www.youtube.com/results?search_query=${searchStringArtist}+${searchStringSongTitle}">Search directly on YouTube</a></p>
-
-                     If you loved this track, maybe you want to checkout:<br>
+                    <p><span class="crumbFont">If you want to know more:</span></p>
                     </div>
 
 
             </div>
             `;
+    
+//cut out album-info from above, not needed?     <div class="div_key">Release:</div><div class="div_value">${albumName} </div>
+    
+    
+//                            <div class="details_overwrap">
+//                                <div class="details_wrapper">
+//                                    <div class="div_key">Title:</div><div class="div_value">${trackName} </div>
+//                                    <div class="div_key">Artist:</div><div class="div_value"<a href="${artistUrl}">${artistName}</a></div>
+//                                   
+//                                </div>
+         
             pickUpElement.innerHTML = '';
             pickUpElement.insertAdjacentHTML('afterbegin', pickUpCrumbTest2); 
     
@@ -208,8 +233,11 @@ function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringA
     
             const openFoundCrumb = document.getElementById('openFoundCrumb');
     
+    
             openFoundCrumb.appendChild(seeRecentlyPlayedButton);
             openFoundCrumb.appendChild(seeTagsButton);
+    
+
 
     
             let user = crumbUser; // ta bort här ha bara crumbUser som argument???!!
@@ -256,7 +284,6 @@ function fetchTags(id){
             let songId = id;
             let tagArray = songData.track.toptags.tag;
             printTags(songId, tagArray);
-          
         })
             .catch(function(error){
                 console.log(error);
@@ -267,11 +294,38 @@ function printTags(songId, tagArray){
             const exploreFurtherDiv = document.createElement('div');
                for(i = 0; i < tagArray.length; i++){
                  let tagsForTrack = `
-                 <div class="tagDiv">${tagArray[i].name}</div>
+                    <div class="tagsWrapper">
+                        <div class="tagsCloseButton" id="tagsCloseButtonDiv">
+   
+                        </div>
+                        <div class="tagDiv" id="tagDiv">
+                            ${tagArray[i].name}
+                        </div>
+                    </div>
+
                  `;
                    exploreFurtherDiv.insertAdjacentHTML('beforeend', tagsForTrack); 
                 }
-                openFoundCrumb.appendChild(exploreFurtherDiv);   
+//                <button type="submit" id="closeTagsLayerButton">X</button>
+                    //const tagWrapper = document.getElementById('tagWrapper');
+    
+//                    const closeTagsButton = document.createElement('button');
+//                    closeTagsButton.classList.add('small_button');
+//                    closeTagsButton.innerHTML = 'Close';
+//                    tagsCloseButtonDiv.appendChild(closeTagsButton);
+    
+    
+                openFoundCrumb.appendChild(exploreFurtherDiv); 
+    
+            const openFoundCrumbTopLayer = document.createElement('div');
+//            const tagWrapper = document.getElementById('tagWrapper');
+    
+            openFoundCrumbTopLayer.classList.add('openFoundCrumbTopLayer');
+    
+//            openFoundCrumbTopLayer.insertAdjacentHTML('afterbegin', closeTagsLayerButton); 
+//        openFoundCrumbTopLayer.insertAdjacentHTML('beforeend', exploreFurtherDiv); 
+            openFoundCrumbTopLayer.appendChild(exploreFurtherDiv);
+            openFoundCrumb.appendChild(openFoundCrumbTopLayer);
 }
 
 /*** Small functions ***/
@@ -279,12 +333,9 @@ function randomCrumbImage(){
     return Math.floor((Math.random() * 7) + 1); 
 }
 
-/* This function should be built out to handle more "weird characters" */
+/* This function should probably be built out to handle more "weird characters" */
 function generateSearchString(string){
     let filterOutCharacters = string.replace('&', '').replace('/', ''); 
     let searchStringFormat = filterOutCharacters.split(' ').join('+');
     return searchStringFormat; 
 }
-
-
-
