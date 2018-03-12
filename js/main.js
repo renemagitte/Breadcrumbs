@@ -11,6 +11,7 @@ var whereWhoWhenWhat = [
 
 /*** DEMO row ***/
 //{lat: 59.2734859, lng: 18.0497044, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: 05}
+//{lat: 59.34585339999999, lng: 18.058053299999997, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: 05}
 
 /*** Setting up map ***/
 
@@ -88,10 +89,6 @@ var whereWhoWhenWhat = [
       }
 
 
-
-
-
-
 function compareLocations(yourPosition){
     let userLatPosition = parseAndRoundOffPosition(yourPosition.lat);
     let userLngPosition = parseAndRoundOffPosition(yourPosition.lng);
@@ -153,10 +150,22 @@ function fetchAndPrintInfo(id, date, user, imageFileEnding){
  //           console.log(songData);
 //           console.log(songData.track.album.mbid);
 
-             
+
+            let userId = id;
+            let crumbDate = date;
+            let crumbUser = user;
+            let fileEnding = imageFileEnding;
             let searchStringArtist = generateSearchString(songData.track.artist.name);
             let searchStringSongTitle = generateSearchString(songData.track.name);
+            let artistUrl = songData.track.artist.url;
+            let trackName = songData.track.name;
+            let artistName = songData.track.artist.name
+            let albumName = songData.track.album.title
+            
+            printOutOutput(userId, crumbDate, crumbUser, fileEnding, searchStringArtist, searchStringSongTitle,
+            artistUrl, trackName, artistName, albumName);
              
+//  //album art             
 //                               let albumId = songData.track.album.mbid;             
 //                              fetch('http://ws.audioscrobbler.com/2.0/?method=album.getInfo&mbid=' + albumId + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
 //                              .then(response => response.json())
@@ -164,23 +173,63 @@ function fetchAndPrintInfo(id, date, user, imageFileEnding){
 //                                    console.log(albumCoverFetch);
 //                                    console.log(albumCoverFetch.album.image[1]['#text']);
 //                                    // let albumArtresult = albumCoverFetch.album.image[2]['#text'];
-
+// // .album art
                                     
                                   
-             let pickUpCrumbTest2 = `
+//             let pickUpCrumbTest2 = `
+//            <div class="opacityOverMap"></div>
+//                    <div class="openFoundCrumb" id="openFoundCrumb">
+//
+//                        <img src="images/heartnotes.gif">
+//                        <img src="images/happycrumb${imageFileEnding}.jpg">
+//                        <img src="images/heartnotes.gif">
+//                        <p><span class="crumbFont">Congratulations! </span> <br>
+//                        You found a song that was dropped here ${date} by ${user}.</p>
+//                            <div class="details_overwrap">
+//                                <div class="details_wrapper">
+//                                    <div class="div_key">Title:</div><div class="div_value">${songData.track.name} </div>
+//                                    <div class="div_key">Artist:</div><div class="div_value"<a href="${songData.track.artist.url}">${songData.track.artist.name}</a></div>
+//                                    <div class="div_key">Release:</div><div class="div_value">${songData.track.album.title} </div>
+//                                </div>
+//                            </div>
+// 
+//                    </div>
+//                    <a target="_blank" href="https://www.youtube.com/results?search_query=${searchStringArtist}+${searchStringSongTitle}">Search directly on YouTube</a></p>
+//
+//                    If you loved this track, maybe you want to checkout:
+//            </div>
+//            `;
+//            pickUpElement.innerHTML = '';
+//            pickUpElement.insertAdjacentHTML('afterbegin', pickUpCrumbTest2); 
+//                                  
+//                                  
+                                  
+                                  
+// album art                                  
+//                                })
+//                                  .catch(function(error){
+//                                        console.log(error);
+//                                })
+// .album art       
+             
+             
+function printOutOutput(userId, crumbDate, crumbUser, fileEnding, searchStringArtist, searchStringSongTitle,
+            artistUrl, trackName, artistName, albumName){
+    
+                 let pickUpCrumbTest2 = `
             <div class="opacityOverMap"></div>
                     <div class="openFoundCrumb" id="openFoundCrumb">
 
                         <img src="images/heartnotes.gif">
-                        <img src="images/happycrumb${imageFileEnding}.jpg">
+                        <img src="images/happycrumb${fileEnding}.jpg">
                         <img src="images/heartnotes.gif">
                         <p><span class="crumbFont">Congratulations! </span> <br>
-                        You found a song that was dropped here ${date} by ${user}.</p>
+                        You found a song that was dropped here ${crumbDate} by ${crumbUser}.</p>
                             <div class="details_overwrap">
                                 <div class="details_wrapper">
-                                    <div class="div_key">Title:</div><div class="div_value">${songData.track.name} </div>
-                                    <div class="div_key">Artist:</div><div class="div_value"<a href="${songData.track.artist.url}">${songData.track.artist.name}</a></div>
-                                    <div class="div_key">Release:</div><div class="div_value">${songData.track.album.title} </div>
+                                    <div class="div_key">Title:</div><div class="div_value">${trackName} </div>
+                                    <div class="div_key">Artist:</div><div class="div_value"<a href="${artistUrl}">${artistName}</a></div>
+                                    <div class="div_key">Release:</div><div class="div_value">${albumName} </div>
                                 </div>
                             </div>
  
@@ -192,24 +241,11 @@ function fetchAndPrintInfo(id, date, user, imageFileEnding){
             `;
             pickUpElement.innerHTML = '';
             pickUpElement.insertAdjacentHTML('afterbegin', pickUpCrumbTest2); 
-                                  
-                                  
-                                  
-                                  
-                                  
-//                                })
-//                                  .catch(function(error){
-//                                        console.log(error);
-//                                })
-       
-                 
- 
-             
+    
             const seeRecentlyPlayedButton = document.createElement('button');
             seeRecentlyPlayedButton.classList.add('small_button');
             seeRecentlyPlayedButton.innerHTML = 'Users recent tracks';
-             
-
+    
             const openFoundCrumb = document.getElementById('openFoundCrumb');
             openFoundCrumb.appendChild(seeRecentlyPlayedButton);
              
@@ -218,7 +254,25 @@ function fetchAndPrintInfo(id, date, user, imageFileEnding){
             seeRecentlyPlayedButton.addEventListener('click', function(){ 
                  seeRecentlyPlayed(id);
             });
+    
+    
+}
+                 
+ 
              
+//            const seeRecentlyPlayedButton = document.createElement('button');
+//            seeRecentlyPlayedButton.classList.add('small_button');
+//            seeRecentlyPlayedButton.innerHTML = 'Users recent tracks';
+//             
+//
+//            const openFoundCrumb = document.getElementById('openFoundCrumb');
+//            openFoundCrumb.appendChild(seeRecentlyPlayedButton);
+//             
+//            //openFoundCrumb.insertAdjacentHTML('beforeend', seeRecentlyPlayedButton); 
+//             
+//            seeRecentlyPlayedButton.addEventListener('click', function(){ 
+//                 seeRecentlyPlayed(id);
+//            });
              
 
             
@@ -238,26 +292,15 @@ function moreInfo(id){
 }
 
 function seeRecentlyPlayed(id){
-    
       fetch('http://ws.audioscrobbler.com/2.0/?method=User.getInfo&method=User.getRecentTracks&user=VenusOfTheSoup&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
             console.log(songData);
           
-            const seeRecentlyDiv = document.createElement('div');
+            let recentArtist = songData.recenttracks.track[i].artist['#text'];
+            let recentTrack = songData.recenttracks.track[i].name;
           
-              for(i = 5; i > 0; i--){ 
-                let recentTrackRow = `
-                ${i}. ${songData.recenttracks.track[i].artist['#text']} - ${songData.recenttracks.track[i].name} 
-                `; 
-                  
-                openFoundCrumb.insertAdjacentHTML('beforeend', recentTrackRow);
-              }
-
-          
-//                seeRecentlyDiv.insertAdjacentHTML('beforeend', recentTrackRow);
-//          
-//                openFoundCrumb.appendChild(seeRecentlyDiv);
+            printOutRecentlyPlayed(recentArtist, recentTrack);
                       
         })
         .catch(function(error){
@@ -265,6 +308,21 @@ function seeRecentlyPlayed(id){
         })
     
 }
+
+function printOutRecentlyPlayed(){
+    
+            const seeRecentlyDiv = document.createElement('div');
+    
+              for(i = 5; i > 0; i--){ 
+                let recentTrackRow = `
+                ${i}. ${recentArtist} - ${recentTrack} 
+                `;  
+                openFoundCrumb.insertAdjacentHTML('beforeend', recentTrackRow);
+              }
+    
+}
+
+
 
 function randomCrumbImage(){
     return Math.floor((Math.random() * 7) + 1); 
