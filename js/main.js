@@ -1,12 +1,16 @@
 /*** In Alpha version, this array data is fetched from database ***/
 var whereWhoWhenWhat = [
         {lat: 59.35, lng: 18.06, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: '925dcc2f-273a-4278-a8b6-3f1f846a7a4b'}, /* MI */
-        {lat: 59.27, lng: 18.05, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: '925dcc2f-273a-4278-a8b6-3f1f846a7a4b'},
+//        {lat: 59.27, lng: 18.05, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: '925dcc2f-273a-4278-a8b6-3f1f846a7a4b'},
+        {lat: 59.2734859, lng: 18.0497044, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: 05},
         {lat: 52.48142, lng: -1.89983, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: 02},
         {lat: -33.727111, lng: 150.371124, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: 03},
         {lat: -33.848588, lng: 151.209834, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: 04},
         {lat: -33.851702, lng: 151.216968, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: 05},
       ]
+
+/*** DEMO row ***/
+//{lat: 59.2734859, lng: 18.0497044, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: 05}
 
 /*** Setting up map ***/
 
@@ -44,7 +48,9 @@ var whereWhoWhenWhat = [
 
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
+//          navigator.geolocation.getCurrentPosition(function(position) {
+// change to watchPosition, see how that works out?
+          navigator.geolocation.watchPosition(function(position) {
             var pos = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
@@ -56,7 +62,8 @@ var whereWhoWhenWhat = [
             map.setCenter(pos);
 
 
-            /* sending the current position for comparing to existing Crumbs' locations */  
+            /* sending the current position for comparing to existing Crumbs' locations */
+              console.log(pos);
             compareLocations(pos);
                    
           }, function() {
@@ -167,7 +174,8 @@ function fetchAndPrintInfo(id, date, user, imageFileEnding){
                         <img src="images/heartnotes.gif">
                         <img src="images/happycrumb${imageFileEnding}.jpg">
                         <img src="images/heartnotes.gif">
-                        <p>Congratulations! You found a song that was dropped here ${date} by ${user}.</p>
+                        <p><span class="crumbFont">Congratulations! </span> <br>
+                        You found a song that was dropped here ${date} by ${user}.</p>
                             <div class="details_overwrap">
                                 <div class="details_wrapper">
                                     <div class="div_key">Title:</div><div class="div_value">${songData.track.name} </div>

@@ -54,6 +54,10 @@
 /*        border-bottom: 10px solid #4C340D;*/
     }
 
+.crumbFont{
+        font-family: 'Nova Mono', monospace;
+}
+
     .menu{
         padding-left: 25px;         
         background-color: #ededed;
