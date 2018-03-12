@@ -182,11 +182,13 @@ function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringA
                                     <div class="div_key">Release:</div><div class="div_value">${albumName} </div>
                                 </div>
                             </div>
- 
-                    </div>
+
                     <a target="_blank" href="https://www.youtube.com/results?search_query=${searchStringArtist}+${searchStringSongTitle}">Search directly on YouTube</a></p>
 
-                    If you loved this track, maybe you want to checkout:
+                     If you loved this track, maybe you want to checkout:<br>
+                    </div>
+
+
             </div>
             `;
             pickUpElement.innerHTML = '';
@@ -249,52 +251,26 @@ function fetchTags(id){
       fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
+            let songId = id;
+            let tagArray = songData.track.toptags.tag;
+            printTags(songId, tagArray);
           
-          console.log(id);
-            //console.log(songData);
-          
-            const exploreFurtherDiv = document.createElement('div');
-          
-          console.log(songData.track.toptags);
-          
-//               for(i = 0; i < songData.track.toptags.tag[i].length; i++){
-               for(i = 0; i < songData.track.toptags.tag.length; i++){
-                   
-                //console.log(songData.track.toptags.tag[i]);
-                   
-                 let tagsForTrack = `
-                 <div class="tagDiv">${songData.track.toptags.tag[i].name}</div>
-                 `;
-                   exploreFurtherDiv.insertAdjacentHTML('beforeend', tagsForTrack); 
-                }
-                openFoundCrumb.appendChild(exploreFurtherDiv); 
         })
             .catch(function(error){
                 console.log(error);
         })
 }
 
-
-//function printOutRecentlyPlayed(artist, track){
-//             const seeRecentlyDiv = document.createElement('div');
-//          
-//               for(i = 5; i > 0; i--){
-//                   
-//                 let recentTrackRow = `
-//                 ${i}. ${artist} - ${track} 
-//                 `;
-//                   
-//                   pickUpElement.insertAdjacentHTML('beforeend', recentTrackRow);
-//                   
-////                 seeRecentlyDiv.insertAdjacentHTML('afterbegin', recentTrackRow); 
-// 
-//               }
-//           
-////                 pickUpElement.appendChild(seeRecentlyDiv);   
-//    
-//
-//}
-
+function printTags(songId, tagArray){
+            const exploreFurtherDiv = document.createElement('div');
+               for(i = 0; i < tagArray.length; i++){
+                 let tagsForTrack = `
+                 <div class="tagDiv">${tagArray[i].name}</div>
+                 `;
+                   exploreFurtherDiv.insertAdjacentHTML('beforeend', tagsForTrack); 
+                }
+                openFoundCrumb.appendChild(exploreFurtherDiv);   
+}
 
 /*** Small functions ***/
 function randomCrumbImage(){
