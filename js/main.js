@@ -149,6 +149,10 @@ function fetchAndPrintInfo(id, date, user, imageFileEnding){
             let fileEnding = imageFileEnding;
             let searchStringArtist = generateSearchString(songData.track.artist.name);
             let searchStringSongTitle = generateSearchString(songData.track.name);
+         
+            console.log(searchStringArtist);
+            console.log(searchStringSongTitle);
+         
             let trackId = songData.track.mbid; 
             let trackName = songData.track.name;
             let artistName = songData.track.artist.name
@@ -244,9 +248,7 @@ function fetchRecentlyPlayed(id){
                 console.log(error);
         })
 }
-
-
-                   
+                  
 function fetchTags(id){
       fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
@@ -278,7 +280,7 @@ function randomCrumbImage(){
 }
 
 function generateSearchString(string){
-    let result = string.replace('\\ ', '+');
+    let result = string.split(' ').join('+').replace('&', '').replace('/', '');
     return result; 
 }
 
