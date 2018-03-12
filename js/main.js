@@ -279,9 +279,11 @@ function randomCrumbImage(){
     return Math.floor((Math.random() * 7) + 1); 
 }
 
+/* This function should be built out to handle more "weird characters" */
 function generateSearchString(string){
-    let result = string.split(' ').join('+').replace('&', '').replace('/', '');
-    return result; 
+    let filterOutCharacters = string.replace('&', '').replace('/', ''); 
+    let searchStringFormat = filterOutCharacters.split(' ').join('+');
+    return searchStringFormat; 
 }
 
 
