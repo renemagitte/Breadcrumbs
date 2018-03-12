@@ -1,12 +1,12 @@
 /*** In Alpha version, this array data is fetched from database ***/
 var whereWhoWhenWhat = [
-        {lat: 59.35, lng: 18.06, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: '925dcc2f-273a-4278-a8b6-3f1f846a7a4b'}, /* MI */
+        {lat: 59.35, lng: 18.06, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: '925dcc2f-273a-4278-a8b6-3f1f846a7a4b'}, /* MI */
 //        {lat: 59.27, lng: 18.05, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: '925dcc2f-273a-4278-a8b6-3f1f846a7a4b'},
-        {lat: 59.2734859, lng: 18.0497044, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: 05},
-        {lat: 52.48142, lng: -1.89983, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: 02},
-        {lat: -33.727111, lng: 150.371124, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: 03},
-        {lat: -33.848588, lng: 151.209834, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: 04},
-        {lat: -33.851702, lng: 151.216968, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: 05},
+        {lat: 59.2734859, lng: 18.0497044, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 05},
+        {lat: 52.48142, lng: -1.89983, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 02},
+        {lat: -33.727111, lng: 150.371124, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 03},
+        {lat: -33.848588, lng: 151.209834, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 04},
+        {lat: -33.851702, lng: 151.216968, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 05},
       ]
 
 /*** DEMO row ***/
@@ -137,21 +137,10 @@ function pickUpCrumb(id, date, user){
 } // end pickUpCrumb
 
 function fetchAndPrintInfo(id, date, user, imageFileEnding){
- //       console.log(id);
-
-    
-//        const fetchedInfo = document.createElement('div');
-//        fetchedInfo.classList.add('classSome');
-//        pickUpDiv.innerHTML = 'Some info about the track';
-    
-         fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+     fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
       .then(response => response.json())
       .then(songData => {
- //           console.log(songData);
-//           console.log(songData.track.album.mbid);
-
-
-            let userId = id;
+            let crumbId = id;
             let crumbDate = date;
             let crumbUser = user;
             let fileEnding = imageFileEnding;
@@ -161,59 +150,16 @@ function fetchAndPrintInfo(id, date, user, imageFileEnding){
             let trackName = songData.track.name;
             let artistName = songData.track.artist.name
             let albumName = songData.track.album.title
-            
-            printOutOutput(userId, crumbDate, crumbUser, fileEnding, searchStringArtist, searchStringSongTitle,
-            artistUrl, trackName, artistName, albumName);
-             
-//  //album art             
-//                               let albumId = songData.track.album.mbid;             
-//                              fetch('http://ws.audioscrobbler.com/2.0/?method=album.getInfo&mbid=' + albumId + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
-//                              .then(response => response.json())
-//                              .then(albumCoverFetch => {
-//                                    console.log(albumCoverFetch);
-//                                    console.log(albumCoverFetch.album.image[1]['#text']);
-//                                    // let albumArtresult = albumCoverFetch.album.image[2]['#text'];
-// // .album art
-                                    
-                                  
-//             let pickUpCrumbTest2 = `
-//            <div class="opacityOverMap"></div>
-//                    <div class="openFoundCrumb" id="openFoundCrumb">
-//
-//                        <img src="images/heartnotes.gif">
-//                        <img src="images/happycrumb${imageFileEnding}.jpg">
-//                        <img src="images/heartnotes.gif">
-//                        <p><span class="crumbFont">Congratulations! </span> <br>
-//                        You found a song that was dropped here ${date} by ${user}.</p>
-//                            <div class="details_overwrap">
-//                                <div class="details_wrapper">
-//                                    <div class="div_key">Title:</div><div class="div_value">${songData.track.name} </div>
-//                                    <div class="div_key">Artist:</div><div class="div_value"<a href="${songData.track.artist.url}">${songData.track.artist.name}</a></div>
-//                                    <div class="div_key">Release:</div><div class="div_value">${songData.track.album.title} </div>
-//                                </div>
-//                            </div>
-// 
-//                    </div>
-//                    <a target="_blank" href="https://www.youtube.com/results?search_query=${searchStringArtist}+${searchStringSongTitle}">Search directly on YouTube</a></p>
-//
-//                    If you loved this track, maybe you want to checkout:
-//            </div>
-//            `;
-//            pickUpElement.innerHTML = '';
-//            pickUpElement.insertAdjacentHTML('afterbegin', pickUpCrumbTest2); 
-//                                  
-//                                  
-                                  
-                                  
-// album art                                  
-//                                })
-//                                  .catch(function(error){
-//                                        console.log(error);
-//                                })
-// .album art       
-             
-             
-function printOutOutput(userId, crumbDate, crumbUser, fileEnding, searchStringArtist, searchStringSongTitle,
+
+            printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringArtist, searchStringSongTitle,
+            artistUrl, trackName, artistName, albumName);      
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+} // end fetchAndPrintInfo()
+                          
+function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringArtist, searchStringSongTitle,
             artistUrl, trackName, artistName, albumName){
     
                  let pickUpCrumbTest2 = `
@@ -250,80 +196,68 @@ function printOutOutput(userId, crumbDate, crumbUser, fileEnding, searchStringAr
             openFoundCrumb.appendChild(seeRecentlyPlayedButton);
              
             //openFoundCrumb.insertAdjacentHTML('beforeend', seeRecentlyPlayedButton); 
+    
+            let user = crumbUser;
+        console.log(user);
              
             seeRecentlyPlayedButton.addEventListener('click', function(){ 
-                 seeRecentlyPlayed(id);
-            });
-    
-    
-}
-                 
- 
-             
-//            const seeRecentlyPlayedButton = document.createElement('button');
-//            seeRecentlyPlayedButton.classList.add('small_button');
-//            seeRecentlyPlayedButton.innerHTML = 'Users recent tracks';
-//             
-//
-//            const openFoundCrumb = document.getElementById('openFoundCrumb');
-//            openFoundCrumb.appendChild(seeRecentlyPlayedButton);
-//             
-//            //openFoundCrumb.insertAdjacentHTML('beforeend', seeRecentlyPlayedButton); 
-//             
-//            seeRecentlyPlayedButton.addEventListener('click', function(){ 
-//                 seeRecentlyPlayed(id);
-//            });
-             
-
-            
-                          
-                          
-    })
-      .catch(function(error){
-            console.log(error);
-      })
-
+                 fetchRecentlyPlayed(user);
+            });    
     
 }
-
-
-function moreInfo(id){
+                   
+function fetchRecentlyPlayed(id){
     
-}
-
-function seeRecentlyPlayed(id){
-      fetch('http://ws.audioscrobbler.com/2.0/?method=User.getInfo&method=User.getRecentTracks&user=VenusOfTheSoup&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+    console.log(id);
+    
+      fetch('http://ws.audioscrobbler.com/2.0/?method=User.getRecentTracks&user=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
             console.log(songData);
           
-            let recentArtist = songData.recenttracks.track[i].artist['#text'];
-            let recentTrack = songData.recenttracks.track[i].name;
+        let artist = songData.recenttracks.track[i].artist['#text'];
+          let track = songData.recenttracks.track[i].name;
           
-            printOutRecentlyPlayed(recentArtist, recentTrack);
-                      
+          printOutRecentlyPlayed(artist, track)
+          
+//            const seeRecentlyDiv = document.createElement('div');
+//          
+//               for(i = 5; i > 0; i--){
+//                   
+//                 let recentTrackRow = `
+//                 ${i}. ${songData.recenttracks.track[i].artist['#text']} - ${songData.recenttracks.track[i].name} 
+//                 `;
+//                 seeRecentlyDiv.insertAdjacentHTML('afterbegin', recentTrackRow); 
+// 
+//               }
+//           
+//                 pickUpElement.appendChild(seeRecentlyDiv);
+          
         })
         .catch(function(error){
             console.log(error);
         })
-    
 }
 
-function printOutRecentlyPlayed(){
+function printOutRecentlyPlayed(artist, track){
+             const seeRecentlyDiv = document.createElement('div');
+          
+               for(i = 5; i > 0; i--){
+                   
+                 let recentTrackRow = `
+                 ${i}. ${artist} - ${track} 
+                 `;
+                 seeRecentlyDiv.insertAdjacentHTML('afterbegin', recentTrackRow); 
+ 
+               }
+           
+                 pickUpElement.appendChild(seeRecentlyDiv);   
     
-            const seeRecentlyDiv = document.createElement('div');
-    
-              for(i = 5; i > 0; i--){ 
-                let recentTrackRow = `
-                ${i}. ${recentArtist} - ${recentTrack} 
-                `;  
-                openFoundCrumb.insertAdjacentHTML('beforeend', recentTrackRow);
-              }
-    
+
 }
 
 
-
+/*** Small functions ***/
 function randomCrumbImage(){
     return Math.floor((Math.random() * 7) + 1); 
 }
