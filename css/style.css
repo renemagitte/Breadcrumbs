@@ -329,6 +329,10 @@
         margin-bottom: 15px;
     }
     
+    .details_row{
+        width: 100%;
+    }
+    
     .exploreFurtherDiv{
         width: 100%;
         display: flex;

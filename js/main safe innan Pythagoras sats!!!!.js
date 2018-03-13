@@ -75,16 +75,11 @@ function showPage() {
             infoWindow.open(map);
             map.setCenter(pos);
 
-            
+
             /* sending the current position for comparing to existing Crumbs' locations */
-            // CONSOLE LOG FOR CURRENT POSITION!!!
-            //console.log(pos);
-            /* Very Important Line, this is is WORKING <--- *******/
-            //compareLocations(pos);
-              
-              //Test function: trying with pythagoras instead:
-              newCompareLocations(pos);
-              
+              // CONSOLE LOG FOR CURRENT POSITION!!!
+              //console.log(pos);
+            compareLocations(pos);
                    
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
@@ -107,9 +102,6 @@ function showPage() {
         infoWindow.open(map);
       }
 
-/*
-
-//WORKING compareLocations, but it's not the way it should be done.
 
 function compareLocations(yourPosition){
     let userLatPosition = parseAndRoundOffPosition(yourPosition.lat);
@@ -124,9 +116,11 @@ function compareLocations(yourPosition){
             
             if((userLatPosition == crumbLatPosition) && (userLngPosition  == crumbLngPosition)){
                 console.log("it's a match!")
+                
 
 //                pickUpCrumb(crumbId, crumbDate, crumbUser);
                 
+               
                 
                 // the if included
                 if(saveCrumbLocally(userLatPosition, userLngPosition)){
@@ -145,40 +139,6 @@ function compareLocations(yourPosition){
                     console.log("this is somewhere else")
             }
         }    
-}
-*/
-
-function newCompareLocations(yourPosition){
-    
-    let userLatPosition = parsePosition(yourPosition.lat);
-    let userLngPosition = parsePosition(yourPosition.lng);  
-    
-    console.log(userLatPosition);
-    console.log(userLngPosition);
-    
-    
-        for(i = 0; i < whereWhoWhenWhat.length; i++){
-            let crumbLatPosition = parsePosition(whereWhoWhenWhat[i].lat);
-            let crumbLngPosition = parsePosition(whereWhoWhenWhat[i].lng);
-            
-            let crumbId = whereWhoWhenWhat[i].crumbId; 
-            let crumbDate = whereWhoWhenWhat[i].date; 
-            let crumbUser = whereWhoWhenWhat[i].user; 
-            
-            console.log(crumbLatPosition);
-            console.log(crumbLngPosition);
-            
-            console.log(newIsCrumbNear(crumbLatPosition, crumbLngPosition, userLatPosition, userLngPosition, 2));
-            
-            if(newIsCrumbNear(crumbLatPosition, crumbLngPosition, userLatPosition, userLngPosition, 2)){
-                pickUpCrumb(crumbId, crumbDate, crumbUser);
-                break;
-            }else{
-                    console.log("this is somewhere else")
-            }
-        }
-        
-
 }
 
 
@@ -237,10 +197,10 @@ function fetchAndPrintInfo(id, date, user, imageFileEnding){
       .then(response => response.json())
       .then(songData => {
          
-//         console.log(id);
-//         console.log(date);
-//         
-//         console.log(songData);
+         console.log(id);
+         console.log(date);
+         
+         console.log(songData);
          
             let crumbId = id;
             let crumbDate = date;
@@ -350,42 +310,42 @@ function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringA
 
 /**************** Fetch-functions for Explore Further Section ****************/
 
-function fetchRecentlyPlayed(id) {
-    fetch('http://ws.audioscrobbler.com/2.0/?method=User.getRecentTracks&user=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+function fetchRecentlyPlayed(id){
+      fetch('http://ws.audioscrobbler.com/2.0/?method=User.getRecentTracks&user=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
-            console.log(songData);
+          console.log(songData);
             let userId = id;
             let recentTrackArray = songData.recenttracks.track;
             printRecentlyPlayed(userId, recentTrackArray);
         })
-        .catch(function (error) {
-            console.log(error);
+            .catch(function(error){
+                console.log(error);
         })
 }
 
-function fetchArtistInfo(id) {
+function fetchArtistInfo(id){
     fetch('http://ws.audioscrobbler.com/2.0/?method=artist.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
-        .then(response => response.json())
-        .then(songData => {
-            let artistInfo = songData.artist.bio.summary;
-            printArtistInfo(artistInfo);
-        })
-        .catch(function (error) {
+    .then(response => response.json())
+    .then(songData => {
+        let artistInfo = songData.artist.bio.summary;
+        printArtistInfo(artistInfo);
+    })
+        .catch(function(error){
             console.log(error);
-        })
+    })
 }
 
-function fetchTags(id) {
-    fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+function fetchTags(id){
+      fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
             let songId = id;
             let tagArray = songData.track.toptags.tag;
             printTags(songId, tagArray);
         })
-        .catch(function (error) {
-            console.log(error);
+            .catch(function(error){
+                console.log(error);
         })
 }
 
@@ -445,31 +405,20 @@ function generateSearchString(string){
     return searchStringFormat; 
 }
 
-/*
-// WORKING; but not the way t should be done
 function parseAndRoundOffPosition(latOrLng){
     let latOrLngParsed = parseFloat(latOrLng);
     let latOrLngRoundOff = latOrLngParsed.toFixed(2); // kalibrera detta värde???
-    return latOrLngRoundOff;    
+    return latOrLngRoundOff;   
 }
-*/
-
-function parsePosition(latOrLng){    
-    let latOrLngParsed = parseFloat(latOrLng);
-    return latOrLngParsed;    
-}
-
 
 /* the above function should be made with pythagoran theorem instead!!!!!: */
-function newIsCrumbNear(checkPointLat, checkPointLng, centerPointLat, centerPointLng, km){
-    var ky = 40000 / 360;    
-    var kx = Math.cos(Math.PI * centerPointLat / 180.0) * ky;
-    var dx = Math.abs(centerPointLng - checkPointLng) * kx;
-    var dy = Math.abs(centerPointLat - checkPointLat) * ky;
-    
-    console.log(Math.sqrt(dx * dx + dy * dy) <= km);
-    return Math.sqrt(dx * dx + dy * dy) <= km;
-}
+//function newIsCrumbNear(checkPointLat, checkPointLng, centerPointLat, centerPointLng km){
+//    var ky = 40000 / 360;    
+//    var kx = Math.cos(Math.PI * centerPointLat / 180.0) * ky;
+//    var dx = Math.abs(centerPointLng - checkPointLng) * kx;
+//    var dy = Math.abs(centerPointLat - checkPointLat) * ky;
+//    return Math.sqrt(dx * dx + dy * dy) <= km;
+//}
 
 //example stack overflow!!!!!!
 //    function arePointsNear(checkPoint, centerPoint, km) {
