@@ -250,6 +250,15 @@ function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringA
     
 }
                    
+
+                  
+
+
+
+
+
+/**************** Fetch-functions for Explore Further Section ****************/
+
 function fetchRecentlyPlayed(id){
       fetch('http://ws.audioscrobbler.com/2.0/?method=User.getRecentTracks&user=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
@@ -263,18 +272,18 @@ function fetchRecentlyPlayed(id){
         })
 }
 
-function printRecentlyPlayed(userId, recentTrackArray){
-    const exploreFurtherDiv = document.createElement('div');
-
-       for(i = 0; i < 5; i++){  
-         let recentTrackRow = `
-         <div class="recentTrackRow">${i+1}. ${recentTrackArray[i].artist['#text']} - ${recentTrackArray[i].name} </div>
-         `;
-           exploreFurtherDiv.insertAdjacentHTML('beforeend', recentTrackRow); 
-        }
-        openFoundCrumb.appendChild(exploreFurtherDiv);     
+function fetchArtistInfo(id){
+    fetch('http://ws.audioscrobbler.com/2.0/?method=artist.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+    .then(response => response.json())
+    .then(songData => {
+        let artistInfo = songData.artist.bio.summary;
+        printArtistInfo(artistInfo);
+    })
+        .catch(function(error){
+            console.log(error);
+    })
 }
-                  
+
 function fetchTags(id){
       fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
@@ -288,33 +297,21 @@ function fetchTags(id){
         })
 }
 
+/***************** Print Out-functions for Explore Further Section *****************/
 
-function printTags(songId, tagArray){
-    const exploreFurtherDivTags = document.createElement('div');
-    
-    for(i = 0; i < tagArray.length; i++){ 
-        let tagsForTrack = `
-            <div class="tagDiv${[i]}" id="tagDiv${[i]}">
-                ${tagArray[i].name}
-            </div>
-            `;
-        exploreFurtherDivTags.insertAdjacentHTML('beforeend', tagsForTrack); // även tagsForTrack[i] här såklart
+function printRecentlyPlayed(userId, recentTrackArray){
+    const exploreFurtherDiv = document.createElement('div');
+    for(i = 0; i < 5; i++){  
+        let recentTrackRow = `
+        <div class="recentTrackRow">
+            <div class="recentTrackRow_number">${i+1}.</div> 
+            <div class="recentTrackRow_artist">${recentTrackArray[i].artist['#text']}</div> 
+            <div class="recentTrackRow_track">${recentTrackArray[i].name}</div>
+        </div>
+        `;
+        exploreFurtherDiv.insertAdjacentHTML('beforeend', recentTrackRow); 
     }
-    openFoundCrumb.appendChild(exploreFurtherDivTags);
-
-}
-
-
-function fetchArtistInfo(id){
-    fetch('http://ws.audioscrobbler.com/2.0/?method=artist.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
-    .then(response => response.json())
-    .then(songData => {
-        let artistInfo = songData.artist.bio.summary;
-        printArtistInfo(artistInfo);
-    })
-        .catch(function(error){
-            console.log(error);
-    })
+    openFoundCrumb.appendChild(exploreFurtherDiv);     
 }
 
 function printArtistInfo(artistInfo){
@@ -325,6 +322,19 @@ function printArtistInfo(artistInfo){
     `;
     exploreFurtherDiv.insertAdjacentHTML('beforeend', artistInfoOutput); 
     openFoundCrumb.appendChild(exploreFurtherDiv);  
+}
+
+function printTags(songId, tagArray){
+    const exploreFurtherDivTags = document.createElement('div');
+    for(i = 0; i < tagArray.length; i++){ 
+        let tagsForTrack = `
+            <div class="tagDiv${[i]}" id="tagDiv${[i]}">
+                ${tagArray[i].name}
+            </div>
+            `;
+        exploreFurtherDivTags.insertAdjacentHTML('beforeend', tagsForTrack); // även tagsForTrack[i] här såklart
+    }
+    openFoundCrumb.appendChild(exploreFurtherDivTags);
 }
 
 

@@ -341,6 +341,30 @@
         width: 400px;
         
     }
+    
+    .recentTrackRow{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding-left: 160px;
+        padding-right: 60px;
+        width: 100%;
+        padding-top: 5px;
+    }
+    
+    .recentTrackRow_number{
+        width: 5%;
+    }
+    
+    .recentTrackRow_artist{
+        width: 20%;
+            text-align: left;
+    }
+    
+    .recentTrackRow_track{
+        width: 75%;
+                    text-align: left;
+    }
 /*
     .details_albumpic{
         width: 30%;
