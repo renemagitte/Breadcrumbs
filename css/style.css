@@ -1,6 +1,10 @@
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 
+#tagDiv{
+    display: block !important;
+}
+
    .small_button {
     font-size: 12px;
     color: black;
@@ -78,11 +82,38 @@
         background-color: #FFAFE1;
 }
 
-.tagDiv{
+.tagDiv0{
     background-color: lightgreen;
     margin: 15px;
     padding: 15px;
     float: left;
+    border-radius: 10px;
+}
+
+
+.tagDiv1{
+    background-color: red;
+    margin: 15px;
+    padding: 15px;
+    float: left;
+    border-radius: 10px;
+}
+
+
+.tagDiv2{
+    background-color: blueviolet;
+    margin: 15px;
+    padding: 15px;
+    float: left;
+    border-radius: 10px;
+}
+
+.tagDiv3{
+    background-color: blueviolet;
+    margin: 15px;
+    padding: 15px;
+    float: left;
+    border-radius: 10px;
 }
 
 #youtube_logo{
@@ -152,7 +183,7 @@
                     background-color: #FFAFE1;
         border-bottom: 10px solid #4C340D;
         border-top: 10px solid #4C340D;
-        z-index: 96 !important;
+        z-index: 94 !important;
         position: absolute !important;
       }
     
@@ -161,7 +192,7 @@
         width: 100%;
         background-color: white;
         opacity: 0.45;
-        z-index: 97;
+        z-index: 95;
         position: absolute;
         left: 0px;
         top: 110px;
@@ -173,7 +204,7 @@
     
     
     .foundCrumbMessage{
-        z-index: 97 !important;
+        z-index: 96 !important;
         position: absolute !important;
         top: 160px;
         height: 180px;
@@ -199,7 +230,7 @@
     }
     
     .openFoundCrumb{
-        z-index: 98 !important;
+        z-index: 97 !important;
         position: absolute !important;
         top: 130px;
         height: auto;
@@ -226,6 +257,30 @@
     }
     
     .openFoundCrumbTopLayer{
+        z-index: 98 !important;
+        position: absolute !important;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        width: 100%;
+        background-color: white !important;
+        opacity: none;
+        vertical-align: middle;
+        align-self: center;
+/*        font-family: 'Karma', serif;*/
+    font-family: 'Raleway', sans-serif;
+/*        font-family: 'Open Sans', sans-serif;*/
+        font-size: 0.8em;
+        color: black;
+        text-align: center;
+        
+        padding: 40px;
+/*
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+*/
+    }
+    
+    .openFoundCrumbTopLayerTags{
         z-index: 99 !important;
         position: absolute !important;
         top: 0px;
@@ -242,11 +297,13 @@
         font-size: 0.8em;
         color: black;
         text-align: center;
+        
+        padding: 40px;
 /*
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        padding: 20px;
 */
     }
+    
     
     .visible{
         display: block;
@@ -272,6 +329,18 @@
         margin-bottom: 15px;
     }
     
+    .exploreFurtherDiv{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+    
+    .artistInfoDiv{
+        width: 400px;
+        
+    }
 /*
     .details_albumpic{
         width: 30%;

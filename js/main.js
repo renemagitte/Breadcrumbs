@@ -154,7 +154,7 @@ function fetchAndPrintInfo(id, date, user, imageFileEnding){
       .then(response => response.json())
       .then(songData => {
          
-         //console.log(songData);
+         console.log(songData);
          
             let crumbId = id;
             let crumbDate = date;
@@ -169,11 +169,12 @@ function fetchAndPrintInfo(id, date, user, imageFileEnding){
             let trackId = songData.track.mbid; 
             let trackName = songData.track.name;
             let artistName = songData.track.artist.name
-            let albumName = songData.track.album.title
+            let artistId = songData.track.artist.mbid;
+            let albumName = songData.track.album.title;
             let artistUrl = songData.track.artist.url;
 
             printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringArtist, searchStringSongTitle,
-            trackId, trackName, artistName, albumName, artistUrl);      
+            trackId, trackName, artistName, artistId, albumName, artistUrl);      
         })
         .catch(function(error){
             console.log(error);
@@ -181,7 +182,7 @@ function fetchAndPrintInfo(id, date, user, imageFileEnding){
 } // end fetchAndPrintInfo()
                           
 function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringArtist, searchStringSongTitle,
-            trackId, trackName, artistName, albumName, artistUrl){
+            trackId, trackName, artistName, artistId, albumName, artistUrl){
     
                  let pickUpCrumbTest2 = `
             <div class="opacityOverMap"></div>
@@ -209,16 +210,6 @@ function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringA
 
             </div>
             `;
-    
-//cut out album-info from above, not needed?     <div class="div_key">Release:</div><div class="div_value">${albumName} </div>
-    
-    
-//                            <div class="details_overwrap">
-//                                <div class="details_wrapper">
-//                                    <div class="div_key">Title:</div><div class="div_value">${trackName} </div>
-//                                    <div class="div_key">Artist:</div><div class="div_value"<a href="${artistUrl}">${artistName}</a></div>
-//                                   
-//                                </div>
          
             pickUpElement.innerHTML = '';
             pickUpElement.insertAdjacentHTML('afterbegin', pickUpCrumbTest2); 
@@ -231,14 +222,16 @@ function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringA
             seeTagsButton.classList.add('small_button');
             seeTagsButton.innerHTML = 'See tags for this track';
     
+            const seeArtistInfo = document.createElement('button');
+            seeArtistInfo.classList.add('small_button');
+            seeArtistInfo.innerHTML = 'Read about the artist';
+    
             const openFoundCrumb = document.getElementById('openFoundCrumb');
     
     
             openFoundCrumb.appendChild(seeRecentlyPlayedButton);
             openFoundCrumb.appendChild(seeTagsButton);
-    
-
-
+            openFoundCrumb.appendChild(seeArtistInfo);
     
             let user = crumbUser; // ta bort här ha bara crumbUser som argument???!!
             //console.log(user);
@@ -249,6 +242,10 @@ function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringA
     
             seeTagsButton.addEventListener('click', function(){ 
                  fetchTags(trackId);
+            });
+    
+            seeArtistInfo.addEventListener('click', function(){ 
+                 fetchArtistInfo(artistId);
             });   
     
 }
@@ -257,7 +254,11 @@ function fetchRecentlyPlayed(id){
       fetch('http://ws.audioscrobbler.com/2.0/?method=User.getRecentTracks&user=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
+            //let userId = id;
+            
             //console.log(songData);
+          
+          //printRecentlyPlayed(userId)
           
             let artist = songData.recenttracks.track[i].artist['#text'];
             let track = songData.recenttracks.track[i].name;
@@ -276,13 +277,17 @@ function fetchRecentlyPlayed(id){
                 console.log(error);
         })
 }
+
+//function printRecentlyPlayed(){
+//    
+//}
                   
 function fetchTags(id){
       fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
             let songId = id;
-            let tagArray = songData.track.toptags.tag;
+            let tagArray = songData.track.toptags.tag; // kan man skicka med en array på det här sättet???
             printTags(songId, tagArray);
         })
             .catch(function(error){
@@ -290,43 +295,61 @@ function fetchTags(id){
         })
 }
 
-function printTags(songId, tagArray){
-            const exploreFurtherDiv = document.createElement('div');
-               for(i = 0; i < tagArray.length; i++){
-                 let tagsForTrack = `
-                    <div class="tagsWrapper">
-                        <div class="tagsCloseButton" id="tagsCloseButtonDiv">
-   
-                        </div>
-                        <div class="tagDiv" id="tagDiv">
-                            ${tagArray[i].name}
-                        </div>
-                    </div>
 
-                 `;
-                   exploreFurtherDiv.insertAdjacentHTML('beforeend', tagsForTrack); 
-                }
-//                <button type="submit" id="closeTagsLayerButton">X</button>
-                    //const tagWrapper = document.getElementById('tagWrapper');
+function printTags(songId, tagArray){
     
-//                    const closeTagsButton = document.createElement('button');
-//                    closeTagsButton.classList.add('small_button');
-//                    closeTagsButton.innerHTML = 'Close';
-//                    tagsCloseButtonDiv.appendChild(closeTagsButton);
+   const exploreFurtherDivTags = document.createElement('div');
     
-    
-                openFoundCrumb.appendChild(exploreFurtherDiv); 
-    
-            const openFoundCrumbTopLayer = document.createElement('div');
-//            const tagWrapper = document.getElementById('tagWrapper');
-    
-            openFoundCrumbTopLayer.classList.add('openFoundCrumbTopLayer');
-    
-//            openFoundCrumbTopLayer.insertAdjacentHTML('afterbegin', closeTagsLayerButton); 
-//        openFoundCrumbTopLayer.insertAdjacentHTML('beforeend', exploreFurtherDiv); 
-            openFoundCrumbTopLayer.appendChild(exploreFurtherDiv);
-            openFoundCrumb.appendChild(openFoundCrumbTopLayer);
+   for(i = 0; i < tagArray.length; i++){ 
+       // varför slutar sidan fungera om jag döper denna nedan till tagsForTrack[i]
+     let tagsForTrack = `
+
+            <div class="tagDiv${[i]}" id="tagDiv${[i]}">
+                ${tagArray[i].name}
+            </div>
+
+     `;
+       exploreFurtherDivTags.insertAdjacentHTML('beforeend', tagsForTrack); // även tagsForTrack[i] här såklart
+
+    }
+    openFoundCrumb.appendChild(exploreFurtherDivTags);
+
 }
+
+//                    <div class="tagsWrapper">
+//                        <div class="tagDiv${[i]}" id="tagDiv">
+//                            ${tagArray[i].name}
+//                        </div>
+//                    </div>
+
+function fetchArtistInfo(id){
+    fetch('http://ws.audioscrobbler.com/2.0/?method=artist.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+    .then(response => response.json())
+    .then(songData => {
+        let artistInfo = songData.artist.bio.summary;
+        printArtistInfo(artistInfo);
+    })
+        .catch(function(error){
+            console.log(error);
+    })
+}
+
+function printArtistInfo(artistInfo){
+    const exploreFurtherDiv = document.createElement('div'); 
+    exploreFurtherDiv.classList.add('exploreFurtherDiv');
+    let artistInfoOutput = `
+        <div class="artistInfoDiv">${artistInfo}</div>
+    `;
+    exploreFurtherDiv.insertAdjacentHTML('beforeend', artistInfoOutput); 
+    openFoundCrumb.appendChild(exploreFurtherDiv);  
+}
+
+
+
+
+
+
+
 
 /*** Small functions ***/
 function randomCrumbImage(){
