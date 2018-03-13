@@ -254,33 +254,26 @@ function fetchRecentlyPlayed(id){
       fetch('http://ws.audioscrobbler.com/2.0/?method=User.getRecentTracks&user=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
-            //let userId = id;
-            
-            //console.log(songData);
-          
-          //printRecentlyPlayed(userId)
-          
-            let artist = songData.recenttracks.track[i].artist['#text'];
-            let track = songData.recenttracks.track[i].name;
-          
-            const exploreFurtherDiv = document.createElement('div');
-          
-               for(i = 0; i < 5; i++){  
-                 let recentTrackRow = `
-                 <div class="recentTrackRow">${i+1}. ${songData.recenttracks.track[i].artist['#text']} - ${songData.recenttracks.track[i].name} </div>
-                 `;
-                   exploreFurtherDiv.insertAdjacentHTML('beforeend', recentTrackRow); 
-                }
-                openFoundCrumb.appendChild(exploreFurtherDiv); 
+            let userId = id;
+            let recentTrackArray = songData.recenttracks.track;
+            printRecentlyPlayed(userId, recentTrackArray);
         })
             .catch(function(error){
                 console.log(error);
         })
 }
 
-//function printRecentlyPlayed(){
-//    
-//}
+function printRecentlyPlayed(userId, recentTrackArray){
+    const exploreFurtherDiv = document.createElement('div');
+
+       for(i = 0; i < 5; i++){  
+         let recentTrackRow = `
+         <div class="recentTrackRow">${i+1}. ${recentTrackArray[i].artist['#text']} - ${recentTrackArray[i].name} </div>
+         `;
+           exploreFurtherDiv.insertAdjacentHTML('beforeend', recentTrackRow); 
+        }
+        openFoundCrumb.appendChild(exploreFurtherDiv);     
+}
                   
 function fetchTags(id){
       fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
@@ -297,30 +290,20 @@ function fetchTags(id){
 
 
 function printTags(songId, tagArray){
+    const exploreFurtherDivTags = document.createElement('div');
     
-   const exploreFurtherDivTags = document.createElement('div');
-    
-   for(i = 0; i < tagArray.length; i++){ 
-       // varför slutar sidan fungera om jag döper denna nedan till tagsForTrack[i]
-     let tagsForTrack = `
-
+    for(i = 0; i < tagArray.length; i++){ 
+        let tagsForTrack = `
             <div class="tagDiv${[i]}" id="tagDiv${[i]}">
                 ${tagArray[i].name}
             </div>
-
-     `;
-       exploreFurtherDivTags.insertAdjacentHTML('beforeend', tagsForTrack); // även tagsForTrack[i] här såklart
-
+            `;
+        exploreFurtherDivTags.insertAdjacentHTML('beforeend', tagsForTrack); // även tagsForTrack[i] här såklart
     }
     openFoundCrumb.appendChild(exploreFurtherDivTags);
 
 }
 
-//                    <div class="tagsWrapper">
-//                        <div class="tagDiv${[i]}" id="tagDiv">
-//                            ${tagArray[i].name}
-//                        </div>
-//                    </div>
 
 function fetchArtistInfo(id){
     fetch('http://ws.audioscrobbler.com/2.0/?method=artist.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
