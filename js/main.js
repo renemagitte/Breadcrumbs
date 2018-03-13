@@ -77,7 +77,8 @@ function showPage() {
 
 
             /* sending the current position for comparing to existing Crumbs' locations */
-              console.log(pos);
+              // CONSOLE LOG FOR CURRENT POSITION!!!
+              //console.log(pos);
             compareLocations(pos);
                    
           }, function() {
@@ -114,39 +115,72 @@ function compareLocations(yourPosition){
             let crumbUser = whereWhoWhenWhat[i].user; 
             
             if((userLatPosition == crumbLatPosition) && (userLngPosition  == crumbLngPosition)){
-                    console.log("it's a match!")
+                console.log("it's a match!")
+                
+                saveCrumbLocally(userLatPosition, userLngPosition);
+                // nedanstående ska vara inok en if-sats och bara köra igång om man inte plockat upp en crumb helt nyss
+                
                 pickUpCrumb(crumbId, crumbDate, crumbUser);
+
             }else{
                     console.log("this is somewhere else")
             }
         }    
 }
 
-function parseAndRoundOffPosition(latOrLng){
-    let latOrLngParsed = parseFloat(latOrLng);
-    let latOrLngRoundOff = latOrLngParsed.toFixed(2); // kalibrera detta värde???
-    return latOrLngRoundOff;   
+var storedPosition = [];
+function saveCrumbLocally(incomingLat, incomingLng){
+    // om man plockat upp en crumb för mindre än 10 minuter sen ska man inte få plocka
+    // upp en ny.
+    // Output: Hold on, you need to cherish this crumb for at least 10 minutes before picking up another one.
+    
+    console.log(incomingLat);
+    lat = parseAndRoundOffPosition(incomingLat);
+    console.log(lat);
+    lng = parseAndRoundOffPosition(incomingLng);
+    
+    if(!localStorage.getItem('storedPosition')){
+        localStorage.setItem('storedPosition', JSON.stringify(storedPosition));
+        storedPosition[0] = lat;
+        storedPosition[1] = lng;
+        localStorage.setItem('storedPosition', JSON.stringify(storedPosition));
+    }else{
+
+        console.log(localStorage);
+        
+        
+        let dataFromLocalStorage = JSON.parse(localStorage.getItem('storedPosition'));
+                if((dataFromLocalStorage[0] == lat) && (dataFromLocalStorage[1] == lat)){
+                    console.log("sorry, wait at least 10 minutes")
+                }else{
+                    console.log("yay! a new crumb!")
+                    storedPosition[0] = lat;
+                    storedPosition[1] = lng;
+                    localStorage.setItem('storedPosition', JSON.stringify(storedPosition));
+                }
+    } 
 }
+
 
 
 /*** DOM Elements ***/
 const pickUpElement = document.getElementById('pickUpElement');
 
 function pickUpCrumb(id, date, user){
-            let imageFileEnding = randomCrumbImage();
-    
-            let pickUpCrumbTest = `
-            <div class="opacityOverMap"></div>
-                <div class="foundCrumbMessage">
-                    <img src="images/crumb${imageFileEnding}.jpg">
-                    <p>Someone dropped something here! Pick it up!</p>
-                </div>
-            `;
-            pickUpElement.insertAdjacentHTML('afterbegin', pickUpCrumbTest); 
-    
-            pickUpElement.addEventListener('click', function(){ 
-                fetchAndPrintInfo(id, date, user, imageFileEnding);
-            })
+        let imageFileEnding = randomCrumbImage();
+
+        let pickUpCrumbTest = `
+        <div class="opacityOverMap"></div>
+            <div class="foundCrumbMessage">
+                <img src="images/crumb${imageFileEnding}.jpg">
+                <p>Someone dropped something here! Pick it up!</p>
+            </div>
+        `;
+        pickUpElement.insertAdjacentHTML('afterbegin', pickUpCrumbTest); 
+
+        pickUpElement.addEventListener('click', function(){ 
+            fetchAndPrintInfo(id, date, user, imageFileEnding);
+        })
 } // end pickUpCrumb
 
 function fetchAndPrintInfo(id, date, user, imageFileEnding){
@@ -251,12 +285,6 @@ function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringA
 }
                    
 
-                  
-
-
-
-
-
 /**************** Fetch-functions for Explore Further Section ****************/
 
 function fetchRecentlyPlayed(id){
@@ -289,7 +317,7 @@ function fetchTags(id){
         .then(response => response.json())
         .then(songData => {
             let songId = id;
-            let tagArray = songData.track.toptags.tag; // kan man skicka med en array på det här sättet???
+            let tagArray = songData.track.toptags.tag;
             printTags(songId, tagArray);
         })
             .catch(function(error){
@@ -332,13 +360,10 @@ function printTags(songId, tagArray){
                 ${tagArray[i].name}
             </div>
             `;
-        exploreFurtherDivTags.insertAdjacentHTML('beforeend', tagsForTrack); // även tagsForTrack[i] här såklart
+        exploreFurtherDivTags.insertAdjacentHTML('beforeend', tagsForTrack);
     }
     openFoundCrumb.appendChild(exploreFurtherDivTags);
 }
-
-
-
 
 
 
@@ -354,4 +379,10 @@ function generateSearchString(string){
     let filterOutCharacters = string.replace('&', '').replace('/', ''); 
     let searchStringFormat = filterOutCharacters.split(' ').join('+');
     return searchStringFormat; 
+}
+
+function parseAndRoundOffPosition(latOrLng){
+    let latOrLngParsed = parseFloat(latOrLng);
+    let latOrLngRoundOff = latOrLngParsed.toFixed(2); // kalibrera detta värde???
+    return latOrLngRoundOff;   
 }
