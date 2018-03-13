@@ -1,8 +1,8 @@
 /*** In Alpha version, this array data is fetched from database ***/
 var whereWhoWhenWhat = [
-        {lat: 59.35, lng: 18.06, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: '925dcc2f-273a-4278-a8b6-3f1f846a7a4b'}, /* MI */
+        {lat: 59.35, lng: 18.06, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 'c4610d30-0831-4913-b177-542ce1fab4db'}, /* MI */
 //        {lat: 59.27, lng: 18.05, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: '925dcc2f-273a-4278-a8b6-3f1f846a7a4b'},
-        {lat: 59.2734859, lng: 18.0497044, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 05},
+        {lat: 59.2734859, lng: 18.0497044, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 'c4610d30-0831-4913-b177-542ce1fab4db'},
         {lat: 52.48142, lng: -1.89983, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 02},
         {lat: -33.727111, lng: 150.371124, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 03},
         {lat: -33.848588, lng: 151.209834, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 04},
@@ -10,8 +10,8 @@ var whereWhoWhenWhat = [
       ]
 
 /*** DEMO row ***/
-//{lat: 59.2734859, lng: 18.0497044, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 05}
-//{lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 05} /* MI klassrummet */
+//{lat: 59.2734859, lng: 18.0497044, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 'c4610d30-0831-4913-b177-542ce1fab4db'}
+//{lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 'c4610d30-0831-4913-b177-542ce1fab4db'} /* MI klassrummet */
 
 
 var myVar;
@@ -117,10 +117,23 @@ function compareLocations(yourPosition){
             if((userLatPosition == crumbLatPosition) && (userLngPosition  == crumbLngPosition)){
                 console.log("it's a match!")
                 
-                saveCrumbLocally(userLatPosition, userLngPosition);
-                // nedanstående ska vara inok en if-sats och bara köra igång om man inte plockat upp en crumb helt nyss
+
+//                pickUpCrumb(crumbId, crumbDate, crumbUser);
                 
-                pickUpCrumb(crumbId, crumbDate, crumbUser);
+               
+                
+                // the if included
+                if(saveCrumbLocally(userLatPosition, userLngPosition)){
+                    pickUpCrumb(crumbId, crumbDate, crumbUser);
+                    setTimeout(function(){localStorage.removeItem("storedPosition");}, 1*60*1000); //ändra till 10 min
+                    //samt ändra till satt tid... ifall man stänger ner. timestamp i local storage?
+                }else{
+                    alert("Wait 10 minutes");
+                    setTimeout(function(){localStorage.removeItem("storedPosition");}, 1*60*1000); //ändra till 10 min
+                }
+            
+                
+            
 
             }else{
                     console.log("this is somewhere else")
@@ -128,38 +141,33 @@ function compareLocations(yourPosition){
         }    
 }
 
+
+
 var storedPosition = [];
-function saveCrumbLocally(incomingLat, incomingLng){
-    // om man plockat upp en crumb för mindre än 10 minuter sen ska man inte få plocka
-    // upp en ny.
-    // Output: Hold on, you need to cherish this crumb for at least 10 minutes before picking up another one.
-    
-    console.log(incomingLat);
-    lat = parseAndRoundOffPosition(incomingLat);
-    console.log(lat);
-    lng = parseAndRoundOffPosition(incomingLng);
+function saveCrumbLocally(lat, lng){
     
     if(!localStorage.getItem('storedPosition')){
         localStorage.setItem('storedPosition', JSON.stringify(storedPosition));
         storedPosition[0] = lat;
         storedPosition[1] = lng;
         localStorage.setItem('storedPosition', JSON.stringify(storedPosition));
+        return true;
     }else{
-
-        console.log(localStorage);
-        
-        
-        let dataFromLocalStorage = JSON.parse(localStorage.getItem('storedPosition'));
-                if((dataFromLocalStorage[0] == lat) && (dataFromLocalStorage[1] == lat)){
-                    console.log("sorry, wait at least 10 minutes")
-                }else{
-                    console.log("yay! a new crumb!")
-                    storedPosition[0] = lat;
-                    storedPosition[1] = lng;
-                    localStorage.setItem('storedPosition', JSON.stringify(storedPosition));
-                }
+        let dataFromLocalStorage = JSON.parse(localStorage.getItem('storedPosition'));     
+            if((dataFromLocalStorage[0] = lat) && (dataFromLocalStorage[1] = lat)){
+                //console.log("sorry, wait at least 10 minutes")
+                return false;   
+            }else{
+                console.log("yay! a new crumb!")
+                storedPosition[0] = lat;
+                storedPosition[1] = lng;
+                localStorage.setItem('storedPosition', JSON.stringify(storedPosition));
+                return true;
+            }
     } 
 }
+
+
 
 
 
@@ -183,10 +191,14 @@ function pickUpCrumb(id, date, user){
         })
 } // end pickUpCrumb
 
+
 function fetchAndPrintInfo(id, date, user, imageFileEnding){
      fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
       .then(response => response.json())
       .then(songData => {
+         
+         console.log(id);
+         console.log(date);
          
          console.log(songData);
          
@@ -291,6 +303,7 @@ function fetchRecentlyPlayed(id){
       fetch('http://ws.audioscrobbler.com/2.0/?method=User.getRecentTracks&user=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
+          console.log(songData);
             let userId = id;
             let recentTrackArray = songData.recenttracks.track;
             printRecentlyPlayed(userId, recentTrackArray);
@@ -386,3 +399,17 @@ function parseAndRoundOffPosition(latOrLng){
     let latOrLngRoundOff = latOrLngParsed.toFixed(2); // kalibrera detta värde???
     return latOrLngRoundOff;   
 }
+
+/* the above function should be made with pythagoran theorem instead!!!!!: */
+function newIsCrumbNear(){
+            //example stack overflow:
+    function arePointsNear(checkPoint, centerPoint, km) {
+          var ky = 40000 / 360;
+          var kx = Math.cos(Math.PI * centerPoint.lat / 180.0) * ky;
+          var dx = Math.abs(centerPoint.lng - checkPoint.lng) * kx;
+          var dy = Math.abs(centerPoint.lat - checkPoint.lat) * ky;
+          return Math.sqrt(dx * dx + dy * dy) <= km;
+        }
+}
+
+
