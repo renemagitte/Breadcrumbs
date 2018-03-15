@@ -1,10 +1,21 @@
+//    fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&artist=Lomboy&track=Loverboy&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+//        .then(response => response.json())
+//        .then(songData => {
+//            console.log(songData);
+//        })
+//        .catch(function (error) {
+//            console.log(error);
+//        })
+
+
+
 /*** In Alpha version, this array data is fetched from database ***/
 var whereWhoWhenWhat = [
         {lat: 59.35, lng: 18.06, user: 'VenusOfTheSoup', date: '13/3 2018', crumbId: 'c4610d30-0831-4913-b177-542ce1fab4db'}, /* MI */
 //        {lat: 59.27, lng: 18.05, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: '925dcc2f-273a-4278-a8b6-3f1f846a7a4b'},
         {lat: 59.2734859, lng: 18.0497044, user: 'VenusOfTheSoup', date: '13/3 2018', crumbId: 'c4610d30-0831-4913-b177-542ce1fab4db'},
-        {lat: 52.48142, lng: -1.89983, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 02},
-        {lat: -33.727111, lng: 150.371124, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 03},
+        {lat: 59.243301, lng: 18.301159, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 'c74ef86c-5f0e-4c9a-a7af-45d249e41ed7'}, // test Sandra
+        {lat: 59.285044, lng: 18.050966, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 'c74ef86c-5f0e-4c9a-a7af-45d249e41ed7'}, // test en matbutik
         {lat: -33.848588, lng: 151.209834, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 04},
         {lat: -33.851702, lng: 151.216968, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 05},
       ]
@@ -22,7 +33,7 @@ function myFunction() {
 
 function showPage() {
   document.getElementById("loader").style.display = "none";
-  document.getElementById("myDiv").style.display = "block";
+  document.getElementById("body").style.display = "block";
 }
 
 
@@ -170,17 +181,28 @@ function newCompareLocations(yourPosition){
             
             console.log(newIsCrumbNear(crumbLatPosition, crumbLngPosition, userLatPosition, userLngPosition, 2));
             
-            if(newIsCrumbNear(crumbLatPosition, crumbLngPosition, userLatPosition, userLngPosition, 2)){
-                pickUpCrumb(crumbId, crumbDate, crumbUser);
-                break;
-            }else{
-                    console.log("this is somewhere else")
-            }
+                /* kollar ifall i närhten */
+                if(newIsCrumbNear(crumbLatPosition, crumbLngPosition, userLatPosition, userLngPosition, 2)){
+
+                    /* kollar ifall det är en ny */
+                    //if(saveCrumbLocally(userLatPosition, userLngPosition)){
+                    
+                       // setStoredPickUpTime();
+                    
+                        pickUpCrumb(crumbId, crumbDate, crumbUser);
+//                        setTimeout(function(){localStorage.removeItem("storedPosition");}, 1*60*1000);
+//                        break;
+                    
+//                    }else{
+//                    alert("Wait 10 minutes");
+//                   // setTimeout(function(){localStorage.removeItem("storedPosition");}, 1*60*1000); //ändra till 10 min
+//                    }
+                }else{
+                        console.log("this is somewhere else")
+                }
         }
-        
-
+            
 }
-
 
 
 var storedPosition = [];
@@ -263,6 +285,8 @@ function fetchAndPrintInfo(id, date, user, imageFileEnding){
             trackId, trackName, artistName, artistId, albumName, artistUrl);      
         })
         .catch(function(error){
+            let errorText = 'Something went wrong in the API connection.';
+            errorMessage(errorText);
             console.log(error);
         })
 } // end fetchAndPrintInfo()
@@ -277,36 +301,24 @@ function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringA
                         <img src="images/heartnotes.gif">
                         <img src="images/happycrumb${fileEnding}.jpg">
                         <img src="images/heartnotes.gif">
-                        <p><span class="crumbFont">Congratulations! You found this song:</span> <br>
 
-                            </p>
-                            <div class="details_overwrap">
-                                <div class="details_wrapper">
+                        <div class="details_wrapper">
+                        <p><span class="crumbFont">Congratulations! You found this song:</span></p>
+                        <p>"${trackName}" by <a href="${artistUrl}">${artistName}</a><br>
 
-                                <div class="details_row">${trackName}</div>
-                            
-                                <div class="details_row">by</div>
-
-                                <div class="details_row"><a href="${artistUrl}">${artistName}</a></div>
-                                </div>
-                            </div>
-                    <p>It was dropped here ${crumbDate} by ${crumbUser}.</p>
-                    <p><span class="crumbFont">Direct search on youtube:</span></p>
-                    <a target="_blank" href="https://www.youtube.com/results?search_query=${searchStringArtist}+${searchStringSongTitle}">
-                        <img id="youtube_logo" src="images/youtube_logo.jpg">
-                    </a></p>
-
-                    <p><span class="crumbFont">If you want to know more:</span></p>
+                        <span class="mini">It was dropped here ${crumbDate} by ${crumbUser}.</span></p>
+                        <p><span class="crumbFont">Direct search on youtube:</span><br>
+                        <a target="_blank" href="https://www.youtube.com/results?search_query=${searchStringArtist}+${searchStringSongTitle}">
+                        <div class="youtube_logo"><img src="images/youtube_logo.jpg">
+                        </a></div>
+                        <span class="crumbFont">If you want to know more:</span>
+                        </p>
+                        </div>
                     </div>
 
 
             </div>
             `;
-    //                      You found a song that was dropped here ${crumbDate} by ${crumbUser}.
-//                                        <div class="div_key">Title:</div            >
-//                                    <div class="div_value">${trackName} </div>
-//                                    <div class="div_key">Artist:</div>
-//                                    <div class="div_value"<a href="${artistUrl}">${artistName}</a></div>
          
             pickUpElement.innerHTML = '';
             pickUpElement.insertAdjacentHTML('afterbegin', pickUpCrumbTest2); 
@@ -360,6 +372,8 @@ function fetchRecentlyPlayed(id) {
             printRecentlyPlayed(userId, recentTrackArray);
         })
         .catch(function (error) {
+            let errorText = 'Something went wrong in the API connection.';
+            errorMessage(errorText);
             console.log(error);
         })
 }
@@ -372,9 +386,14 @@ function fetchArtistInfo(id) {
             printArtistInfo(artistInfo);
         })
         .catch(function (error) {
+            let errorText = 'Something went wrong in the API connection.';
+            errorMessage(errorText);
             console.log(error);
         })
 }
+
+
+
 
 function fetchTags(id) {
     fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
@@ -385,6 +404,8 @@ function fetchTags(id) {
             printTags(songId, tagArray);
         })
         .catch(function (error) {
+            let errorText = 'Something went wrong in the API connection.';
+            errorMessage(errorText);
             console.log(error);
         })
 }
@@ -398,7 +419,7 @@ function printRecentlyPlayed(userId, recentTrackArray){
         <div class="recentTrackRow">
             <div class="recentTrackRow_number">${i+1}.</div> 
             <div class="recentTrackRow_artist">${recentTrackArray[i].artist['#text']}</div> 
-            <div class="recentTrackRow_track">${recentTrackArray[i].name}</div>
+            <div class="recentTrackRow_track">- ${recentTrackArray[i].name}</div>
         </div>
         `;
         exploreFurtherDiv.insertAdjacentHTML('beforeend', recentTrackRow); 
@@ -406,21 +427,29 @@ function printRecentlyPlayed(userId, recentTrackArray){
     openFoundCrumb.appendChild(exploreFurtherDiv);     
 }
 
+
+
 function printArtistInfo(artistInfo){
     const exploreFurtherDiv = document.createElement('div'); 
     exploreFurtherDiv.classList.add('exploreFurtherDiv');
+    
+    artistInfo = artistInfo.substr(0, 275);
     let artistInfoOutput = `
-        <div class="artistInfoDiv">${artistInfo}</div>
+        ${artistInfo}...
     `;
     exploreFurtherDiv.insertAdjacentHTML('beforeend', artistInfoOutput); 
     openFoundCrumb.appendChild(exploreFurtherDiv);  
 }
 
+//        <div class="artistInfoDiv">
+//        ${artistInfo}
+//        </div>
+
 function printTags(songId, tagArray){
     const exploreFurtherDivTags = document.createElement('div');
     for(i = 0; i < tagArray.length; i++){ 
         let tagsForTrack = `
-            <div class="tagDiv${[i]}" id="tagDiv${[i]}">
+            <div class="tag tagDiv${[i]}" id="tagDiv${[i]}">
                 ${tagArray[i].name}
             </div>
             `;
@@ -454,20 +483,17 @@ function parseAndRoundOffPosition(latOrLng){
 }
 */
 
+/* the above function is replaced with these two below: */
 function parsePosition(latOrLng){    
     let latOrLngParsed = parseFloat(latOrLng);
     return latOrLngParsed;    
 }
 
-
-/* the above function should be made with pythagoran theorem instead!!!!!: */
 function newIsCrumbNear(checkPointLat, checkPointLng, centerPointLat, centerPointLng, km){
     var ky = 40000 / 360;    
     var kx = Math.cos(Math.PI * centerPointLat / 180.0) * ky;
     var dx = Math.abs(centerPointLng - checkPointLng) * kx;
     var dy = Math.abs(centerPointLat - checkPointLat) * ky;
-    
-    console.log(Math.sqrt(dx * dx + dy * dy) <= km);
     return Math.sqrt(dx * dx + dy * dy) <= km;
 }
 
@@ -480,4 +506,22 @@ function newIsCrumbNear(checkPointLat, checkPointLng, centerPointLat, centerPoin
 //          return Math.sqrt(dx * dx + dy * dy) <= km;
 //        }
 
+function errorMessage(errorText){
+    const body = document.getElementById('body');
+    body.innerHTML = '';
+        let errorOutput = `
+        <div class="errorMessageBody">
+            <div class="errorMessageDiv">
+                <img src="images/crumb4.jpg">
+                <p><span class="crumbFont">Sorry! You have just been served a slice of ERROR.</span></p>
+                <p>Reason:</p>
+                <p>${errorText}</p>
+                <p><a href="#" onclick="window.location.reload(true);">Try to reload the page</a></p>
+            </div>
+        </div>
+        `; // Or "Sorry! Say hello to ERROR."
+        body.insertAdjacentHTML('afterbegin', errorOutput); 
+
+   // openFoundCrumb.appendChild(exploreFurtherDiv);     
+}
 

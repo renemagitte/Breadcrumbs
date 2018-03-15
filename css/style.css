@@ -1,11 +1,70 @@
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
 
-#tagDiv{
-    display: block !important;
+
+html, body{
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    background-color: #FFAFE1;
+    position: relative;
+      -webkit-animation-name: animatebottom;
+      -webkit-animation-duration: 1s;
+      animation-name: animatebottom;
+      animation-duration: 1s
 }
 
-   .small_button {
+.body#body.animate-bottom.body{
+     background-color: #FFAFE1;   
+}
+
+        @-webkit-keyframes animatebottom {
+          from { bottom:-100px; opacity:0 } 
+          to { bottom:0px; opacity:1 }
+        }
+
+        @keyframes animatebottom { 
+          from{ bottom:-100px; opacity:0 } 
+          to{ bottom:0; opacity:1 }
+        }
+
+        #myDiv {
+          display: none;
+          text-align: center;
+        }
+
+.crumbFont{
+    font-family: 'Nova Mono', monospace;
+}
+
+.mini{
+    font-size: 0.8em;
+}
+
+.title{
+    color: #4C340D;
+    background-color: #FFAFE1;
+    font-family: 'Nova Mono', monospace;
+    text-transform: uppercase;
+}
+
+#map{
+    display: flex;
+    justify-content: center;
+    background-color: #FFAFE1;
+    border-bottom: 10px solid #4C340D;
+    border-top: 10px solid #4C340D;
+    z-index: 94 !important;
+    position: absolute !important;
+  }
+
+.pickUpElement{
+    display: flex;
+    justify-content: center;
+    background-color: #FFAFE1;
+}
+
+.small_button{
     font-size: 12px;
     color: black;
     font-family: 'Poppins', sans-serif;
@@ -15,441 +74,297 @@
     height: 22px;
     width: auto;
     margin-left: 10px;
-        cursor: pointer;
-    
+    cursor: pointer;
 }
 
-            
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-/*          background-color: turquoise;*/
-/*          background-color: #ededed;*/
-          font-family: 'Open Sans', sans-serif;
-                  background-color: #FFAFE1;
-      }
-            
-    .title{
-/*        background-color: #ededed;*/
-/*        color: #FCDC3B;*/
-        height: 100px;
-        color: #4C340D;
-        background-color: #FFAFE1;
-/*        background-color: lightgray;*/
-        
-        /*
-        font-family: 'Contrail One', cursive;
-        font-family: 'Londrina Solid', cursive;
-        font-family: 'Kavoon', cursive; 
-        font-family: 'Averia Gruesa Libre', cursive; */
-        font-family: 'Nova Mono', monospace;
-/*        font-family: 'Spicy Rice', cursive;*/
-        
-/*        font-family: 'Piedra', cursive;*/
-/*      font-family: 'Unlock', cursive;*/
-        font-size: 3em;
-        text-transform: uppercase;
-        padding-top: 10px;
-        padding-left: 25px;
-        padding-bottom: 20px;
-/*        border-bottom: 10px solid #87FFC8;*/
-/*        border-bottom: 10px solid #4C340D;*/
-    }
-
-.crumbFont{
-        font-family: 'Nova Mono', monospace;
+.foundCrumbMessage{
+    z-index: 96 !important;
+    position: absolute !important;
+    background-color: white !important;
+    border: 1px solid black;
+    opacity: none;
+    vertical-align: middle;
+    align-self: center;
+    font-family: 'Nova Mono', monospace;
+    color: black;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-    .menu{
-        padding-left: 25px;         
-        background-color: #ededed;
-        border-bottom: 1px solid blue;
-    }
-
-    .crumb{
-       font-family: 'Piedra', cursive; 
-        font-size: 15em;
-        color: #FCDC3B;
-        margin-top: -100px;
-    }
-
-.pickUpElement{
-        display: flex;
-        justify-content: center;
-        padding: 20px;
-        background-color: #FFAFE1;
+.openFoundCrumb{
+    z-index: 97 !important;
+    position: absolute !important;
+    height: auto;
+    background-color: white !important;
+    border: 1px solid black;
+    opacity: none;
+    vertical-align: middle;
+    align-self: center;
+    font-family: 'Raleway', sans-serif;
+    color: black;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.opacityOverMap{
+    background-color: white;
+    opacity: 0.25;
+    z-index: 95;
+    position: absolute;
+    left: 0px;
+    margin-top: 0px;
+    display: flex;
+    justify-content: center;   
+}
+
+.exploreFurtherDiv{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.recentTrackRow{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.recentTrackRow_number{
+    width: 5%;
+}  
+.recentTrackRow_artist{
+    width: 20%;
+    text-align: left;
+}
+.recentTrackRow_track{
+    width: 75%;
+    text-align: left;
+}
+
+.tag{
+    float: left;
+    border-radius: 10px;
+}
 .tagDiv0{
     background-color: lightgreen;
-    margin: 15px;
-    padding: 15px;
-    float: left;
-    border-radius: 10px;
 }
-
-
 .tagDiv1{
     background-color: red;
-    margin: 15px;
-    padding: 15px;
-    float: left;
-    border-radius: 10px;
 }
-
-
 .tagDiv2{
     background-color: blueviolet;
-    margin: 15px;
-    padding: 15px;
-    float: left;
-    border-radius: 10px;
 }
-
 .tagDiv3{
     background-color: blueviolet;
-    margin: 15px;
-    padding: 15px;
-    float: left;
-    border-radius: 10px;
 }
 
-#youtube_logo{
-    width: 160px;
-}
-
-.main{
+.errorMessageBody{
+    background-color: #FFAFE1;
     width: 100%;
-    height: auto;
+    height: 100%;
+    display: flex;
+    justify-content: center;
 }
 
+.errorMessageDiv{
+    z-index: 97 !important;
+    position: absolute !important;
+    height: auto;
+    background-color: white !important;
+    border: 1px solid black;
+    opacity: none;
+    vertical-align: middle;
+    align-self: center;
+    font-family: 'Raleway', sans-serif;
+    color: black;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 20px;
+}
 
-
-/*** Mobile ***/
+/************ Mobile ***************/
 @media screen and (max-width: 500px) {
     
-    #map {
-        height: 80%;
-        width: 100%;
-        margin-left: 0px;        
-      }
+.title{
+    height: 90px;
+    font-size: 3em;
+    padding-top: 10px;
+    padding-left: 15px;
+    padding-bottom: 10px;
+}   
     
-    .opacityOverMap{
-        background-color: white;
-        opacity: 0.5;
-        z-index: 99;
-        position: absolute;
-        border: 1px solid red;
-        height: 100%;
-    }
-    
+#map{
+    height: 80%;
+    width: 100%;
 }
+    
+.opacityOverMap{
+    height: 77%;
+    width: 100%;
+    top: 100px;
+}
+   
+.foundCrumbMessage{
+    top: 150px;
+    height: 230px;
+    width: 340px;
+    font-size: 1.2em;
+    padding: 25px;
+}   
+.foundCrumbMessage img{
+    width: 120px;
+    padding: 20px;
+}
+    
+.openFoundCrumb{
+    top: 130px;
+    width: 90%;
+    font-size: 0.8em;
+    padding: 20px;
+}   
+.openFoundCrumb img{
+    width: 35px;
+    padding: 0px;
+    padding-bottom: 20px;
+}
+    
+.small_button{
+    font-size: 0.8em;
+    height: 18px;
+    width: auto;
+    margin-left: 10px;
+    cursor: pointer;
+    margin-left: 70px;
+    margin-right: 70px;
+}
+    
+.exploreFurtherDiv{
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 0.8em;
+}
+    
+.recentTrackRow{
+    font-size: 0.8em;
+} 
+    
+.youtube_logo{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0px;
+}
+.youtube_logo img{
+    width: 100px;
+    padding: 0px;
+}
+    
+} //end mobile
 
 /*** Tablet ***/
 @media screen and (min-width: 501px) and (max-width: 1023px) {
     
-    #map {
-        height: 80%;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-      }
-    
 
-
-    .foundMessage{
-        z-index: 99 !important;
-        position: absolute !important;
-        height: 180px;
-        width: 340px;
-        background-color: white !important;
-        border: 1px solid black;
-        opacity: 1 !important;
-        vertical-align: middle;
-        align-self: center;
-    }
 }
 
 /*** Desktop ***/
 @media screen and (min-width: 1024px) {
     
-        #map {
-        height: 80%;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-                    background-color: #FFAFE1;
-        border-bottom: 10px solid #4C340D;
-        border-top: 10px solid #4C340D;
-        z-index: 94 !important;
-        position: absolute !important;
-      }
+.title{
+    height: 90px;
+    font-size: 3em;
+    padding-top: 10px;
+    padding-left: 15px;
+    padding-bottom: 10px;
+} 
     
-    .opacityOverMap{
-        height: 78%;
-        width: 100%;
-        background-color: white;
-        opacity: 0.45;
-        z-index: 95;
-        position: absolute;
-        left: 0px;
-        top: 110px;
-        margin-top: 0px;
-        display: flex;
-        justify-content: center;
-        
-    }
+#map{
+    height: 80%;
+    width: 100%;
+}
     
+.opacityOverMap{
+    height: 77%;
+    width: 100%;
+    top: 100px;  
+}
+     
+.foundCrumbMessage{
+    top: 160px;
+    height: 180px;
+    width: 600px;
+    font-size: 1.2em;
+}   
+.foundCrumbMessage img{
+    width: 140px;
+    padding: 20px;
+}
     
-    .foundCrumbMessage{
-        z-index: 96 !important;
-        position: absolute !important;
-        top: 160px;
-        height: 180px;
-        width: 600px;
-        background-color: white !important;
-        border: 1px solid black;
-        opacity: none;
-        vertical-align: middle;
-        align-self: center;
-        font-family: 'Nova Mono', monospace;
-/*        font-family: 'Karma', serif;*/
-/*        font-family: 'Open Sans', sans-serif;*/
-        font-size: 1.2em;
-        color: black;
-        text-align: center;
-        cursor: pointer;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    }
+.openFoundCrumb{
+    top: 120px;
+    height: auto;
+    width: 90%;
+    font-size: 0.8em;
+    padding: 20px;
+} 
+.openFoundCrumb img{
+    width: 75px;
+    padding: 0px;
+    padding-bottom: 20px;
+}
     
-    .foundCrumbMessage img{
-        width: 140px;
-        padding: 20px;
-    }
+.details_wrapper{
+    width: 100%;
+    margin-bottom: 15px;
+}
+ 
+.youtube_logo{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.youtube_logo img{
+    width: 160px;
+}
     
-    .openFoundCrumb{
-        z-index: 97 !important;
-        position: absolute !important;
-        top: 130px;
-        height: auto;
-        width: 90%;
-        background-color: white !important;
-        border: 1px solid black;
-        opacity: none;
-        vertical-align: middle;
-        align-self: center;
-/*        font-family: 'Karma', serif;*/
-    font-family: 'Raleway', sans-serif;
-/*        font-family: 'Open Sans', sans-serif;*/
-        font-size: 0.8em;
-        color: black;
-        text-align: center;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        padding: 20px;
-    }
-    
-    .openFoundCrumb img{
-        width: 75px;
-        padding: 0px;
-        padding-bottom: 20px;
-    }
-    
-    .openFoundCrumbTopLayer{
-        z-index: 98 !important;
-        position: absolute !important;
-        top: 0px;
-        left: 0px;
-        height: 100%;
-        width: 100%;
-        background-color: white !important;
-        opacity: none;
-        vertical-align: middle;
-        align-self: center;
-/*        font-family: 'Karma', serif;*/
-    font-family: 'Raleway', sans-serif;
-/*        font-family: 'Open Sans', sans-serif;*/
-        font-size: 0.8em;
-        color: black;
-        text-align: center;
-        
-        padding: 40px;
-/*
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-*/
-    }
-    
-    .openFoundCrumbTopLayerTags{
-        z-index: 99 !important;
-        position: absolute !important;
-        top: 0px;
-        left: 0px;
-        height: 100%;
-        width: 100%;
-        background-color: white !important;
-        opacity: none;
-        vertical-align: middle;
-        align-self: center;
-/*        font-family: 'Karma', serif;*/
-    font-family: 'Raleway', sans-serif;
-/*        font-family: 'Open Sans', sans-serif;*/
-        font-size: 0.8em;
-        color: black;
-        text-align: center;
-        
-        padding: 40px;
-/*
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-*/
-    }
-    
-    
-    .visible{
-        display: block;
-    }
-    
-    .invisible{
-        display: none;
-    }
-    
-    
-    .details_overwrap{
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-    
-    .details_wrapper{
-        width: 36%;
-/*        border: 1px solid blue;*/
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        margin-bottom: 15px;
-    }
-    
-    .details_row{
-        width: 100%;
-    }
-    
-    .exploreFurtherDiv{
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        padding-top: 25px;
-        padding-bottom: 25px;
-    }
-    
-    .artistInfoDiv{
-        width: 400px;
-        
-    }
-    
-    .recentTrackRow{
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        padding-left: 160px;
-        padding-right: 60px;
-        width: 100%;
-        padding-top: 5px;
-    }
-    
-    .recentTrackRow_number{
-        width: 5%;
-    }
-    
-    .recentTrackRow_artist{
-        width: 20%;
-            text-align: left;
-    }
-    
-    .recentTrackRow_track{
-        width: 75%;
-                    text-align: left;
-    }
-/*
-    .details_albumpic{
-        width: 30%;
-    }
-    
-    .details_albumpic img{
-        width: 100%;
-    }
+.exploreFurtherDiv{
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
 
+.recentTrackRow{
+    margin-left: 320px;
+}   
     
-    .details_details{
-        width: 70%;
-    }
-*/
-    
-    .div_key{
-        width: 15%;
-        text-align: left;
-    }
-    
-    .div_value{
-        width: 85%;
-        text-align: left;
-
-    }
-    
-    .details_row{
-        width: 100%;
-    }
-    
-    .tagsWrapper{
-        width: 100%;
-    }
-    
-    .tagsCloseButton{
-        width: 100%;
-        height: 10%;
-    }
+.tag{
+    margin: 15px;
+    padding: 15px;
+}
+   
+.errorMessageDiv{
+    top: 130px;
+    height: auto;
+    width: 60%;
+    font-size: 0.8em;
+    padding: 20px;
+}
+.errorMessageDiv img{
+    width: 140px;
+    padding: 20px;
+}
     
 
     
 } /* end of Desktop */
 
 
-/*** Animations ***/
-
-/*
-#p1 {
-    animation: fadeout 11s;
-}
-#p2 {
-    animation: fadeout 9s;
-}
-#p3 {
-    animation: fadeout 7s;
-}
-#p4 {
-    animation: fadeout 5s;
-}
-#p5 {
-    animation: fadeout 3s;
-}
-#p6 {
-    animation: fadeout 1s;
-}
-#p7 {
-    animation: fadeout 3s;
-}
-#p8 {
-    animation: fadeout 1s;
-}
-
-@keyframes fadeout {
-  0% {
-    opacity: 1;
-  }
-  10% {
-    opacity: 0;
-  }
-}
-*/
 
 /* Center the loader */
 #loader {
@@ -477,28 +392,4 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
-}
-
-/* Add animation to "page content" */
-.animate-bottom {
-  position: relative;
-  -webkit-animation-name: animatebottom;
-  -webkit-animation-duration: 1s;
-  animation-name: animatebottom;
-  animation-duration: 1s
-}
-
-@-webkit-keyframes animatebottom {
-  from { bottom:-100px; opacity:0 } 
-  to { bottom:0px; opacity:1 }
-}
-
-@keyframes animatebottom { 
-  from{ bottom:-100px; opacity:0 } 
-  to{ bottom:0; opacity:1 }
-}
-
-#myDiv {
-  display: none;
-  text-align: center;
 }
