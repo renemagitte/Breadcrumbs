@@ -20,15 +20,12 @@ follow their tracks (yes, in two senses!) and come to pick the "crumb" up. Once 
 ##### API:s:
 
 [Google Maps Geolocation](https://developers.google.com/maps/documentation/javascript/examples/map-geolocation)
-
 Google maps api that creates a map and marks the position the device is on. 
 
 [Google Maps Marker Clustering](https://developers.google.com/maps/documentation/javascript/marker-clustering)
-
 Google Maps api that creates multiple markers on the map. These are the positions for the dropped crumbs on my page.
 
 [Last.fm API](https://www.last.fm/sv/api)
-
 I use this api to fetch info about track, artist info, tags connected to the track and recently played songs.
 
 <!--
