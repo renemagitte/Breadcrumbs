@@ -3,7 +3,7 @@ by Ida Bergström
 
 Link to repository: https://github.com/renemagitte/ida_bergstrom_ajax
 
-Link to GitHub Pages: ** länk till projektet live på GitHub Pages **
+Link to GitHub Pages: https://renemagitte.github.io/Breadcrumbs
 
 or try www.idabergstrom.se/portfolio/breadcrumbs
 
