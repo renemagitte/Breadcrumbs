@@ -26,11 +26,13 @@ I use this api to fetch info about track, artist info, tags connected to the tra
 
 ##### Work progress:
 * I could structure my work much better from the start to avoid problems further on. CSS I'm talking about you.
-* Since I prefered to start coding instead of thinking, I ended up writing two verisons of the way crumbs are detected.
+* Since I prefered to start coding instead of thinking, I ended up writing two verisons of the way crumbs are detected,
+ several functions were written only to be erased and rewritten. 
 * Better semantics regarding HTML5. I should have used headings, nav-tags and so on...
 * I built my code around the fact that all songs from the last.fm-api came with an unique id (called "mbid").
 Later on I realised that not all song have got an mbid which was quite disappointing (it just says mbid: "" in the API). So this verison only works with songs that has got an id.
 * I spent time on trying to figure out how to get local storage to work (which I never did anyways!) instead of delivering the page on time :(
+* Much trial and error: tried watchPosition instead of getCurrentPosition but it caused other problems.
 
 ##### Todo, if there was time:
 * There's a bug when looking at artistinfo/tags/recently played. Need to sort that out.

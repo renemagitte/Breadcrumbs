@@ -66,7 +66,7 @@ const pickUpElement = document.getElementById('pickUpElement');
 
 /*** Geolocation ***/
     if (navigator.geolocation) {
-        navigator.geolocation.watchPosition(function (position) {
+        navigator.geolocation.getCurrentPosition(function (position) {
             var pos = {
                 lat: position.coords.latitude,
                 /* device latitude */
