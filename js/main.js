@@ -25,7 +25,7 @@ var whereWhoWhenWhat = [
 
 /*** DEMO row ***/
 //{lat: 59.2734859, lng: 18.0497044, user: 'VenusOfTheSoup', date: '13/3 2018', crumbId: 'c4610d30-0831-4913-b177-542ce1fab4db'}
-//{lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', crumbId: 'c4610d30-0831-4913-b177-542ce1fab4db'} /* MI klassrummet */
+//{lat: 59.34588819999999, lng: 18.058012599999998} /* MI klassrummet */
 
 /*** DOM Elements ***/
 const pickUpElement = document.getElementById('pickUpElement');
@@ -65,41 +65,50 @@ const pickUpElement = document.getElementById('pickUpElement');
         {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 
 /*** Geolocation ***/
-        if (navigator.geolocation) {
-          navigator.geolocation.watchPosition(function(position) {
+    if (navigator.geolocation) {
+        navigator.geolocation.watchPosition(function (position) {
             var pos = {
-              lat: position.coords.latitude, /* device latitude */
-              lng: position.coords.longitude /* device longitude */
+                lat: position.coords.latitude,
+                /* device latitude */
+                lng: position.coords.longitude /* device longitude */
             };
-              
+
             infoWindow.setPosition(pos);
             infoWindow.setContent('You are here!');
             infoWindow.open(map);
             map.setCenter(pos);
-            //console.log(pos);
-            //compareLocations(pos); /* <---this is is WORKING, but trying: *******/
+
+            /**********************************************************************************/
+            /* Hello world!                                                                   */
+            /* For testing a location that is not allready in the array:                      */
+            /* 1. Run this console.log:                                                       */
+            // console.log(pos);                                            
+            /* 2. Insert logged positions in lat/lng properties in whereWhoWhenWhat-array     */
+            /* 3. Reload page                                                                 */
+            /**********************************************************************************/
+
             newCompareLocations(pos);
-              
-          }, function() {
+
+        }, function () {
             handleLocationError(true, infoWindow, map.getCenter());
-//            let errorText = 'It seems like the Geolocation service failed';
-//            errorMessage(errorText);
-          });
-        } else {
-          handleLocationError(false, infoWindow, map.getCenter());
-//            let errorText = "Too bad. Your browser doesn't support Geolocation.";
-//            errorMessage(errorText);
-        }
-      
+            //            let errorText = 'It seems like the Geolocation service failed';
+            //            errorMessage(errorText);
+        });
+    } else {
+        handleLocationError(false, infoWindow, map.getCenter());
+        //            let errorText = "Too bad. Your browser doesn't support Geolocation.";
+        //            errorMessage(errorText);
+    }
+
 } // end initMap
 
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
-      }
+  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ?
+                          'Error: The Geolocation service failed.' :
+                          'Error: Your browser doesn\'t support geolocation.');
+    infoWindow.open(map);
+  }
 
 
 function newCompareLocations(yourPosition){
@@ -115,25 +124,29 @@ function newCompareLocations(yourPosition){
         let crumbId = whereWhoWhenWhat[i].crumbId; 
         let crumbDate = whereWhoWhenWhat[i].date; 
         let crumbUser = whereWhoWhenWhat[i].user; 
-//        console.log(crumbLatPosition);
-//        console.log(crumbLngPosition);
-//        console.log(newIsCrumbNear(crumbLatPosition, crumbLngPosition, userLatPosition, userLngPosition, 2)); 
             
-        /* kollar ifall i närhten */
-        if(newIsCrumbNear(crumbLatPosition, crumbLngPosition, userLatPosition, userLngPosition, 1)){ /* = 1 km */
+        /* Checking if there is any crumb around... */
+        if(isCrumbNear(crumbLatPosition, crumbLngPosition, userLatPosition, userLngPosition, 1)){ /* = 1 km */
 
-                    /* kollar ifall det är en ny */
-                    //if(saveCrumbLocally(userLatPosition, userLngPosition)){
             /* Checking if it's been over 10 minutes since last pick up */        
             if(checkTimestamp()){
                 pickUpCrumb(crumbId, crumbDate, crumbUser);
             }else{
-                console.log("Wait 10 minutes");
+                alert("Please cherish the last crumb you picked up for at least 10 minutes before picking up another one.");
             }
-        }else{
-            console.log("this is somewhere else")
         }
-    }         
+//        else{
+//            console.log("this is somewhere else")
+//        }   
+    }   
+}
+
+function isCrumbNear(checkPointLat, checkPointLng, centerPointLat, centerPointLng, km){
+    var ky = 40000 / 360;    
+    var kx = Math.cos(Math.PI * centerPointLat / 180.0) * ky;
+    var dx = Math.abs(centerPointLng - checkPointLng) * kx;
+    var dy = Math.abs(centerPointLat - checkPointLat) * ky;
+    return Math.sqrt(dx * dx + dy * dy) <= km;
 }
 
 var storedTimestamp = [];
@@ -181,7 +194,7 @@ function pickUpCrumb(id, date, user) {
         fetchAndPrintInfo(id, date, user, imageFileEnding);
         storeTimestamp();
     })
-} // end pickUpCrumb
+}
 
 // NTS: replace with HTTPS when uploading on oderland
 function fetchAndPrintInfo(id, date, user, imageFileEnding){
@@ -209,7 +222,7 @@ function fetchAndPrintInfo(id, date, user, imageFileEnding){
              let errorText = 'Something went wrong in the API connection.';
              errorMessage(errorText);
          })
-} // end fetchAndPrintInfo()
+}
                           
 function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringArtist, searchStringSongTitle,
             trackId, trackName, artistName, artistId, albumName, artistUrl){
@@ -254,25 +267,21 @@ function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringA
 
     const openFoundCrumb = document.getElementById('openFoundCrumb');
     
+    openFoundCrumb.appendChild(seeRecentlyPlayedButton);
+    openFoundCrumb.appendChild(seeTagsButton);
+    openFoundCrumb.appendChild(seeArtistInfo);
     
-            openFoundCrumb.appendChild(seeRecentlyPlayedButton);
-            openFoundCrumb.appendChild(seeTagsButton);
-            openFoundCrumb.appendChild(seeArtistInfo);
-    
-            let user = crumbUser; // ta bort här ha bara crumbUser som argument???!!
-            //console.log(user);
-             
-            seeRecentlyPlayedButton.addEventListener('click', function(){ 
-                 fetchRecentlyPlayed(user);
-            }); 
-    
-            seeTagsButton.addEventListener('click', function(){ 
-                 fetchTags(trackId);
-            });
-    
-            seeArtistInfo.addEventListener('click', function(){ 
-                 fetchArtistInfo(artistId);
-            });   
+    seeRecentlyPlayedButton.addEventListener('click', function(){ 
+        fetchRecentlyPlayed(crumbUser);
+    }); 
+
+    seeTagsButton.addEventListener('click', function(){ 
+         fetchTags(trackId);
+    });
+
+    seeArtistInfo.addEventListener('click', function(){ 
+         fetchArtistInfo(artistId);
+    });   
     
 }
                    
@@ -401,13 +410,7 @@ function parsePosition(latOrLng){
     return latOrLngParsed;    
 }
 
-function newIsCrumbNear(checkPointLat, checkPointLng, centerPointLat, centerPointLng, km){
-    var ky = 40000 / 360;    
-    var kx = Math.cos(Math.PI * centerPointLat / 180.0) * ky;
-    var dx = Math.abs(centerPointLng - checkPointLng) * kx;
-    var dy = Math.abs(centerPointLat - checkPointLat) * ky;
-    return Math.sqrt(dx * dx + dy * dy) <= km;
-}
+
 
 //example stack overflow!!!!!!
 //    function arePointsNear(checkPoint, centerPoint, km) {
