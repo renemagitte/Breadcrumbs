@@ -7,16 +7,20 @@ html, body{
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     background-color: #FFAFE1;
+/*
     position: relative;
       -webkit-animation-name: animatebottom;
       -webkit-animation-duration: 1s;
       animation-name: animatebottom;
       animation-duration: 1s
+*/
 }
 
+/*
 .body#body.animate-bottom.body{
      background-color: #FFAFE1;   
 }
+
 
         @-webkit-keyframes animatebottom {
           from { bottom:-100px; opacity:0 } 
@@ -32,6 +36,7 @@ html, body{
           display: none;
           text-align: center;
         }
+*/
 
 .crumbFont{
     font-family: 'Nova Mono', monospace;
@@ -39,6 +44,10 @@ html, body{
 
 .mini{
     font-size: 0.8em;
+}
+
+.hide{
+    display: none;s
 }
 
 .title{
@@ -65,6 +74,19 @@ html, body{
 }
 
 .small_button{
+    font-size: 12px;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    background-color: #e7e7e7;
+    border: 1px grey;
+    border-radius: 20px;
+    height: 22px;
+    width: auto;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.function_button{
     font-size: 12px;
     color: black;
     font-family: 'Poppins', sans-serif;
@@ -188,7 +210,7 @@ html, body{
     
 .title{
     height: 90px;
-    font-size: 3em;
+    font-size: 2.4em;
     padding-top: 10px;
     padding-left: 15px;
     padding-bottom: 10px;
@@ -239,6 +261,16 @@ html, body{
     margin-right: 70px;
 }
     
+.function_button{
+    font-size: 0.6em;
+    height: 16px;
+    width: auto;
+    margin-left: 10px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+    
 .exploreFurtherDiv{
     width: 100%;
     padding-top: 10px;
@@ -279,8 +311,18 @@ html, body{
     font-size: 3em;
     padding-top: 10px;
     padding-left: 15px;
-    padding-bottom: 10px;
-} 
+    padding-bottom: 10px;    
+}
+    
+.function_button{
+    font-size: 0.8em !important;
+    height: 18px;
+    width: auto;
+    margin-left: 10px;
+    cursor: pointer;
+    margin-left: 70px;
+    margin-right: 70px;
+}
     
 #map{
     height: 80%;
@@ -367,11 +409,12 @@ html, body{
 
 
 /* Center the loader */
+/*
 #loader {
   position: absolute;
   left: 50%;
   top: 50%;
-  z-index: 1;
+  z-index: 99;
   width: 150px;
   height: 150px;
   margin: -75px 0 0 -75px;
@@ -393,3 +436,4 @@ html, body{
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+*/

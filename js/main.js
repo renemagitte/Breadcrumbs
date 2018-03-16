@@ -1,4 +1,4 @@
-//    fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&artist=Lomboy&track=Loverboy&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+//    fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&artist=Muriel+Dacq&track=Tropique&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
 //        .then(response => response.json())
 //        .then(songData => {
 //            console.log(songData);
@@ -8,16 +8,18 @@
 //        })
 
 
-
 /*** In Alpha version, this array data is fetched from database ***/
+
 var whereWhoWhenWhat = [
-        {lat: 59.35, lng: 18.06, user: 'VenusOfTheSoup', date: '13/3 2018', crumbId: 'c4610d30-0831-4913-b177-542ce1fab4db'}, /* MI */
-//        {lat: 59.27, lng: 18.05, user: 'VenusInTheSoup', date: 'xx/xx', crumbId: '925dcc2f-273a-4278-a8b6-3f1f846a7a4b'},
-        {lat: 59.2734859, lng: 18.0497044, user: 'VenusOfTheSoup', date: '13/3 2018', crumbId: 'c4610d30-0831-4913-b177-542ce1fab4db'},
-        {lat: 59.243301, lng: 18.301159, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 'c74ef86c-5f0e-4c9a-a7af-45d249e41ed7'}, // test Sandra
-        {lat: 59.285044, lng: 18.050966, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 'c74ef86c-5f0e-4c9a-a7af-45d249e41ed7'}, // test en matbutik
-        {lat: -33.848588, lng: 151.209834, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 04},
-        {lat: -33.851702, lng: 151.216968, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 05},
+{lat: 59.35, lng: 18.06, user: 'VenusOfTheSoup', date: '13/3 2018', crumbId: '770a770b-ad34-4564-8c9e-83e6d47f90e'}, 
+/* MI, muriel */
+{lat: 59.2734988, lng: 18.0497676, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: '925dcc2f-273a-4278-a8b6-3f1f846a7a4b'}, 
+/* centerpoint, pg+lolo */
+{lat: 59.285044, lng: 18.050966, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 'c74ef86c-5f0e-4c9a-a7af-45d249e41ed7'}, // test en matbutik
+//{lat: 59.2734859, lng: 18.0497044, user: 'VenusOfTheSoup', date: '13/3 2018', crumbId: 'c4610d30-0831-4913-b177-542ce1fab4db'},
+{lat: 59.243301, lng: 18.301159, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 'c74ef86c-5f0e-4c9a-a7af-45d249e41ed7'}, // test Sandra
+{lat: -33.848588, lng: 151.209834, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 04},
+{lat: -33.851702, lng: 151.216968, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 05},
       ]
 
 /*** DEMO row ***/
@@ -25,16 +27,18 @@ var whereWhoWhenWhat = [
 //{lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', crumbId: 'c4610d30-0831-4913-b177-542ce1fab4db'} /* MI klassrummet */
 
 
-var myVar;
 
+//var myVar;
 function myFunction() {
     initMap = setTimeout(showPage, 3000);
+    document.getElementById("loader").style.display = "none";
 }
 
 function showPage() {
-  document.getElementById("loader").style.display = "none";
-  document.getElementById("body").style.display = "block";
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("body").style.display = "block";
 }
+
 
 
 /*** Setting up map ***/
@@ -49,7 +53,7 @@ function showPage() {
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
-          zoom: 6
+          zoom: 12
         });
         infoWindow = new google.maps.InfoWindow;
 
@@ -89,7 +93,7 @@ function showPage() {
             
             /* sending the current position for comparing to existing Crumbs' locations */
             // CONSOLE LOG FOR CURRENT POSITION!!!
-            //console.log(pos);
+            console.log(pos);
             /* Very Important Line, this is is WORKING <--- *******/
             //compareLocations(pos);
               
@@ -98,25 +102,28 @@ function showPage() {
               
                    
           }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
+            // handleLocationError(true, infoWindow, map.getCenter());
+            let errorText = 'It seems like the Geolocation service failed';
+            errorMessage(errorText);
           });
         } else {
           // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
+          //handleLocationError(false, infoWindow, map.getCenter());
+            let errorText = "Too bad. Your browser doesn't support Geolocation.";
+            errorMessage(errorText);
         }
 
 } // end initMap
 
 
-
-
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
-      }
+//
+//      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+//        infoWindow.setPosition(pos);
+//        infoWindow.setContent(browserHasGeolocation ?
+//                              'Error: The Geolocation service failed.' :
+//                              'Error: Your browser doesn\'t support geolocation.');
+//        infoWindow.open(map);
+//      }
 
 /*
 
@@ -179,10 +186,10 @@ function newCompareLocations(yourPosition){
             console.log(crumbLatPosition);
             console.log(crumbLngPosition);
             
-            console.log(newIsCrumbNear(crumbLatPosition, crumbLngPosition, userLatPosition, userLngPosition, 2));
+            console.log(newIsCrumbNear(crumbLatPosition, crumbLngPosition, userLatPosition, userLngPosition, 2)); 
             
                 /* kollar ifall i närhten */
-                if(newIsCrumbNear(crumbLatPosition, crumbLngPosition, userLatPosition, userLngPosition, 2)){
+                if(newIsCrumbNear(crumbLatPosition, crumbLngPosition, userLatPosition, userLngPosition, 1)){ /* = 1 km */
 
                     /* kollar ifall det är en ny */
                     //if(saveCrumbLocally(userLatPosition, userLngPosition)){
@@ -255,7 +262,8 @@ function pickUpCrumb(id, date, user){
 
 
 function fetchAndPrintInfo(id, date, user, imageFileEnding){
-     fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+//     fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+     fetch('https://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
       .then(response => response.json())
       .then(songData => {
          
@@ -363,7 +371,7 @@ function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringA
 /**************** Fetch-functions for Explore Further Section ****************/
 
 function fetchRecentlyPlayed(id) {
-    fetch('http://ws.audioscrobbler.com/2.0/?method=User.getRecentTracks&user=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+    fetch('https://ws.audioscrobbler.com/2.0/?method=User.getRecentTracks&user=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
             console.log(songData);
@@ -372,14 +380,14 @@ function fetchRecentlyPlayed(id) {
             printRecentlyPlayed(userId, recentTrackArray);
         })
         .catch(function (error) {
-            let errorText = 'Something went wrong in the API connection.';
+            let errorText = 'Something went wrong with the API when fetching users recent tracks.';
             errorMessage(errorText);
             console.log(error);
         })
 }
 
 function fetchArtistInfo(id) {
-    fetch('http://ws.audioscrobbler.com/2.0/?method=artist.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+    fetch('https://ws.audioscrobbler.com/2.0/?method=artist.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
             let artistInfo = songData.artist.bio.summary;
@@ -392,11 +400,8 @@ function fetchArtistInfo(id) {
         })
 }
 
-
-
-
 function fetchTags(id) {
-    fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+    fetch('https://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
             let songId = id;
@@ -426,8 +431,6 @@ function printRecentlyPlayed(userId, recentTrackArray){
     }
     openFoundCrumb.appendChild(exploreFurtherDiv);     
 }
-
-
 
 function printArtistInfo(artistInfo){
     const exploreFurtherDiv = document.createElement('div'); 
@@ -462,7 +465,7 @@ function printTags(songId, tagArray){
 
 
 
-/*** Small functions ***/
+/*************************** Small functions **********************************/
 function randomCrumbImage(){
     return Math.floor((Math.random() * 7) + 1); 
 }
