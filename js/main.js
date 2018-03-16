@@ -68,8 +68,7 @@ const pickUpElement = document.getElementById('pickUpElement');
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             var pos = {
-                lat: position.coords.latitude,
-                /* device latitude */
+                lat: position.coords.latitude, /* device latitude */
                 lng: position.coords.longitude /* device longitude */
             };
 
@@ -78,45 +77,43 @@ const pickUpElement = document.getElementById('pickUpElement');
             infoWindow.open(map);
             map.setCenter(pos);
 
-            /**********************************************************************************/
-            /* Hello world!                                                                   */
-            /* For testing a location that is not allready in the array:                      */
-            /* 1. Run this console.log:                                                       */
+            /**********************************************************************************************/
+            /* Hello world!                                                                               */
+            /* For testing the location you're at:                                                        */
+            /* 1. Run this console.log:                                                                   */
             // console.log(pos);                                            
-            /* 2. Insert logged positions in lat/lng properties in whereWhoWhenWhat-array     */
-            /* 3. Reload page                                                                 */
-            /**********************************************************************************/
+            /* 2. Insert logged positions on some row in lat/lng properties in whereWhoWhenWhat-array ^   */
+            /* 3. Reload page                                                                             */
+            /**********************************************************************************************/
 
-            newCompareLocations(pos);
+            compareLocations(pos);
 
         }, function () {
-            handleLocationError(true, infoWindow, map.getCenter());
-            //            let errorText = 'It seems like the Geolocation service failed';
-            //            errorMessage(errorText);
+            let errorText = 'It seems like the Geolocation service failed';
+            errorMessage(errorText);
         });
     } else {
-        handleLocationError(false, infoWindow, map.getCenter());
-        //            let errorText = "Too bad. Your browser doesn't support Geolocation.";
-        //            errorMessage(errorText);
+        let errorText = "Too bad. Your browser doesn't support Geolocation.";
+        errorMessage(errorText);
     }
+} 
 
-} // end initMap
+/****************************************************************/
 
-  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-    infoWindow.setPosition(pos);
-    infoWindow.setContent(browserHasGeolocation ?
-                          'Error: The Geolocation service failed.' :
-                          'Error: Your browser doesn\'t support geolocation.');
-    infoWindow.open(map);
-  }
+//   var removeLoader = function(event, XMLHttpRequest, ajaxOptions)
+//    {
+//        $('.ajax-loader').removeClass('ajax-loader');
+//    };
 
 
-function newCompareLocations(yourPosition){
+/****************************************************************/
+
+/*********************** Location functions ***********************************/
+
+function compareLocations(yourPosition){
     
     let userLatPosition = parsePosition(yourPosition.lat);
     let userLngPosition = parsePosition(yourPosition.lng);    
-//    console.log(userLatPosition);
-//    console.log(userLngPosition);
 
     for(i = 0; i < whereWhoWhenWhat.length; i++){
         let crumbLatPosition = parsePosition(whereWhoWhenWhat[i].lat);
@@ -134,10 +131,7 @@ function newCompareLocations(yourPosition){
             }else{
                 alert("Please cherish the last crumb you picked up for at least 10 minutes before picking up another one.");
             }
-        }
-//        else{
-//            console.log("this is somewhere else")
-//        }   
+        }  
     }   
 }
 
@@ -148,6 +142,8 @@ function isCrumbNear(checkPointLat, checkPointLng, centerPointLat, centerPointLn
     var dy = Math.abs(centerPointLat - checkPointLat) * ky;
     return Math.sqrt(dx * dx + dy * dy) <= km;
 }
+
+/************************* Timestamp ********************************/
 
 var storedTimestamp = [];
 
@@ -179,6 +175,7 @@ function checkTimestamp(){
     }    
 }
 
+/****************** Crumb: Pick up, fetch & print functions ************************/
 
 function pickUpCrumb(id, date, user) {
     let imageFileEnding = randomCrumbImage();
@@ -288,6 +285,7 @@ function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringA
 
 /**************** Fetch-functions for Explore Further Section ****************/
 
+// NTS: replace with HTTPS when uploading on oderland
 function fetchRecentlyPlayed(id) {
     fetch('http://ws.audioscrobbler.com/2.0/?method=User.getRecentTracks&user=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
@@ -304,6 +302,7 @@ function fetchRecentlyPlayed(id) {
         })
 }
 
+// NTS: replace with HTTPS when uploading on oderland
 function fetchArtistInfo(id) {
     fetch('http://ws.audioscrobbler.com/2.0/?method=artist.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
@@ -318,6 +317,7 @@ function fetchArtistInfo(id) {
         })
 }
 
+// NTS: replace with HTTPS when uploading on oderland
 function fetchTags(id) {
     fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
@@ -362,10 +362,6 @@ function printArtistInfo(artistInfo){
     openFoundCrumb.appendChild(exploreFurtherDiv);  
 }
 
-//        <div class="artistInfoDiv">
-//        ${artistInfo}
-//        </div>
-
 function printTags(songId, tagArray){
     const exploreFurtherDivTags = document.createElement('div');
     for(i = 0; i < tagArray.length; i++){ 
@@ -380,10 +376,8 @@ function printTags(songId, tagArray){
 }
 
 
-
-
-
 /*************************** Small functions **********************************/
+
 function randomCrumbImage(){
     return Math.floor((Math.random() * 7) + 1); 
 }
@@ -395,31 +389,12 @@ function generateSearchString(string){
     return searchStringFormat; 
 }
 
-/*
-// WORKING; but not the way t should be done
-function parseAndRoundOffPosition(latOrLng){
-    let latOrLngParsed = parseFloat(latOrLng);
-    let latOrLngRoundOff = latOrLngParsed.toFixed(2); // kalibrera detta värde???
-    return latOrLngRoundOff;    
-}
-*/
-
-/* the above function is replaced with these two below: */
 function parsePosition(latOrLng){    
     let latOrLngParsed = parseFloat(latOrLng);
     return latOrLngParsed;    
 }
 
-
-
-//example stack overflow!!!!!!
-//    function arePointsNear(checkPoint, centerPoint, km) {
-//          var ky = 40000 / 360;
-//          var kx = Math.cos(Math.PI * centerPoint.lat / 180.0) * ky;
-//          var dx = Math.abs(centerPoint.lng - checkPoint.lng) * kx;
-//          var dy = Math.abs(centerPoint.lat - checkPoint.lat) * ky;
-//          return Math.sqrt(dx * dx + dy * dy) <= km;
-//        }
+/************************ Errors & such  *****************************************/
 
 function errorMessage(errorText){
     const body = document.getElementById('body');
@@ -428,13 +403,13 @@ function errorMessage(errorText){
         <div class="errorMessageBody">
             <div class="errorMessageDiv">
                 <img src="images/crumb4.jpg">
-                <p><span class="crumbFont">Sorry! You have just been served a slice of ERROR.</span></p>
+                <p><span class="crumbFont">Sorry! Say hello to ERROR.</span></p>
                 <p>Reason:</p>
                 <p>${errorText}</p>
                 <p><a href="#" onclick="window.location.reload(true);">Try to reload the page</a></p>
             </div>
         </div>
-        `; // Or "Sorry! Say hello to ERROR."
+        `; // Or "Sorry! You have just been served a slice of ERROR."
         body.insertAdjacentHTML('afterbegin', errorOutput);     
 }
 
@@ -456,7 +431,3 @@ inactive3.addEventListener('click', function(){
 inactive4.addEventListener('click', function(){ 
      alert('Nope. This function is not available in demo version.')
 }); 
-
-
-
-
