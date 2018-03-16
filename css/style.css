@@ -1,5 +1,3 @@
-
-
 html, body{
     height: 100%;
     margin: 0px;
@@ -46,15 +44,14 @@ html, body{
     font-size: 0.8em;
 }
 
-.hide{
-    display: none;s
-}
-
 .title{
     color: #4C340D;
     background-color: #FFAFE1;
     font-family: 'Nova Mono', monospace;
     text-transform: uppercase;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
 #map{
@@ -206,16 +203,40 @@ html, body{
 }
 
 /************ Mobile ***************/
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 599px) {
     
 .title{
     height: 90px;
-    font-size: 2.4em;
+    font-size: 2.6em;
     padding-top: 10px;
     padding-left: 15px;
     padding-bottom: 10px;
-}   
+} 
     
+.one{
+    width: 65%;
+}
+.two{
+    display: none;
+} 
+.two_sub{
+    display: none;
+}
+.three{
+    display: block;
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    padding-top: 22px;
+    font-size: 0.25em;
+}
+.three_sub{
+    width: 100%;
+    padding-right: 15px;
+    cursor: pointer;
+}
+     
 #map{
     height: 80%;
     width: 100%;
@@ -295,13 +316,111 @@ html, body{
     padding: 0px;
 }
     
-} //end mobile
+} /*end mobile*/
 
 /*** Tablet ***/
-@media screen and (min-width: 501px) and (max-width: 1023px) {
-    
-
+@media screen and (min-width: 600px) and (max-width: 1023px) {
+.title{
+    height: 90px;
+    font-size: 2.4em;
+    padding-top: 10px;
+    padding-left: 15px;
+    padding-bottom: 10px;
 }
+    
+.one{
+    width: 60%;
+}
+.two{
+    display: block;
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    text-align: right;
+    padding-top: 40px;
+    font-size: 0.3em;
+}   
+.two_sub{
+    cursor: pointer;
+    padding-right: 20px;
+}
+.three{
+    display: none;
+}
+.three_sub{
+    display: none;       
+}
+    
+#map{
+    height: 80%;
+    width: 100%;
+}
+    
+.opacityOverMap{
+    height: 77%;
+    width: 100%;
+    top: 100px;
+}
+   
+.foundCrumbMessage{
+    top: 150px;
+    height: 230px;
+    width: 340px;
+    font-size: 1.2em;
+    padding: 25px;
+}   
+.foundCrumbMessage img{
+    width: 120px;
+    padding: 20px;
+}
+    
+.openFoundCrumb{
+    top: 130px;
+    width: 90%;
+    font-size: 0.8em;
+    padding: 20px;
+}   
+.openFoundCrumb img{
+    width: 35px;
+    padding: 0px;
+    padding-bottom: 20px;
+}
+    
+.small_button{
+    font-size: 0.8em;
+    height: 18px;
+    width: auto;
+    margin-left: 10px;
+    cursor: pointer;
+    margin-left: 70px;
+    margin-right: 70px;
+}
+    
+.exploreFurtherDiv{
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 0.8em;
+}
+    
+.recentTrackRow{
+    font-size: 0.8em;
+} 
+    
+.youtube_logo{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0px;
+}
+.youtube_logo img{
+    width: 100px;
+    padding: 0px;
+}  
+
+} /*end tablet*/
 
 /*** Desktop ***/
 @media screen and (min-width: 1024px) {
@@ -314,16 +433,29 @@ html, body{
     padding-bottom: 10px;    
 }
     
-.function_button{
-    font-size: 0.8em !important;
-    height: 18px;
-    width: auto;
-    margin-left: 10px;
-    cursor: pointer;
-    margin-left: 70px;
-    margin-right: 70px;
+.one{
+    width: 75%;
 }
-    
+.two{
+    display: block;
+    width: 25%;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    padding-top: 40px;
+    font-size: 0.3em;
+}   
+.two_sub{
+    width: 50%;
+    cursor: pointer;
+}
+.three{
+    display: none;
+}
+.three_sub{
+    display: none;       
+}
+  
 #map{
     height: 80%;
     width: 100%;

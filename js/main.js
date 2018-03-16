@@ -29,15 +29,15 @@ var whereWhoWhenWhat = [
 
 
 //var myVar;
-function myFunction() {
-    initMap = setTimeout(showPage, 3000);
-    document.getElementById("loader").style.display = "none";
-}
-
-function showPage() {
-    document.getElementById("loader").style.display = "none";
-    document.getElementById("body").style.display = "block";
-}
+//function myFunction() {
+//    initMap = setTimeout(showPage, 3000);
+//    document.getElementById("loader").style.display = "none";
+//}
+//
+//function showPage() {
+//    document.getElementById("loader").style.display = "none";
+//    document.getElementById("body").style.display = "block";
+//}
 
 
 
@@ -527,4 +527,26 @@ function errorMessage(errorText){
 
    // openFoundCrumb.appendChild(exploreFurtherDiv);     
 }
+
+const inactive1 = document.getElementById('inactive1');
+const inactive2 = document.getElementById('inactive2');
+const inactive3 = document.getElementById('inactive3');
+const inactive4 = document.getElementById('inactive4');
+
+
+inactive1.addEventListener('click', function(){ 
+     alert('Nope. This function is not available in demo version.')
+}); 
+inactive2.addEventListener('click', function(){ 
+     alert('Nope. This function is not available in demo version.')
+}); 
+inactive3.addEventListener('click', function(){ 
+     alert('Nope. This function is not available in demo version.')
+}); 
+inactive4.addEventListener('click', function(){ 
+     alert('Nope. This function is not available in demo version.')
+}); 
+
+
+
 
