@@ -6,7 +6,7 @@ var whereWhoWhenWhat = [
     {lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: '6161a743-23fc-458f-8aed-eeac7782bca0'}, /* demo */
     {lat: 59.2734988, lng: 18.0497676, user: 'VenusOfTheSoup', date: '13/3 2018', 
-     crumbId: '770a770b-ad34-4564-8c9e-83e6d47f90e'} /* best music video ever made */
+     crumbId: '770a770b-ad34-4564-8c9e-83e6d47f90e'} /* best music video everrr */
     ]
 
 /************************* Map ************************************/
@@ -24,16 +24,12 @@ var whereWhoWhenWhat = [
 /*** Setting up crumb markers ***/
     var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; /* marker name string */
 
-//    var markerImage = 'images/bread-flat.dms';
-//   markerImage.width = 50;
-      
     /* Adding markers, using the labels above: 
     "The code uses the JavaScript Array.prototype.map() method to create an array of markers based on a given "locations" (whereWhenWhat) array. The map() method here has nothing to do with the Google Maps API"" */ 
     var markers = whereWhoWhenWhat.map(function(location, i) {
       return new google.maps.Marker({
         position: location,
         label: labels[i % labels.length],
-//       icon: markerImage
           });
         });
       
@@ -54,15 +50,11 @@ var whereWhoWhenWhat = [
             infoWindow.open(map);
             map.setCenter(pos);
             
+            showPage(); /* Function that will display map-element in DOM when getCurrentPosition is done */
             
-            
-            showPage();
-            
-            
-
             /**********************************************************************************************/
-            /* Hello world!                                                                               */
-            /* For testing the location you're at:                                                        */
+            /* Hello myself & world!                                                                      */
+            /* For getting and testing the location you're at:                                            */
             /* 1. Run this console.log:                                                                   */
             // console.log(pos);                                            
             /* 2. Insert logged positions on some row in lat/lng properties in whereWhoWhenWhat-array ^   */
@@ -81,36 +73,13 @@ var whereWhoWhenWhat = [
     }
 } 
 
-/****************************************************************/
+/***************** Display page after loading **********************************/
 
-//function myFunction() { 
-//infoWidow.addEventListener("load", myFunction2);
-//}
-//
-//function myFunction2() {
-//    console.log("hej");
-////    document.getElementById("demo").innerHTML = "Iframe is loaded.";
-//}
-    
-//    map.onload = function(){
-////        document.getElementById("map").style.display = "block";  
-//        const seeMap = document.getElementById("map");
-//        seeMap.classList.add('block');
-//    }}
-//
-//function myFunction() {
-////    infoWindow.onload = setTimeout(showPage);
-//    infoWindow = setTimeout(showPage);
-//}
-//
 function showPage() {
-    console.log("hej");
     document.getElementById("loader").style.display = "none";
     document.getElementById("loaderMessage").style.display = "none";
     document.getElementById("map").style.display = "block";
 }
-
-/****************************************************************/
 
 /*********************** Location functions ***********************************/
 
@@ -230,7 +199,7 @@ function fetchAndPrintInfo(id, date, user, imageFileEnding){
 function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringArtist, searchStringSongTitle,
             trackId, trackName, artistName, artistId, albumName, artistUrl){
     
-    let pickUpCrumbTest2 = `
+    let pickUpCrumbOutput = `
     <div class="opacityOverMap"></div>
         <div class="openFoundCrumb" id="openFoundCrumb">
 
@@ -254,7 +223,7 @@ function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringA
     </div>
     `;   
     pickUpElement.innerHTML = '';
-    pickUpElement.insertAdjacentHTML('afterbegin', pickUpCrumbTest2); 
+    pickUpElement.insertAdjacentHTML('afterbegin', pickUpCrumbOutput); 
 
     const seeRecentlyPlayedButton = document.createElement('button');
     seeRecentlyPlayedButton.classList.add('small_button');
@@ -296,7 +265,6 @@ function fetchRecentlyPlayed(id) {
     fetch('http://ws.audioscrobbler.com/2.0/?method=User.getRecentTracks&user=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
-            console.log(songData);
             let userId = id;
             let recentTrackArray = songData.recenttracks.track;
             printRecentlyPlayed(userId, recentTrackArray);
@@ -304,7 +272,6 @@ function fetchRecentlyPlayed(id) {
         .catch(function (error) {
             let errorText = 'Something went wrong with the API when fetching users recent tracks.';
             errorMessage(errorText);
-            console.log(error);
         })
 }
 
@@ -319,7 +286,6 @@ function fetchArtistInfo(id) {
         .catch(function (error) {
             let errorText = 'Something went wrong in the API connection.';
             errorMessage(errorText);
-            console.log(error);
         })
 }
 
@@ -335,11 +301,11 @@ function fetchTags(id) {
         .catch(function (error) {
             let errorText = 'Something went wrong in the API connection.';
             errorMessage(errorText);
-            console.log(error);
         })
 }
 
-/***************** Print Out-functions for Explore Further Section *****************/
+/******************* Print Out-functions for Explore Further Section *****************/
+/* There's a bug here? These sections doesn't seem to work perfectly all the time */
 
 function printRecentlyPlayed(userId, recentTrackArray){
     const exploreFurtherDiv = document.createElement('div');
@@ -403,7 +369,7 @@ function parsePosition(latOrLng){
 /************************ Errors & such  *****************************************/
 
 function errorMessage(errorText){
-    const body = document.getElementById('body');
+    const body = document.getElementsByTagName('body');
     body.innerHTML = '';
         let errorOutput = `
         <div class="errorMessageBody">
