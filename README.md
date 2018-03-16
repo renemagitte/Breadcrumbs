@@ -37,7 +37,6 @@ Later on I realised that not all song have got an mbid which was quite disappoin
 * Sometimes, the fetching of the position is INCREDIBLY slow... I need to check up on that.
 * ...so the page really needs some kind of loading indicator!
 * Save timestamp for pick up in local storage and then empty after 10 minutes.
-Furthermore:
 * Make so that the user can "drop" their own "crumb": a whole new page with input fields would need to be created, not least to say a database where the "crumbs" can be stored instead of the preset little array in this demoversion. 
 * Connect the application to several different API:s! This demoversion had a kind of "lost mixtape" take to it, but a crumb could be anything really: a photo, a poem, just a small note, a link... anything! Fetched from database or from photo roll on users mobile e.g.
 * A page for "crumb collection" where user can view the history of their picked up/dropped crumbs, what it consisted of.
