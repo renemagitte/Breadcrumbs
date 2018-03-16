@@ -124,56 +124,19 @@ function newCompareLocations(yourPosition){
 
                     /* kollar ifall det är en ny */
                     //if(saveCrumbLocally(userLatPosition, userLngPosition)){
-                    
-                       // setStoredPickUpTime();
-                    
+            /* Checking if it's been over 10 minutes since last pick up */        
             if(checkTimestamp()){
-            
-            pickUpCrumb(crumbId, crumbDate, crumbUser);
-//                        setTimeout(function(){localStorage.removeItem("storedPosition");}, 1*60*1000);
-//                        break;
-                    
-                    }else{
-                    console.log("Wait 10 minutes");
-                   // setTimeout(function(){localStorage.removeItem("storedPosition");}, 1*60*1000); //ändra till 10 min
-                    }
-                }else{
-                        console.log("this is somewhere else")
-                }
+                pickUpCrumb(crumbId, crumbDate, crumbUser);
+            }else{
+                console.log("Wait 10 minutes");
+            }
+        }else{
+            console.log("this is somewhere else")
         }
-            
+    }         
 }
 
-
-//var storedPosition = [];
-//function saveCrumbLocally(lat, lng){
-//    
-//    if(!localStorage.getItem('storedPosition')){
-//        localStorage.setItem('storedPosition', JSON.stringify(storedPosition));
-//        storedPosition[0] = lat;
-//        storedPosition[1] = lng;
-//        localStorage.setItem('storedPosition', JSON.stringify(storedPosition));
-//        return true;
-//    }else{
-//        let dataFromLocalStorage = JSON.parse(localStorage.getItem('storedPosition'));     
-//            if((dataFromLocalStorage[0] = lat) && (dataFromLocalStorage[1] = lat)){
-//                //console.log("sorry, wait at least 10 minutes")
-//                return false;   
-//            }else{
-//                console.log("yay! a new crumb!")
-//                storedPosition[0] = lat;
-//                storedPosition[1] = lng;
-//                localStorage.setItem('storedPosition', JSON.stringify(storedPosition));
-//                return true;
-//            }
-//    } 
-//}
-
-
-
-//om denna funktion returnerar true, låt koden gå vidare?
 var storedTimestamp = [];
-
 
 function storeTimestamp(){
     let timestamp = new Date;
@@ -190,21 +153,18 @@ function checkTimestamp(){
         localStorage.setItem('storedTimestamp', JSON.stringify(storedTimestamp));
         storedTimestamp[0] = timestampJS;
         localStorage.setItem('storedTimestamp', JSON.stringify(storedTimestamp));
-        console.log("first time storage");
         return true;
     }else{
        let earlierTimestampJS = JSON.parse(localStorage.getItem('storedTimestamp'));
-        console.log(earlierTimestampJS);
-        console.log(timestampJS);
         let diffMs = (timestampJS - earlierTimestampJS); /* milliseconds between earler timestamp & current timestamp */
         let diffMins = diffMs/60000; /* convert milliseconds to minutes */
-            if(diffMins <= 10){
+            if(diffMins > 10){
                 return true; 
             }else{
                 return false;
             } 
     }    
-} // end checkTimestamp
+}
 
 
 function pickUpCrumb(id, date, user) {
