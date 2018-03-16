@@ -5,6 +5,8 @@
 var whereWhoWhenWhat = [
     {lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: '6161a743-23fc-458f-8aed-eeac7782bca0'}, /* demo */
+    {lat: 59.2735078, lng: 18.049701100000004, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '6161a743-23fc-458f-8aed-eeac7782bca0'}, /* demo */
     {lat: 59.344371, lng: 18.054932, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: '770a770b-ad34-4564-8c9e-83e6d47f90e'} /* best music video everrr */
     ]
@@ -56,7 +58,7 @@ var whereWhoWhenWhat = [
             /* Hello myself & world!                                                                      */
             /* For getting and testing the location you're at:                                            */
             /* 1. Run this console.log:                                                                   */
-            // console.log(pos);                                            
+             console.log(pos);                                            
             /* 2. Insert logged positions on some row in lat/lng properties in whereWhoWhenWhat-array ^   */
             /* 3. Reload page                                                                             */
             /**********************************************************************************************/
@@ -99,11 +101,11 @@ function compareLocations(yourPosition){
         if(isCrumbNear(crumbLatPosition, crumbLngPosition, userLatPosition, userLngPosition, 1)){ /* = 1 km */
 
             /* Checking if it's been over 10 minutes since last pick up */        
-            if(checkTimestamp()){
+            //if(checkTimestamp()){
                 pickUpCrumb(crumbId, crumbDate, crumbUser);
-            }else{
-                alert("Please cherish the last crumb you picked up for at least 10 minutes before picking up another one.");
-            }
+//            }else{
+//                alert("Please cherish the last crumb you picked up for at least 10 minutes before picking up another one.");
+//            }
         }  
     }   
 }
@@ -168,9 +170,8 @@ function pickUpCrumb(id, date, user) {
     })
 }
 
-// NTS: replace with HTTPS when uploading on oderland
 function fetchAndPrintInfo(id, date, user, imageFileEnding){
-     fetch('https://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+     fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
          .then(response => response.json())
          .then(songData => {
 
@@ -260,9 +261,8 @@ function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringA
 
 /**************** Fetch-functions for Explore Further Section ****************/
 
-// NTS: replace with HTTPS when uploading on oderland
 function fetchRecentlyPlayed(id) {
-    fetch('https://ws.audioscrobbler.com/2.0/?method=User.getRecentTracks&user=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+    fetch('http://ws.audioscrobbler.com/2.0/?method=User.getRecentTracks&user=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
             let userId = id;
@@ -275,9 +275,8 @@ function fetchRecentlyPlayed(id) {
         })
 }
 
-// NTS: replace with HTTPS when uploading on oderland
 function fetchArtistInfo(id) {
-    fetch('https://ws.audioscrobbler.com/2.0/?method=artist.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+    fetch('http://ws.audioscrobbler.com/2.0/?method=artist.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
             let artistInfo = songData.artist.bio.summary;
@@ -289,9 +288,8 @@ function fetchArtistInfo(id) {
         })
 }
 
-// NTS: replace with HTTPS when uploading on oderland
 function fetchTags(id) {
-    fetch('https://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+    fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
             let songId = id;
@@ -338,7 +336,7 @@ function printTags(songId, tagArray){
     const exploreFurtherDivTags = document.createElement('div');
     for(i = 0; i < tagArray.length; i++){ 
         let tagsForTrack = `
-            <div class="tag tagDiv${[i]}" id="tagDiv${[i]}">
+            <div class="tag">
                 ${tagArray[i].name}
             </div>
             `;
