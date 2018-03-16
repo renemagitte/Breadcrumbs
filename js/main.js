@@ -351,7 +351,7 @@ function printTags(songId, tagArray){
 /*************************** Small functions **********************************/
 
 function randomCrumbImage(){
-    return Math.floor((Math.random() * 7) + 1); 
+    return Math.floor((Math.random() * 6) + 1); 
 }
 
 /* This function should probably be built out to handle more "weird characters" */
@@ -374,7 +374,7 @@ function errorMessage(errorText){
         let errorOutput = `
         <div class="errorMessageBody">
             <div class="errorMessageDiv">
-                <img src="images/crumb4.jpg">
+                <img src="images/alwayssadcrumb.jpg">
                 <p><span class="crumbFont">Sorry! Say hello to ERROR.</span></p>
                 <p>Reason:</p>
                 <p>${errorText}</p>
