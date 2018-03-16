@@ -523,16 +523,13 @@ function errorMessage(errorText){
             </div>
         </div>
         `; // Or "Sorry! Say hello to ERROR."
-        body.insertAdjacentHTML('afterbegin', errorOutput); 
-
-   // openFoundCrumb.appendChild(exploreFurtherDiv);     
+        body.insertAdjacentHTML('afterbegin', errorOutput);     
 }
 
 const inactive1 = document.getElementById('inactive1');
 const inactive2 = document.getElementById('inactive2');
 const inactive3 = document.getElementById('inactive3');
 const inactive4 = document.getElementById('inactive4');
-
 
 inactive1.addEventListener('click', function(){ 
      alert('Nope. This function is not available in demo version.')
