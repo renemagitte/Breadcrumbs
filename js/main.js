@@ -170,7 +170,7 @@ function pickUpCrumb(id, date, user) {
 
 // NTS: replace with HTTPS when uploading on oderland
 function fetchAndPrintInfo(id, date, user, imageFileEnding){
-     fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+     fetch('https://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
          .then(response => response.json())
          .then(songData => {
 
@@ -262,7 +262,7 @@ function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringA
 
 // NTS: replace with HTTPS when uploading on oderland
 function fetchRecentlyPlayed(id) {
-    fetch('http://ws.audioscrobbler.com/2.0/?method=User.getRecentTracks&user=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+    fetch('https://ws.audioscrobbler.com/2.0/?method=User.getRecentTracks&user=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
             let userId = id;
@@ -277,7 +277,7 @@ function fetchRecentlyPlayed(id) {
 
 // NTS: replace with HTTPS when uploading on oderland
 function fetchArtistInfo(id) {
-    fetch('http://ws.audioscrobbler.com/2.0/?method=artist.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+    fetch('https://ws.audioscrobbler.com/2.0/?method=artist.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
             let artistInfo = songData.artist.bio.summary;
@@ -291,7 +291,7 @@ function fetchArtistInfo(id) {
 
 // NTS: replace with HTTPS when uploading on oderland
 function fetchTags(id) {
-    fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+    fetch('https://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
             let songId = id;
