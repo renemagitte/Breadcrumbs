@@ -1,38 +1,15 @@
-//    fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&artist=Denim&track=Internet+curtains&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
-//        .then(response => response.json())
-//        .then(songData => {
-//            console.log(songData);
-//        })
-//        .catch(function (error) {
-//            console.log(error);
-//        })
 
-
-/*** In Alpha version, this array data is fetched from database ***/
+/******************** Array of info ***************************/
+/* In Alpha version, this array data is fetched from database */
 
 var whereWhoWhenWhat = [
-/* MI, videotips! */
-{lat: 59.35, lng: 18.06, user: 'VenusOfTheSoup', date: '13/3 2018', crumbId: '770a770b-ad34-4564-8c9e-83e6d47f90e'}, 
-/* data */
-{lat: 59.2734988, lng: 18.0497676, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: '2d905c53-4d75-4982-bc60-898119ad4a97'}, 
-/* centerpoint, data */
-{lat: 59.285044, lng: 18.050966, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: '17831aa7-0b90-4cd7-b247-a8118ea894be'}, // test en matbutik
-//{lat: 59.2734859, lng: 18.0497044, user: 'VenusOfTheSoup', date: '13/3 2018', crumbId: 'c4610d30-0831-4913-b177-542ce1fab4db'},
-{lat: 59.243301, lng: 18.301159, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 'c74ef86c-5f0e-4c9a-a7af-45d249e41ed7'}, // test Sandra
-{lat: -33.848588, lng: 151.209834, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 04},
-{lat: -33.851702, lng: 151.216968, user: 'VenusOfTheSoup', date: 'xx/xx', crumbId: 05},
-      ]
+    {lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '6161a743-23fc-458f-8aed-eeac7782bca0'}, /* demo */
+    {lat: 59.2734988, lng: 18.0497676, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '770a770b-ad34-4564-8c9e-83e6d47f90e'} /* best music video ever made */
+    ]
 
-/*** DEMO row ***/
-//{lat: 59.2734859, lng: 18.0497044, user: 'VenusOfTheSoup', date: '13/3 2018', crumbId: 'c4610d30-0831-4913-b177-542ce1fab4db'}
-//{lat: 59.34588819999999, lng: 18.058012599999998} /* MI klassrummet */
-
-/*** DOM Elements ***/
-const pickUpElement = document.getElementById('pickUpElement');
-
-
-
-/*** Setting up map ***/
+/************************* Map ************************************/
 
   var map;
   var infoWindow;
@@ -76,6 +53,12 @@ const pickUpElement = document.getElementById('pickUpElement');
             infoWindow.setContent('You are here!');
             infoWindow.open(map);
             map.setCenter(pos);
+            
+            
+            
+            showPage();
+            
+            
 
             /**********************************************************************************************/
             /* Hello world!                                                                               */
@@ -100,11 +83,32 @@ const pickUpElement = document.getElementById('pickUpElement');
 
 /****************************************************************/
 
-//   var removeLoader = function(event, XMLHttpRequest, ajaxOptions)
-//    {
-//        $('.ajax-loader').removeClass('ajax-loader');
-//    };
-
+//function myFunction() { 
+//infoWidow.addEventListener("load", myFunction2);
+//}
+//
+//function myFunction2() {
+//    console.log("hej");
+////    document.getElementById("demo").innerHTML = "Iframe is loaded.";
+//}
+    
+//    map.onload = function(){
+////        document.getElementById("map").style.display = "block";  
+//        const seeMap = document.getElementById("map");
+//        seeMap.classList.add('block');
+//    }}
+//
+//function myFunction() {
+////    infoWindow.onload = setTimeout(showPage);
+//    infoWindow = setTimeout(showPage);
+//}
+//
+function showPage() {
+    console.log("hej");
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("loaderMessage").style.display = "none";
+    document.getElementById("map").style.display = "block";
+}
 
 /****************************************************************/
 
@@ -176,6 +180,8 @@ function checkTimestamp(){
 }
 
 /****************** Crumb: Pick up, fetch & print functions ************************/
+
+const pickUpElement = document.getElementById('pickUpElement');
 
 function pickUpCrumb(id, date, user) {
     let imageFileEnding = randomCrumbImage();

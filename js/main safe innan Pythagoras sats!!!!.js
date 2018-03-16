@@ -1,3 +1,15 @@
+    fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&artist=Bruce+Haack&track=Program+me&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+        .then(response => response.json())
+        .then(songData => {
+            console.log(songData);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+
+
+
+
 /*** In Alpha version, this array data is fetched from database ***/
 var whereWhoWhenWhat = [
         {lat: 59.35, lng: 18.06, user: 'VenusOfTheSoup', date: '13/3 2018', crumbId: 'c4610d30-0831-4913-b177-542ce1fab4db'}, /* MI */

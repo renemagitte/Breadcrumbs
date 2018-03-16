@@ -5,36 +5,11 @@ html, body{
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     background-color: #FFAFE1;
-/*
-    position: relative;
-      -webkit-animation-name: animatebottom;
-      -webkit-animation-duration: 1s;
-      animation-name: animatebottom;
-      animation-duration: 1s
-*/
 }
 
-/*
-.body#body.animate-bottom.body{
-     background-color: #FFAFE1;   
+.block{
+    display: block;
 }
-
-
-        @-webkit-keyframes animatebottom {
-          from { bottom:-100px; opacity:0 } 
-          to { bottom:0px; opacity:1 }
-        }
-
-        @keyframes animatebottom { 
-          from{ bottom:-100px; opacity:0 } 
-          to{ bottom:0; opacity:1 }
-        }
-
-        #myDiv {
-          display: none;
-          text-align: center;
-        }
-*/
 
 .crumbFont{
     font-family: 'Nova Mono', monospace;
@@ -62,7 +37,64 @@ html, body{
     border-top: 10px solid #4C340D;
     z-index: 94 !important;
     position: absolute !important;
-  }
+    
+      -webkit-animation-name: animatebottom;
+      -webkit-animation-duration: 1s;
+      animation-name: animatebottom;
+      animation-duration: 3s  
+
+/*
+    position: relative;
+      -webkit-animation-name: animatebottom;
+      -webkit-animation-duration: 1s;
+      animation-name: animatebottom;
+      animation-duration: 1s
+*/
+}
+
+    .map#map.animate-bottom.map{
+     background-color: #FFAFE1;   
+}
+
+
+        @-webkit-keyframes animatebottom {
+          from { opacity:0 } 
+          to { opacity:1 }
+        }
+
+        @keyframes animatebottom { 
+          from{ opacity:0 } 
+          to{ opacity:1 }
+        }
+
+        #myDiv {
+          display: none;
+          text-align: center;
+        }
+
+    
+/*
+    .map#map.animate-bottom.map{
+     background-color: #FFAFE1;   
+}
+
+
+        @-webkit-keyframes animatebottom {
+          from { bottom:-100px; opacity:0 } 
+          to { bottom:0px; opacity:1 }
+        }
+
+        @keyframes animatebottom { 
+          from{ bottom:-100px; opacity:0 } 
+          to{ bottom:0; opacity:1 }
+        }
+
+        #myDiv {
+          display: none;
+          text-align: center;
+        }
+*/
+
 
 .pickUpElement{
     display: flex;
@@ -538,10 +570,12 @@ html, body{
     
 } /* end of Desktop */
 
+.loaderMessage{
+    width: 100%;
+    text-align: center;
+    padding-top: 30px;
+}
 
-
-/* Center the loader */
-/*
 #loader {
   position: absolute;
   left: 50%;
@@ -568,4 +602,3 @@ html, body{
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-*/
