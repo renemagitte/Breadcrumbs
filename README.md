@@ -18,15 +18,14 @@ This is just a demo version so there are only a few preset crumbs here but in a 
 follow their tracks (yes, in two senses!) and come to pick the "crumb" up. Once they're at the location they will be able to access the track that the crumb consist of.
 
 ##### API:s:
-**kort beskrivning av det API/APIer du använt samt länk till dem.**
 
-[Google Maps Geolocation](https://developers.google.com/maps/documentation/javascript/examples/map-geolocation)
+[Google Maps Geolocation][https://developers.google.com/maps/documentation/javascript/examples/map-geolocation]
 Google maps api that creates a map and marks the position the device is on. 
 
-[Google Maps Marker Clustering](https://developers.google.com/maps/documentation/javascript/marker-clustering)
+[Google Maps Marker Clustering][https://developers.google.com/maps/documentation/javascript/marker-clustering]
 Google Maps api that creates multiple markers on the map. These are the positions for the dropped crumbs on my page.
 
-[Last.fm API](https://www.last.fm/sv/api)
+[Last.fm API][https://www.last.fm/sv/api]
 I use this api to fetch info about track, artist info, tags connected to the track and recently played songs.
 
 <!--
@@ -35,10 +34,9 @@ https://developers.google.com/maps/documentation/javascript/examples/icon-simple
 -->
 
 ##### Work progress:
-**kortfattat om din arbetsprocess och vad som skulle kodmässigt kunna förbättras.**
-- I could structur my work much better from the start to avoid problems further on. CSS I'm talking about you.
-- Better semantics regarding HTML5. I should have used headings, nav-tags and so on...
-- I built my code around the fact that all songs from the last.fm-api came with an unique id (called "mbid").
+* I could structur my work much better from the start to avoid problems further on. CSS I'm talking about you.
+* Better semantics regarding HTML5. I should have used headings, nav-tags and so on...
+* I built my code around the fact that all songs from the last.fm-api came with an unique id (called "mbid").
 Later on I realised that not all song have got an mbid which was quite disappointing (it just says mbid: "" in the API). So this verison only works with songs that has got an id.
 
 
