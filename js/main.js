@@ -17,7 +17,7 @@ var whereWhoWhenWhat = [
   var infoWindow;
 
   function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {  /* get map-div-element and fill with content */
+    map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 59.34588819999999, lng: 18.058012599999998}, /* sets out default position */
       zoom: 12                                                   /* and default zoom */
     });
@@ -27,7 +27,8 @@ var whereWhoWhenWhat = [
     var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; /* marker name string */
 
     /* Adding markers, using the labels above: 
-    "The code uses the JavaScript Array.prototype.map() method to create an array of markers based on a given "locations" (whereWhenWhat) array. The map() method here has nothing to do with the Google Maps API"" */ 
+    "The code uses the JavaScript Array.prototype.map() method to create an array of markers based on a given "locations" 
+    [in this code: whereWhoWhenWhat] array. The map() method here has nothing to do with the Google Maps API" */ 
     var markers = whereWhoWhenWhat.map(function(location, i) {
       return new google.maps.Marker({
         position: location,
@@ -58,7 +59,7 @@ var whereWhoWhenWhat = [
             /* Hello myself & world!                                                                      */
             /* For getting and testing the location you're at:                                            */
             /* 1. Run this console.log:                                                                   */
-             console.log(pos);                                            
+            // console.log(pos);                                            
             /* 2. Insert logged positions on some row in lat/lng properties in whereWhoWhenWhat-array ^   */
             /* 3. Reload page                                                                             */
             /**********************************************************************************************/
@@ -101,11 +102,11 @@ function compareLocations(yourPosition){
         if(isCrumbNear(crumbLatPosition, crumbLngPosition, userLatPosition, userLngPosition, 1)){ /* = 1 km */
 
             /* Checking if it's been over 10 minutes since last pick up */        
-            //if(checkTimestamp()){
+            if(checkTimestamp()){
                 pickUpCrumb(crumbId, crumbDate, crumbUser);
-//            }else{
-//                alert("Please cherish the last crumb you picked up for at least 10 minutes before picking up another one.");
-//            }
+            }else{
+                alert("Please cherish the last crumb you picked up for at least 10 minutes before picking up another one.");
+            }
         }  
     }   
 }

@@ -42,26 +42,26 @@ html, body{
       animation-name: animatebottom;
       animation-duration: 3s  
 }
+/*
 
-    .map#map.animate-bottom.map{
+    .body#body.animate-bottom.body{
      background-color: #FFAFE1;   
 }
+*/
+    @-webkit-keyframes animatebottom {
+      from { opacity:0 } 
+      to { opacity:1 }
+    }
 
+    @keyframes animatebottom { 
+      from{ opacity:0 } 
+      to{ opacity:1 }
+    }
 
-        @-webkit-keyframes animatebottom {
-          from { opacity:0 } 
-          to { opacity:1 }
-        }
-
-        @keyframes animatebottom { 
-          from{ opacity:0 } 
-          to{ opacity:1 }
-        }
-
-        #myDiv {
-          display: none;
-          text-align: center;
-        }
+    #myDiv {
+      display: none;
+      text-align: center;
+    }
 
 .pickUpElement{
     display: flex;
