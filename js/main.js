@@ -5,9 +5,7 @@
 var whereWhoWhenWhat = [
     {lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: '6161a743-23fc-458f-8aed-eeac7782bca0'}, /* demo */
-    {lat: 59.33094699999999, lng: 18.05926290000002, user: 'VenusOfTheSoup', date: '13/3 2018', 
-     crumbId: '6161a743-23fc-458f-8aed-eeac7782bca0'}, /* demo */
-    {lat: 59.344371, lng: 18.054932, user: 'VenusOfTheSoup', date: '13/3 2018', 
+    {lat: 59.33094699999999, lng: 18.05926290000002, user: 'VenusOfTheSoup', date: '16/3 2018', 
      crumbId: '770a770b-ad34-4564-8c9e-83e6d47f90e'} /* best music video everrr */
     ]
 
