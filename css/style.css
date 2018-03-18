@@ -82,6 +82,25 @@ html, body{
     cursor: pointer;
 }
 
+.noCrumbAround{
+    z-index: 96 !important;
+    position: absolute !important;
+    background-color: white !important;
+    border: 1px solid black;
+    opacity: none;
+    vertical-align: middle;
+    align-self: center;
+    font-family: 'Nova Mono', monospace;
+    color: black;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      -webkit-animation-name: animatebottom;
+      -webkit-animation-duration: 1s;
+      animation-name: animatebottom;
+      animation-duration: 5s 
+}
+
 .foundCrumbMessage{
     z-index: 96 !important;
     position: absolute !important;
@@ -225,8 +244,17 @@ html, body{
     width: 100%;
     top: 100px;
 }
+    
+.noCrumbAround{
+    top: 78%;
+    left: 5%;
+    height: 77px;
+    width: 90%;
+    padding: 20px;
+    font-size: 0.8em;
+}  
    
-.foundCrumbMessage{
+.foundCrumbMessa5e{
     top: 150px;
     height: 230px;
     width: 340px;
@@ -339,6 +367,16 @@ html, body{
     width: 100%;
     top: 100px;
 }
+    
+.noCrumbAround{
+    top: 80%;
+    left: 5%;
+    height: 60px;
+    width: 90%;
+    padding: 20px;
+    font-size: 0.8em;
+    display: none;
+} 
    
 .foundCrumbMessage{
     top: 150px;
@@ -444,6 +482,16 @@ html, body{
     width: 100%;
     top: 100px;  
 }
+    
+.noCrumbAround{
+    top: 80%;
+    left: 15%;
+    height: 60px;
+    width: 70%;
+    padding: 20px;
+    font-size: 0.8em;
+    display: none;
+} 
      
 .foundCrumbMessage{
     top: 160px;

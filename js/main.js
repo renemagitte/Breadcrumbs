@@ -1,12 +1,66 @@
+    fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&artist=Factory+floor&track=heart+of+data&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+        .then(response => response.json())
+        .then(songData => {
+            console.log(songData);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
 
 /******************** Array of info ***************************/
 /* In Alpha version, this array data is fetched from database */
 
 var whereWhoWhenWhat = [
     {lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', 
-     crumbId: '6161a743-23fc-458f-8aed-eeac7782bca0'}, /* demo */
-    {lat: 59.33094699999999, lng: 18.05926290000002, user: 'VenusOfTheSoup', date: '16/3 2018', 
-     crumbId: '770a770b-ad34-4564-8c9e-83e6d47f90e'} /* best music video everrr */
+     crumbId: '6161a743-23fc-458f-8aed-eeac7782bca0'}, /* bruce haack - program me */
+    {lat: 59.319595, lng: 18.070485299999973, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '2d905c53-4d75-4982-bc60-898119ad4a97'}, /* skatebård - data italia */
+    {lat: 59.29323549999999, lng: 18.0812138, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '9396958e-95be-405a-a0f2-abf41bf24d33'}, /* kraftwerk - computer love */
+    {lat: 59.33178700000001, lng: 18.086991500000067, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '224ab66d-c764-4258-b82f-efa89047f36c'}, /* software - island sunrise */
+    {lat: 59.3447535, lng: 18.098191799999995, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '224bc68e-5d9c-42de-b8ce-350e3f36c97b'}, /* file not found - give me sign */
+    {lat: 59.29380129999998, lng: 18.014540600000032, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '10cd695c-5784-40f9-9776-b3240ca0fa40'}, /* fleetwood mac - family man */
+    {lat: 59.3550448, lng: 18.01459049999994, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '---Factory Floor---Heart of data'}, /* factory floor - heart of data */
+    {lat: 59.3318129, lng: 18.0265938, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: 'cef51eff-ced3-48ee-9f00-f3cb45b6ee6d'}, /* Macintosh Plus — リサフランク420 / 現代のコンピュー */
+    {lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '894d769e-bb8e-4140-8c4f-52caced82af2'}, /* kate bush - deeper understanding (text) */
+    {lat: 59.315189, lng: 18.043007200000034, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '50ee013e-6d25-4a2e-9a98-6015801fa255'}, /* the gist - love at first sight */
+    {lat: 59.3178415, lng: 18.08591039999999, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: 'a38f8b5b-a2d4-4757-977d-a2a65e11eb0d'}, /* pet shop boys - oppertunities (text) */
+    {lat: 59.3329563, lng: 17.980345199999988, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: 'e8f20a87-e5c9-4697-9e11-807b13573b3a'}, /* 6th Borough Project - the callback */
+    {lat: 59.2583266, lng: 18.083452299999976, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '---The Magnetic Fields---Technical (You\'re so)'}, /* magnetic fields - technical (you're so) */
+//    {lat: 59.273495499999996, lng: 18.0497686, user: 'VenusOfTheSoup', date: '13/3 2018', 
+//     crumbId: '---Legowelt---Computerized paradise'}, /* legowelt - computerized paradise */
+    {lat: 59.27438780000001, lng: 18.133848599999965, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '---The internet---Girl'}, /* the internet - girl */
+    {lat: 59.2744378, lng: 17.901997299999948, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '6d4e507f-f424-40ee-90f9-51e7ad75482b'}, /* casco - cybernetic love */
+    {lat: 59.30790299999999, lng: 18.15604189999999, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '---Software Seduction---Try'}, /* software seduction - try */
+    {lat: 59.30790299999999, lng: 18.15604189999999, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '---Bobby Browser---Baby Dre'}, /* bobby browser - baby dre */
+    {lat: 59.38292819999999, lng: 17.964470699999993, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '62ec8081-b946-4294-a817-7cd01248e998'}, /* carole king - computer eyes */
+    {lat: 59.2632336, lng: 18.04249600000003, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '4082758d-de91-448a-bafa-6436f6400c41'}, /* com truise - data kiss */
+    
+    
+//    {lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', 
+//     crumbId: '3a2fc000-58f1-4856-b6b3-5cb257a5f0ba'}, /* oneohtrix point never - computer vision */
+//    {lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', 
+//     crumbId: '9af1acba-b716-43f8-9568-407de3facc0a'}, /* clock dva - the hacker */
+//    {lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', 
+//     crumbId: 'bfd9ce03-f8cb-4806-98c1-9669d1bb0cbc'}, /* pia fraus - japanese heart software */
+//    {lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', 
+//     crumbId: '4071f0ca-81b5-4653-a778-657bc48eb0da'}, /* wild nothing - data world */
     ]
 
 /************************* Map ************************************/
@@ -15,64 +69,65 @@ var whereWhoWhenWhat = [
   var infoWindow;
 
   function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 59.34588819999999, lng: 18.058012599999998}, /* sets out default position */
-      zoom: 12                                                   /* and default zoom */
-    });
-    infoWindow = new google.maps.InfoWindow;
+      map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 59.34588819999999, lng: 18.058012599999998}, /* sets out default position */
+          zoom: 12 /* and default zoom */
+      });
+      infoWindow = new google.maps.InfoWindow;
 
-/*** Setting up crumb markers ***/
-    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; /* marker name string */
+      /*** Setting up crumb markers ***/
+      var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; /* marker name string */
 
-    /* Adding markers, using the labels above: 
-    "The code uses the JavaScript Array.prototype.map() method to create an array of markers based on a given "locations" 
-    [in this code: whereWhoWhenWhat] array. The map() method here has nothing to do with the Google Maps API" */ 
-    var markers = whereWhoWhenWhat.map(function(location, i) {
-      return new google.maps.Marker({
-        position: location,
-        label: labels[i % labels.length],
+      /* Adding markers, using the labels above: 
+      "The code uses the JavaScript Array.prototype.map() method to create an array of markers based on a given "locations" 
+      [in this code: whereWhoWhenWhat] array. The map() method here has nothing to do with the Google Maps API" */
+      var markers = whereWhoWhenWhat.map(function (location, i) {
+          return new google.maps.Marker({
+              position: location,
+              label: labels[i % labels.length],
           });
-        });
-      
-/* The marker clusterer manage the markers */
-    var markerCluster = new MarkerClusterer(map, markers,
-        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+      });
 
-/*** Geolocation ***/
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            var pos = {
-                lat: position.coords.latitude, /* device latitude */
-                lng: position.coords.longitude /* device longitude */
-            };
+      /* The marker clusterer manage the markers */
+      var markerCluster = new MarkerClusterer(map, markers, {
+          imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+      });
 
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('You are here!');
-            infoWindow.open(map);
-            map.setCenter(pos);
-            
-            showPage(); /* Function that will display map-element in DOM when getCurrentPosition is done */
-            
-            /**********************************************************************************************/
-            /* Hello myself & world!                                                                      */
-            /* For getting and testing the location you're at:                                            */
-            /* 1. Run this console.log:                                                                   */
-            // console.log(pos);                                            
-            /* 2. Insert logged positions on some row in lat/lng properties in whereWhoWhenWhat-array ^   */
-            /* 3. Reload page                                                                             */
-            /**********************************************************************************************/
+      /*** Geolocation ***/
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function (position) {
+              var pos = {
+                  lat: position.coords.latitude, /* device latitude */
+                  lng: position.coords.longitude /* device longitude */
+              };
 
-            compareLocations(pos);
+              infoWindow.setPosition(pos);
+              infoWindow.setContent('You are here!');
+              infoWindow.open(map);
+              map.setCenter(pos);
 
-        }, function () {
-            let errorText = 'It seems like the Geolocation service failed';
-            errorMessage(errorText);
-        });
-    } else {
-        let errorText = "Too bad. Your browser doesn't support Geolocation.";
-        errorMessage(errorText);
-    }
-} 
+              showPage(); /* Function that will display map-element in DOM when getCurrentPosition is done */
+
+              /**********************************************************************************************/
+              /* Hello myself & world!                                                                      */
+              /* For getting and testing the location you're at:                                            */
+              /* 1. Run this console.log:                                                                   */
+               console.log(pos);
+              /* 2. Insert logged positions on some row in lat/lng properties in whereWhoWhenWhat-array ^   */
+              /* 3. Reload page                                                                             */
+              /**********************************************************************************************/
+
+              compareLocations(pos);
+
+          }, function () {
+              let errorText = 'It seems like the Geolocation service failed';
+              errorMessage(errorText);
+          });
+      } else {
+          let errorText = "Too bad. Your browser doesn't support Geolocation.";
+          errorMessage(errorText);
+      }
+  } 
 
 /***************** Display page after loading **********************************/
 
@@ -94,17 +149,28 @@ function compareLocations(yourPosition){
         let crumbLngPosition = parsePosition(whereWhoWhenWhat[i].lng);
         let crumbId = whereWhoWhenWhat[i].crumbId; 
         let crumbDate = whereWhoWhenWhat[i].date; 
-        let crumbUser = whereWhoWhenWhat[i].user; 
-            
+        let crumbUser = whereWhoWhenWhat[i].user;
+        
+        
+        
+//        if(whereWhoWhenWhat[i].crumbId === ''){
+//            crumbId = whereWhoWhenWhat[i].altToCrumbId;
+//            //console.log(crumbId);
+//        }   
+        
+        
+        
         /* Checking if there is any crumb around... */
         if(isCrumbNear(crumbLatPosition, crumbLngPosition, userLatPosition, userLngPosition, 1)){ /* = 1 km */
 
             /* Checking if it's been over 10 minutes since last pick up */        
-            if(checkTimestamp()){
+//            if(checkTimestamp()){
                 pickUpCrumb(crumbId, crumbDate, crumbUser);
-            }else{
-                alert("Please cherish the last crumb you picked up for at least 10 minutes before picking up another one.");
-            }
+//            }else{
+//                alert("Please cherish the last crumb you picked up for at least 10 minutes before picking up another one.");
+//            }
+        }else{
+            document.getElementById("noCrumbAround").style.display = "block";
         }  
     }   
 }
@@ -170,7 +236,16 @@ function pickUpCrumb(id, date, user) {
 }
 
 function fetchAndPrintInfo(id, date, user, imageFileEnding){
-     fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+    
+    var fetchUrl = "http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json";
+    
+    /* If the track did not have an id (mbid) then format the fetch url */
+    if(id.substr(0,3) == '---'){
+        fetchUrl = getFetchUrl(id);
+    }
+
+    
+     fetch(fetchUrl)
          .then(response => response.json())
          .then(songData => {
 
@@ -194,6 +269,20 @@ function fetchAndPrintInfo(id, date, user, imageFileEnding){
              let errorText = 'Something went wrong in the API connection.';
              errorMessage(errorText);
          })
+}
+
+/* This function is for tracks that did not have an id/mbid. They're stored in array starting 
+with --- (could have been something else!) for recognizion, and then they will be transformed 
+in this function to return an alternative fetch-url adjusted to search for artist/trackname instead of mbid */
+function getFetchUrl(id){
+        id = id.replace('---', ''); /* removes "recognizion flag" */
+        let arrayOfAlt = id.split('---'); /* split where --- marks end of artistname, begining of trackname */
+        var altArtist = generateSearchString(arrayOfAlt[0]); 
+        var altTrackName = generateSearchString(arrayOfAlt[1]);
+        
+        url = `http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&artist=${altArtist}&track=${altTrackName}&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json`;
+
+        return url;   
 }
                           
 function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringArtist, searchStringSongTitle,
@@ -366,7 +455,7 @@ function parsePosition(latOrLng){
 /************************ Errors & such  *****************************************/
 
 function errorMessage(errorText){
-    const body = document.getElementsByTagName('body');
+    const body = document.getElementById('body');
     body.innerHTML = '';
         let errorOutput = `
         <div class="errorMessageBody">
