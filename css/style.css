@@ -11,6 +11,11 @@ html, body{
     display: block;
 }
 
+.hide{
+    display: none !important;
+}
+
+
 .crumbFont{
     font-family: 'Nova Mono', monospace;
 }
@@ -83,6 +88,7 @@ html, body{
 }
 
 .noCrumbAround{
+    display: none;
     z-index: 96 !important;
     position: absolute !important;
     background-color: white !important;
@@ -375,7 +381,6 @@ html, body{
     width: 90%;
     padding: 20px;
     font-size: 0.8em;
-    display: none;
 } 
    
 .foundCrumbMessage{
@@ -490,7 +495,6 @@ html, body{
     width: 70%;
     padding: 20px;
     font-size: 0.8em;
-    display: none;
 } 
      
 .foundCrumbMessage{

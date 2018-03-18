@@ -1,11 +1,11 @@
-    fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&artist=Factory+floor&track=heart+of+data&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
-        .then(response => response.json())
-        .then(songData => {
-            console.log(songData);
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
+//    fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&artist=The+beach+boys&track=Surf\'s+up&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+//        .then(response => response.json())
+//        .then(songData => {
+//            console.log(songData);
+//        })
+//        .catch(function (error) {
+//            console.log(error);
+//        })
 
 /******************** Array of info ***************************/
 /* In Alpha version, this array data is fetched from database */
@@ -13,6 +13,8 @@
 var whereWhoWhenWhat = [
     {lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: '6161a743-23fc-458f-8aed-eeac7782bca0'}, /* bruce haack - program me */
+    {lat: 59.315189, lng: 18.043007200000034, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '50ee013e-6d25-4a2e-9a98-6015801fa255'}, /* the gist - love at first sight */
     {lat: 59.319595, lng: 18.070485299999973, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: '2d905c53-4d75-4982-bc60-898119ad4a97'}, /* skatebård - data italia */
     {lat: 59.29323549999999, lng: 18.0812138, user: 'VenusOfTheSoup', date: '13/3 2018', 
@@ -29,30 +31,31 @@ var whereWhoWhenWhat = [
      crumbId: 'cef51eff-ced3-48ee-9f00-f3cb45b6ee6d'}, /* Macintosh Plus — リサフランク420 / 現代のコンピュー */
     {lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: '894d769e-bb8e-4140-8c4f-52caced82af2'}, /* kate bush - deeper understanding (text) */
-    {lat: 59.315189, lng: 18.043007200000034, user: 'VenusOfTheSoup', date: '13/3 2018', 
-     crumbId: '50ee013e-6d25-4a2e-9a98-6015801fa255'}, /* the gist - love at first sight */
     {lat: 59.3178415, lng: 18.08591039999999, user: 'VenusOfTheSoup', date: '13/3 2018', 
-     crumbId: 'a38f8b5b-a2d4-4757-977d-a2a65e11eb0d'}, /* pet shop boys - oppertunities (text) */
+     crumbId: 'a38f8b5b-a2d4-4757-977d-a2a65e11eb0d'}, /* pet shop boys - opportunities (text) */
     {lat: 59.3329563, lng: 17.980345199999988, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: 'e8f20a87-e5c9-4697-9e11-807b13573b3a'}, /* 6th Borough Project - the callback */
     {lat: 59.2583266, lng: 18.083452299999976, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: '---The Magnetic Fields---Technical (You\'re so)'}, /* magnetic fields - technical (you're so) */
-//    {lat: 59.273495499999996, lng: 18.0497686, user: 'VenusOfTheSoup', date: '13/3 2018', 
-//     crumbId: '---Legowelt---Computerized paradise'}, /* legowelt - computerized paradise */
+    {lat: 59.273495499999996, lng: 18.0497686, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '---Legowelt---Computerized paradise'}, /* legowelt - computerized paradise */
     {lat: 59.27438780000001, lng: 18.133848599999965, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: '---The internet---Girl'}, /* the internet - girl */
     {lat: 59.2744378, lng: 17.901997299999948, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: '6d4e507f-f424-40ee-90f9-51e7ad75482b'}, /* casco - cybernetic love */
     {lat: 59.30790299999999, lng: 18.15604189999999, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: '---Software Seduction---Try'}, /* software seduction - try */
-    {lat: 59.30790299999999, lng: 18.15604189999999, user: 'VenusOfTheSoup', date: '13/3 2018', 
-     crumbId: '---Bobby Browser---Baby Dre'}, /* bobby browser - baby dre */
     {lat: 59.38292819999999, lng: 17.964470699999993, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: '62ec8081-b946-4294-a817-7cd01248e998'}, /* carole king - computer eyes */
     {lat: 59.2632336, lng: 18.04249600000003, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: '4082758d-de91-448a-bafa-6436f6400c41'}, /* com truise - data kiss */
+    {lat: 59.39876100000001, lng: 18.036410499999988, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '---Jamie Jupitor---Computer Power (Instrumental)'}, /* jamie jupitor - computer power (instrumental) */
+   {lat: 59.39876100000001, lng: 18.036410499999988, user: 'VenusOfTheSoup', date: '13/3 2018', 
+     crumbId: '295d531e-81ef-47ca-94bb-b062ebfc13c9'}, /* the beach boys - surf's up */
     
-    
+//     {lat: 59.30790299999999, lng: 18.15604189999999, user: 'VenusOfTheSoup', date: '13/3 2018', 
+//     crumbId: '---Bobby Browser---Baby Dre'}, /* bobby browser - baby dre */   
 //    {lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', 
 //     crumbId: '3a2fc000-58f1-4856-b6b3-5cb257a5f0ba'}, /* oneohtrix point never - computer vision */
 //    {lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', 
@@ -151,18 +154,13 @@ function compareLocations(yourPosition){
         let crumbDate = whereWhoWhenWhat[i].date; 
         let crumbUser = whereWhoWhenWhat[i].user;
         
-        
-        
-//        if(whereWhoWhenWhat[i].crumbId === ''){
-//            crumbId = whereWhoWhenWhat[i].altToCrumbId;
-//            //console.log(crumbId);
-//        }   
-        
-        
+        const noCrumbAround = document.getElementById("noCrumbAround");
         
         /* Checking if there is any crumb around... */
         if(isCrumbNear(crumbLatPosition, crumbLngPosition, userLatPosition, userLngPosition, 1)){ /* = 1 km */
 
+            noCrumbAround.classList.add('hide');
+            
             /* Checking if it's been over 10 minutes since last pick up */        
 //            if(checkTimestamp()){
                 pickUpCrumb(crumbId, crumbDate, crumbUser);
@@ -170,7 +168,7 @@ function compareLocations(yourPosition){
 //                alert("Please cherish the last crumb you picked up for at least 10 minutes before picking up another one.");
 //            }
         }else{
-            document.getElementById("noCrumbAround").style.display = "block";
+            noCrumbAround.classList.add('block');
         }  
     }   
 }
@@ -276,7 +274,7 @@ with --- (could have been something else!) for recognizion, and then they will b
 in this function to return an alternative fetch-url adjusted to search for artist/trackname instead of mbid */
 function getFetchUrl(id){
         id = id.replace('---', ''); /* removes "recognizion flag" */
-        let arrayOfAlt = id.split('---'); /* split where --- marks end of artistname, begining of trackname */
+        let arrayOfAlt = id.split('---'); /* split where --- marks end of artistname, beginning of trackname */
         var altArtist = generateSearchString(arrayOfAlt[0]); 
         var altTrackName = generateSearchString(arrayOfAlt[1]);
         
