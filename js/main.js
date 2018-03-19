@@ -1,11 +1,3 @@
-//    fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&artist=The+beach+boys&track=Surf\'s+up&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
-//        .then(response => response.json())
-//        .then(songData => {
-//            console.log(songData);
-//        })
-//        .catch(function (error) {
-//            console.log(error);
-//        })
 
 /******************** Array of info ***************************/
 /* In Alpha version, this array data is fetched from database */
@@ -29,7 +21,7 @@ var whereWhoWhenWhat = [
      crumbId: '---Factory Floor---Heart of data'}, /* factory floor - heart of data */
     {lat: 59.3318129, lng: 18.0265938, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: 'cef51eff-ced3-48ee-9f00-f3cb45b6ee6d'}, /* Macintosh Plus — リサフランク420 / 現代のコンピュー */
-    {lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', 
+    {lat: 59.32412109999999, lng: 18.101595299999985, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: '894d769e-bb8e-4140-8c4f-52caced82af2'}, /* kate bush - deeper understanding (text) */
     {lat: 59.3178415, lng: 18.08591039999999, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: 'a38f8b5b-a2d4-4757-977d-a2a65e11eb0d'}, /* pet shop boys - opportunities (text) */
@@ -37,7 +29,7 @@ var whereWhoWhenWhat = [
      crumbId: 'e8f20a87-e5c9-4697-9e11-807b13573b3a'}, /* 6th Borough Project - the callback */
     {lat: 59.2583266, lng: 18.083452299999976, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: '---The Magnetic Fields---Technical (You\'re so)'}, /* magnetic fields - technical (you're so) */
-    {lat: 59.273495499999996, lng: 18.0497686, user: 'VenusOfTheSoup', date: '13/3 2018', 
+    {lat: 59.2795448, lng: 18.00356529999999, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: '---Legowelt---Computerized paradise'}, /* legowelt - computerized paradise */
     {lat: 59.27438780000001, lng: 18.133848599999965, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: '---The internet---Girl'}, /* the internet - girl */
@@ -52,18 +44,7 @@ var whereWhoWhenWhat = [
     {lat: 59.39876100000001, lng: 18.036410499999988, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: '---Jamie Jupitor---Computer Power (Instrumental)'}, /* jamie jupitor - computer power (instrumental) */
    {lat: 59.39876100000001, lng: 18.036410499999988, user: 'VenusOfTheSoup', date: '13/3 2018', 
-     crumbId: '295d531e-81ef-47ca-94bb-b062ebfc13c9'}, /* the beach boys - surf's up */
-    
-//     {lat: 59.30790299999999, lng: 18.15604189999999, user: 'VenusOfTheSoup', date: '13/3 2018', 
-//     crumbId: '---Bobby Browser---Baby Dre'}, /* bobby browser - baby dre */   
-//    {lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', 
-//     crumbId: '3a2fc000-58f1-4856-b6b3-5cb257a5f0ba'}, /* oneohtrix point never - computer vision */
-//    {lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', 
-//     crumbId: '9af1acba-b716-43f8-9568-407de3facc0a'}, /* clock dva - the hacker */
-//    {lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', 
-//     crumbId: 'bfd9ce03-f8cb-4806-98c1-9669d1bb0cbc'}, /* pia fraus - japanese heart software */
-//    {lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', 
-//     crumbId: '4071f0ca-81b5-4653-a778-657bc48eb0da'}, /* wild nothing - data world */
+     crumbId: '295d531e-81ef-47ca-94bb-b062ebfc13c9'} /* the beach boys - surf's up */
     ]
 
 /************************* Map ************************************/
@@ -98,7 +79,7 @@ var whereWhoWhenWhat = [
 
       /*** Geolocation ***/
       if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function (position) {
+          navigator.geolocation.watchPosition(function (position) {
               var pos = {
                   lat: position.coords.latitude, /* device latitude */
                   lng: position.coords.longitude /* device longitude */
@@ -115,7 +96,7 @@ var whereWhoWhenWhat = [
               /* Hello myself & world!                                                                      */
               /* For getting and testing the location you're at:                                            */
               /* 1. Run this console.log:                                                                   */
-               console.log(pos);
+              // console.log(pos);
               /* 2. Insert logged positions on some row in lat/lng properties in whereWhoWhenWhat-array ^   */
               /* 3. Reload page                                                                             */
               /**********************************************************************************************/
@@ -144,6 +125,8 @@ function showPage() {
 
 function compareLocations(yourPosition){
     
+    const noCrumbAround = document.getElementById("noCrumbAround");
+    
     let userLatPosition = parsePosition(yourPosition.lat);
     let userLngPosition = parsePosition(yourPosition.lng);    
 
@@ -154,19 +137,17 @@ function compareLocations(yourPosition){
         let crumbDate = whereWhoWhenWhat[i].date; 
         let crumbUser = whereWhoWhenWhat[i].user;
         
-        const noCrumbAround = document.getElementById("noCrumbAround");
-        
         /* Checking if there is any crumb around... */
         if(isCrumbNear(crumbLatPosition, crumbLngPosition, userLatPosition, userLngPosition, 1)){ /* = 1 km */
 
             noCrumbAround.classList.add('hide');
             
             /* Checking if it's been over 10 minutes since last pick up */        
-//            if(checkTimestamp()){
+            if(checkTimestamp()){
                 pickUpCrumb(crumbId, crumbDate, crumbUser);
-//            }else{
-//                alert("Please cherish the last crumb you picked up for at least 10 minutes before picking up another one.");
-//            }
+            }else{
+                alert("Please cherish the last crumb you picked up for at least 10 minutes before picking up another one.");
+            }
         }else{
             noCrumbAround.classList.add('block');
         }  
@@ -235,15 +216,14 @@ function pickUpCrumb(id, date, user) {
 
 function fetchAndPrintInfo(id, date, user, imageFileEnding){
     
-    var fetchUrl = "http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json";
+    var fetchUrl = "https://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json";
     
     /* If the track did not have an id (mbid) then format the fetch url */
     if(id.substr(0,3) == '---'){
         fetchUrl = getFetchUrl(id);
     }
 
-    
-     fetch(fetchUrl)
+    fetch(fetchUrl)
          .then(response => response.json())
          .then(songData => {
 
@@ -348,7 +328,7 @@ function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringA
 /**************** Fetch-functions for Explore Further Section ****************/
 
 function fetchRecentlyPlayed(id) {
-    fetch('http://ws.audioscrobbler.com/2.0/?method=User.getRecentTracks&user=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+    fetch('https://ws.audioscrobbler.com/2.0/?method=User.getRecentTracks&user=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
             let userId = id;
@@ -362,7 +342,7 @@ function fetchRecentlyPlayed(id) {
 }
 
 function fetchArtistInfo(id) {
-    fetch('http://ws.audioscrobbler.com/2.0/?method=artist.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+    fetch('https://ws.audioscrobbler.com/2.0/?method=artist.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
             let artistInfo = songData.artist.bio.summary;
@@ -375,7 +355,7 @@ function fetchArtistInfo(id) {
 }
 
 function fetchTags(id) {
-    fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+    fetch('https://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
             let songId = id;

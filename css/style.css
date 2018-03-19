@@ -8,13 +8,12 @@ html, body{
 }
 
 .block{
-    display: block;
+    display: block !important;
 }
 
 .hide{
     display: none !important;
 }
-
 
 .crumbFont{
     font-family: 'Nova Mono', monospace;
@@ -47,12 +46,7 @@ html, body{
       animation-name: animatebottom;
       animation-duration: 3s  
 }
-/*
 
-    .body#body.animate-bottom.body{
-     background-color: #FFAFE1;   
-}
-*/
     @-webkit-keyframes animatebottom {
       from { opacity:0 } 
       to { opacity:1 }
@@ -89,7 +83,7 @@ html, body{
 
 .noCrumbAround{
     display: none;
-    z-index: 96 !important;
+    z-index: 99 !important;
     position: absolute !important;
     background-color: white !important;
     border: 1px solid black;
@@ -101,10 +95,6 @@ html, body{
     text-align: center;
     cursor: pointer;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      -webkit-animation-name: animatebottom;
-      -webkit-animation-duration: 1s;
-      animation-name: animatebottom;
-      animation-duration: 5s 
 }
 
 .foundCrumbMessage{
@@ -120,6 +110,14 @@ html, body{
     text-align: center;
     cursor: pointer;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
+    animation-name: slideDown;
+	-webkit-animation-name: slideDown;	
+	animation-duration: 1s;	
+	-webkit-animation-duration: 1s;
+	animation-timing-function: ease;	
+	-webkit-animation-timing-function: ease;	
+	visibility: visible !important;	
 }
 
 .openFoundCrumb{
@@ -135,6 +133,10 @@ html, body{
     color: black;
     text-align: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      -webkit-animation-name: animatebottom;
+      -webkit-animation-duration: 1s;
+      animation-name: animatebottom;
+      animation-duration: 2s
 }
 
 .opacityOverMap{
@@ -202,8 +204,96 @@ html, body{
     color: black;
     text-align: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 20px;
+    padding: 20px;					
 }
+
+
+}
+
+@keyframes slideDown {
+	0% {
+		transform: translateY(-100%);
+	}
+	50%{
+		transform: translateY(8%);
+	}
+	65%{
+		transform: translateY(-4%);
+	}
+	80%{
+		transform: translateY(4%);
+	}
+	95%{
+		transform: translateY(-2%);
+	}			
+	100% {
+		transform: translateY(0%);
+	}		
+}
+
+@-webkit-keyframes slideDown {
+	0% {
+		-webkit-transform: translateY(-100%);
+	}
+	50%{
+		-webkit-transform: translateY(8%);
+	}
+	65%{
+		-webkit-transform: translateY(-4%);
+	}
+	80%{
+		-webkit-transform: translateY(4%);
+	}
+	95%{
+		-webkit-transform: translateY(-2%);
+	}			
+	100% {
+		-webkit-transform: translateY(0%);
+	}	
+}
+
+@keyframes slideUp {
+	0% {
+		transform: translateY(0%);
+	}
+	50%{
+		transform: translateY(-2%);
+	}
+	65%{
+		transform: translateY(4%);
+	}
+	80%{
+		transform: translateY(-4%);
+	}
+	95%{
+		transform: translateY(8%);
+	}			
+	100% {
+		transform: translateY(-100%);
+	}		
+}
+
+@-webkit-keyframes slideUp {
+	0% {
+		-webkit-transform: translateY(0%);
+	}
+	50%{
+		-webkit-transform: translateY(-2%);
+	}
+	65%{
+		-webkit-transform: translateY(4%);
+	}
+	80%{
+		-webkit-transform: translateY(-4%);
+	}
+	95%{
+		-webkit-transform: translateY(8%);
+	}			
+	100% {
+		-webkit-transform: translateY(-100%);
+	}	
+}
+
 
 /************ Mobile ***************/
 @media screen and (max-width: 599px) {
@@ -260,7 +350,7 @@ html, body{
     font-size: 0.8em;
 }  
    
-.foundCrumbMessa5e{
+.foundCrumbMessage{
     top: 150px;
     height: 230px;
     width: 340px;
@@ -279,7 +369,7 @@ html, body{
     padding: 20px;
 }   
 .openFoundCrumb img{
-    width: 35px;
+    width: 45px;
     padding: 0px;
     padding-bottom: 20px;
 }
@@ -326,6 +416,18 @@ html, body{
 .youtube_logo img{
     width: 100px;
     padding: 0px;
+}
+    
+.errorMessageDiv{
+    top: 100px;
+    height: auto;
+    width: 60%;
+    font-size: 0.8em;
+    padding: 20px;
+}
+.errorMessageDiv img{
+    width: 120px;
+    padding: 20px;
 }
     
 } /*end mobile*/
@@ -402,7 +504,7 @@ html, body{
     padding: 20px;
 }   
 .openFoundCrumb img{
-    width: 35px;
+    width: 45px;
     padding: 0px;
     padding-bottom: 20px;
 }
@@ -439,7 +541,19 @@ html, body{
 .youtube_logo img{
     width: 100px;
     padding: 0px;
-}  
+}
+    
+.errorMessageDiv{
+    top: 130px;
+    height: auto;
+    width: 60%;
+    font-size: 0.8em;
+    padding: 20px;
+}
+.errorMessageDiv img{
+    width: 140px;
+    padding: 20px;
+}
 
 } /*end tablet*/
 
@@ -564,8 +678,7 @@ html, body{
     padding: 20px;
 }
     
-
-    
+ 
 } /* end of Desktop */
 
 
@@ -574,6 +687,12 @@ html, body{
     width: 100%;
     text-align: center;
     padding-top: 30px;
+}
+
+.loaderDiv{
+    width: 100%;
+    height: 100%;
+    border: 1px solid red;
 }
 
 #loader {
