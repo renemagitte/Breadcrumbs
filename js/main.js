@@ -144,11 +144,11 @@ function compareLocations(yourPosition){
             noCrumbAround.classList.add('hide');
             
             /* Checking if it's been over 10 minutes since last pick up */        
-//            if(checkTimestamp()){
+            if(checkTimestamp()){
                 pickUpCrumb(crumbId, crumbDate, crumbUser);
-//            }else{
-//                alert("Please cherish the last crumb you picked up for at least 10 minutes before picking up another one.");
-//            }
+            }else{
+                alert("Please cherish the last crumb you picked up for at least 10 minutes before picking up another one.");
+            }
         }else{
             noCrumbAround.classList.add('block');
         }  
