@@ -1,10 +1,20 @@
+    fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&artist=Denim&track=Internet+curtains&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+        .then(response => response.json())
+        .then(songData => {
+            console.log(songData);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
 
 /******************** Array of info ***************************/
 /* In Alpha version, this array data is fetched from database */
 
 var whereWhoWhenWhat = [
+//    {lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', 
+//     crumbId: '6161a743-23fc-458f-8aed-eeac7782bca0'}, /* bruce haack - program me */
     {lat: 59.34588819999999, lng: 18.058012599999998, user: 'VenusOfTheSoup', date: '13/3 2018', 
-     crumbId: '6161a743-23fc-458f-8aed-eeac7782bca0'}, /* bruce haack - program me */
+     crumbId: 'c4610d30-0831-4913-b177-542ce1fab4db'}, /* bruce haack - school for robots */
     {lat: 59.315189, lng: 18.043007200000034, user: 'VenusOfTheSoup', date: '13/3 2018', 
      crumbId: '50ee013e-6d25-4a2e-9a98-6015801fa255'}, /* the gist - love at first sight */
     {lat: 59.319595, lng: 18.070485299999973, user: 'VenusOfTheSoup', date: '13/3 2018', 
@@ -216,7 +226,7 @@ function pickUpCrumb(id, date, user) {
 
 function fetchAndPrintInfo(id, date, user, imageFileEnding){
     
-    var fetchUrl = "https://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json";
+    var fetchUrl = `http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=${id}&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json`;
     
     /* If the track did not have an id (mbid) then format the fetch url */
     if(id.substr(0,3) == '---'){
@@ -328,7 +338,7 @@ function printOutOutput(crumbId, crumbDate, crumbUser, fileEnding, searchStringA
 /**************** Fetch-functions for Explore Further Section ****************/
 
 function fetchRecentlyPlayed(id) {
-    fetch('https://ws.audioscrobbler.com/2.0/?method=User.getRecentTracks&user=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+    fetch('http://ws.audioscrobbler.com/2.0/?method=User.getRecentTracks&user=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
             let userId = id;
@@ -342,7 +352,7 @@ function fetchRecentlyPlayed(id) {
 }
 
 function fetchArtistInfo(id) {
-    fetch('https://ws.audioscrobbler.com/2.0/?method=artist.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+    fetch('http://ws.audioscrobbler.com/2.0/?method=artist.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
             let artistInfo = songData.artist.bio.summary;
@@ -355,7 +365,7 @@ function fetchArtistInfo(id) {
 }
 
 function fetchTags(id) {
-    fetch('https://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
+    fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&mbid=' + id + '&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
         .then(response => response.json())
         .then(songData => {
             let songId = id;
