@@ -248,6 +248,7 @@ html, body{
 	}	
 }
 
+/*
 @keyframes slideUp {
 	0% {
 		transform: translateY(0%);
@@ -289,6 +290,7 @@ html, body{
 		-webkit-transform: translateY(-100%);
 	}	
 }
+*/
 
 
 /************ Mobile ***************/
