@@ -1,12 +1,3 @@
-    fetch('http://ws.audioscrobbler.com/2.0/?method=Track.getInfo&artist=Denim&track=Internet+curtains&api_key=e26b796f4961b23b890aa1fe985eb6ff&format=json')
-        .then(response => response.json())
-        .then(songData => {
-            console.log(songData);
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-
 /******************** Array of info ***************************/
 /* In Alpha version, this array data is fetched from database */
 
@@ -153,11 +144,11 @@ function compareLocations(yourPosition){
             noCrumbAround.classList.add('hide');
             
             /* Checking if it's been over 10 minutes since last pick up */        
-            if(checkTimestamp()){
+//            if(checkTimestamp()){
                 pickUpCrumb(crumbId, crumbDate, crumbUser);
-            }else{
-                alert("Please cherish the last crumb you picked up for at least 10 minutes before picking up another one.");
-            }
+//            }else{
+//                alert("Please cherish the last crumb you picked up for at least 10 minutes before picking up another one.");
+//            }
         }else{
             noCrumbAround.classList.add('block');
         }  
